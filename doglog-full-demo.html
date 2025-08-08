@@ -1,0 +1,3969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DogLog - Full Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Views */
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease-in 2s forwards;
+        }
+
+        .splash-content {
+            text-align: center;
+            color: white;
+            animation: slideUp 1s ease-out;
+        }
+
+        .paw-icon {
+            font-size: 4rem;
+            animation: bounce 2s infinite;
+            margin-bottom: 1rem;
+        }
+
+        .app-name {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 2px;
+        }
+
+        .app-tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Gallery */
+        .dog-gallery {
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .settings-btn {
+            position: absolute;
+            right: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .gallery-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .dogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dog-card, .add-dog-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 280px;
+        }
+
+        .dog-card:hover, .add-dog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .dog-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .dog-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dog-photo-placeholder {
+            font-size: 3rem;
+            color: #999;
+        }
+
+        .dog-info {
+            text-align: center;
+        }
+
+        .dog-info h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .dog-info p {
+            color: #666;
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .add-dog-card {
+            border: 2px dashed #ddd;
+            background: transparent;
+            color: #999;
+            justify-content: center;
+        }
+
+        .add-dog-card:hover {
+            border-color: #667eea;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .add-icon {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Dog Page */
+        .dog-page {
+            min-height: 100vh;
+        }
+
+        .dog-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dog-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .dog-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            overflow: hidden;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dog-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dog-details h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .dog-details p {
+            margin: 0.25rem 0 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Calendar */
+        .calendar {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-arrow {
+            background: #f5f5f5;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+            background: #e5e5e5;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+
+        .weekday {
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            transition: all 0.3s ease;
+            min-height: 80px;
+            background: #f8f9fa;
+            border: 3px solid transparent;
+            font-weight: 500;
+            padding: 4px;
+        }
+
+        .calendar-day:not(.empty):hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .calendar-day.today {
+            border-color: #667eea;
+            font-weight: bold;
+        }
+
+        .calendar-day.day-good {
+            border-color: #4CAF50;
+            border-width: 4px;
+        }
+
+        .calendar-day.day-okay {
+            border-color: #FFB300;
+            border-width: 4px;
+        }
+
+        .calendar-day.day-bad {
+            border-color: #F44336;
+            border-width: 4px;
+        }
+
+        .day-number {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .activity-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            max-width: 100%;
+        }
+
+        .activity-icon {
+            font-size: 12px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .activity-icon.good {
+            background: #4CAF50;
+        }
+
+        .activity-icon.okay {
+            background: #FFB300;
+        }
+
+        .activity-icon.bad {
+            background: #F44336;
+        }
+
+        .calendar-day.empty {
+            cursor: default;
+            background: transparent;
+        }
+
+        /* Activity Page */
+        .activity-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .activity-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity-content {
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .activity-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .activity-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e1e5e9;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .activity-btn:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .activities-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-item {
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            padding: 1rem;
+            background: #f8f9fa;
+        }
+
+        .activity-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .outcome-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .outcome-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .outcome-btn.good {
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+
+        .outcome-btn.good.active {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .outcome-btn.okay {
+            border-color: #FFB300;
+            color: #FFB300;
+        }
+
+        .outcome-btn.okay.active {
+            background: #FFB300;
+            color: white;
+        }
+
+        .outcome-btn.bad {
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .outcome-btn.bad.active {
+            background: #F44336;
+            color: white;
+        }
+
+        /* Modal & Forms */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .photo-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .photo-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background: #f5f5f5;
+            border: 3px dashed #ddd;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .photo-preview:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder {
+            text-align: center;
+            color: #999;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-btn, .back-btn {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .save-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #5a67d8;
+        }
+
+        .remove-btn {
+            background: #f44336;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        /* Settings Page */
+        .settings-page {
+            min-height: 100vh;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .settings-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .settings-header h2 {
+            margin: 0;
+            color: #333;
+            font-size: 2rem;
+        }
+
+        .settings-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .settings-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .settings-section h3 {
+            margin: 0 0 1rem 0;
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+        .settings-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .settings-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .settings-description {
+            margin: 0 0 1rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .settings-help {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .settings-help ol {
+            margin: 0.5rem 0;
+            padding-left: 1.2rem;
+        }
+
+        .settings-help a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .settings-help a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .demo-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Pattern Analysis */
+        .pattern-analysis {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .pattern-analysis h3 {
+            color: #333;
+            margin: 0 0 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .insights-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .insight-item {
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            background: #f8f9ff;
+        }
+
+        .insight-item.positive {
+            border-left-color: #4CAF50;
+            background: #f1f8e9;
+        }
+
+        .insight-item.warning {
+            border-left-color: #FFB300;
+            background: #fff8e1;
+        }
+
+        .insight-item.negative {
+            border-left-color: #F44336;
+            background: #ffebee;
+        }
+
+        .insight-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .insight-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .no-insights {
+            text-align: center;
+            color: #666;
+            padding: 2rem;
+        }
+
+        /* AI Loading Animation */
+        .ai-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f9ff 100%);
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .ai-brain {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: brainPulse 2s ease-in-out infinite;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .loading-dot {
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: dotBounce 1.4s ease-in-out infinite both;
+        }
+
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dot:nth-child(3) { animation-delay: 0s; }
+
+        .loading-text {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .loading-subtext {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .ai-waves {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-top: 1.5rem;
+        }
+
+        .ai-wave {
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: waveAnimation 1s ease-in-out infinite;
+        }
+
+        .ai-wave:nth-child(1) { animation-delay: 0s; }
+        .ai-wave:nth-child(2) { animation-delay: 0.1s; }
+        .ai-wave:nth-child(3) { animation-delay: 0.2s; }
+        .ai-wave:nth-child(4) { animation-delay: 0.3s; }
+        .ai-wave:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes brainPulse {
+            0%, 100% { 
+                transform: scale(1); 
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                transform: scale(1.1); 
+                filter: hue-rotate(45deg);
+            }
+        }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { 
+                transform: scale(0.8); 
+                opacity: 0.7;
+            }
+            40% { 
+                transform: scale(1.2); 
+                opacity: 1;
+            }
+        }
+
+        @keyframes waveAnimation {
+            0%, 100% { 
+                height: 20px; 
+                opacity: 0.7;
+            }
+            50% { 
+                height: 40px; 
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .ai-loading {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        /* Example Week Calendar Styles */
+        .example-week-calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .example-day {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 120px;
+            text-align: center;
+        }
+
+        .example-day.today {
+            border-color: #007bff;
+            background: #e3f2fd;
+        }
+
+        .example-day-header {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .example-activities {
+            text-align: left;
+            font-size: 0.8rem;
+        }
+
+        .example-activity {
+            background: #28a745;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin: 2px 0;
+            display: inline-block;
+            font-size: 0.75rem;
+        }
+
+        .example-activity.moderate {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .example-activity.light {
+            background: #17a2b8;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Behavior Tracking Sliders */
+        .behavior-slider-container {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .behavior-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .behavior-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #dc3545 0%, #ffc107 50%, #28a745 100%);
+            outline: none;
+        }
+
+        .behavior-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #333;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .behavior-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #333;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .behavior-value {
+            min-width: 80px;
+            text-align: center;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .behavior-value.bad { background: #f8d7da; color: #721c24; }
+        .behavior-value.okay { background: #fff3cd; color: #856404; }
+        .behavior-value.good { background: #d1edff; color: #0c5460; }
+        .behavior-value.excellent { background: #d4edda; color: #155724; }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splash">
+        <div class="splash-content">
+            <div class="paw-icon">🐾</div>
+            <h1 class="app-name">DogLog</h1>
+            <p class="app-tagline">Track • Analyze • Improve</p>
+        </div>
+    </div>
+
+    <!-- Gallery View -->
+    <div class="view active" id="galleryView">
+        <div class="dog-gallery">
+            <div class="demo-note">
+                <strong>🎉 DogLog Full Demo</strong><br>
+                Complete with photo upload, calendar, and activity tracking! Add a dog and click to explore.
+            </div>
+            
+            <header class="gallery-header">
+                <div class="header-top">
+                    <h1 data-translate="appName">DogLog</h1>
+                    <button class="settings-btn" onclick="showSettings()" title="Settings">⚙️</button>
+                </div>
+                <p data-translate="tagline">Your furry friends' daily tracker</p>
+            </header>
+            
+            <div class="dogs-grid" id="dogsGrid">
+                <div class="empty-state">
+                    <div class="empty-icon">🐾</div>
+                    <h2>No dogs yet!</h2>
+                    <p>Add your first furry friend to get started tracking their activities.</p>
+                </div>
+                
+                <div class="add-dog-card" onclick="openAddModal()">
+                    <div class="add-icon">+</div>
+                    <p>Add Dog</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dog Page View -->
+    <div class="view" id="dogView">
+        <div class="dog-page">
+            <header class="dog-header">
+                <button class="back-btn" onclick="showGallery()">← Back</button>
+                <div class="dog-title" id="dogTitle">
+                    <!-- Dog info will be inserted here -->
+                </div>
+                <div>
+                    <button class="save-btn" onclick="editCurrentDog()" title="Edit dog information">✏️ Edit</button>
+                    <button class="save-btn" onclick="generateTestData()" title="Generate random activities for the entire month" style="margin-left: 10px;">📊 Test Data</button>
+                </div>
+            </header>
+            
+            <div class="calendar" id="calendar">
+                <!-- Calendar will be generated here -->
+            </div>
+            
+            <div class="pattern-analysis" id="patternAnalysis">
+                <h3>
+                    🧠 AI Pattern Analysis
+                    <div style="float: right; font-size: 0.9rem; font-weight: normal;">
+                        <button id="localAIBtn" onclick="useLocalAI()" style="padding: 6px 12px; background: #28a745; color: white; border: none; border-radius: 6px 0 0 6px; cursor: pointer; font-size: 0.85rem;">
+                            📊 Local
+                        </button>
+                        <button id="chatGPTBtn" onclick="askRealAI()" style="padding: 6px 12px; background: #6c757d; color: white; border: none; border-radius: 0 6px 6px 0; cursor: pointer; font-size: 0.85rem;">
+                            🤖 ChatGPT
+                        </button>
+                    </div>
+                </h3>
+                <div class="insights-list" id="insightsList">
+                    <div class="no-insights">
+                        Add more activity data to see AI-powered insights about your dog's patterns.
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px; display: none;" id="exportSection">
+                    <button id="exportPdfBtn" onclick="exportAnalysisToPDF()" style="padding: 8px 16px; background: #dc3545; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600;" title="Export current analysis to PDF">
+                        📄 Export Analysis as PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity Page View -->
+    <div class="view" id="activityView">
+        <div class="activity-page">
+            <header class="activity-header">
+                <button class="back-btn" onclick="showDogPage()">← Calendar</button>
+                <div id="activityDate">
+                    <h2>Activity Log</h2>
+                </div>
+                <button class="save-btn" onclick="saveActivities()">Save Day</button>
+            </header>
+            
+            <div class="activity-content">
+                <div class="activity-section">
+                    <h3>Quick Add Activities</h3>
+                    <div class="activity-buttons">
+                        <button class="activity-btn" onclick="addActivity('Nosework')">+ Nosework</button>
+                        <button class="activity-btn" onclick="addActivity('Obedience Training')">+ Obedience Training</button>
+                        <button class="activity-btn" onclick="addActivity('Long Walk')">+ Long Walk</button>
+                        <button class="activity-btn" onclick="addActivity('Playdate')">+ Playdate</button>
+                        <button class="activity-btn" onclick="addActivity('Vet Visit')">+ Vet Visit</button>
+                        <button class="activity-btn" onclick="addActivity('Rest Day')">+ Rest Day</button>
+                        <button class="activity-btn" onclick="addActivity('Agility')">+ Agility</button>
+                        <button class="activity-btn" onclick="addActivity('Grooming')">+ Grooming</button>
+                        <button class="activity-btn" onclick="addActivity('Swimming')">+ Swimming</button>
+                    </div>
+                </div>
+                
+                <div class="activity-section">
+                    <h3>Today's Activities (<span id="activityCount">0</span>)</h3>
+                    <div class="activities-list" id="activitiesList">
+                        <div style="text-align: center; padding: 2rem; color: #666;">
+                            No activities logged yet. Add some activities above!
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-section">
+                    <h3>Overall Day Rating</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">How was the overall day for your dog?</p>
+                    <div class="outcome-buttons" style="justify-content: center;">
+                        <button class="outcome-btn good" id="dayGood" onclick="setDayRating('good')">😊 Good Day</button>
+                        <button class="outcome-btn okay" id="dayOkay" onclick="setDayRating('okay')">😐 Okay Day</button>
+                        <button class="outcome-btn bad" id="dayBad" onclick="setDayRating('bad')">😞 Bad Day</button>
+                    </div>
+                </div>
+                
+                <div class="activity-section" id="behaviorTrackingSection" style="display: none;">
+                    <h3>Behavior Progress Today</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Rate how each behavior issue was today</p>
+                    <div id="behaviorSliders">
+                        <!-- Behavior sliders will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings View -->
+    <div class="view" id="settingsView">
+        <div class="settings-page">
+            <header class="settings-header">
+                <button class="back-btn" onclick="showGallery()">← Back</button>
+                <h2>Settings</h2>
+            </header>
+            
+            <div class="settings-content">
+
+                <div class="settings-section">
+                    <h3>🤖 OpenAI API Configuration</h3>
+                    <p class="settings-description">Enter your own OpenAI API key to use Real AI analysis</p>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="password" id="apiKeyInput" class="settings-input" placeholder="sk-proj-your-api-key-here..." onchange="saveApiKey()" style="flex: 1;">
+                        <button onclick="saveApiKey()" style="padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; white-space: nowrap;">💾 Save</button>
+                        <button onclick="clearApiKey()" style="padding: 8px 16px; background: #dc3545; color: white; border: none; border-radius: 6px; cursor: pointer; white-space: nowrap;">🗑️ Clear</button>
+                    </div>
+                    <div class="settings-help">
+                        <p><strong>How to get your API key:</strong></p>
+                        <ol>
+                            <li>Visit <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a></li>
+                            <li>Sign up or log in to your account</li>
+                            <li>Create a new API key</li>
+                            <li>Copy and paste it above</li>
+                        </ol>
+                        <p><em>Your API key is stored locally and never shared.</em></p>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>🔒 Privacy</h3>
+                    <p>All your data is stored locally on your device. No information is sent to external servers except when using Real AI analysis with your own API key.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Dog Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h2>Add New Dog</h2>
+            
+            <div class="photo-section">
+                <div class="photo-preview" id="photoPreview" onclick="document.getElementById('photoInput').click()">
+                    <div class="photo-placeholder">
+                        <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📸</span>
+                        <p style="font-size: 0.9rem; margin: 0;">Add Photo</p>
+                    </div>
+                </div>
+                <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+            </div>
+            
+            <form id="dogForm">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" required placeholder="Enter dog's name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="breed">Breed</label>
+                    <input type="text" id="breed" placeholder="e.g., Golden Retriever">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" id="dateOfBirth" placeholder="Select date of birth">
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" rows="3" placeholder="Any additional information..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="behaviorIssues">Behavior Issues (optional)</label>
+                    <textarea id="behaviorIssues" rows="3" placeholder="e.g., separation anxiety, excessive barking, aggression, resource guarding, leash pulling..."></textarea>
+                    <small style="color: #666; font-size: 0.85rem;">List any behavioral concerns or issues you'd like AI analysis to focus on</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeAddModal()">Cancel</button>
+                    <button type="submit" class="save-btn">Add Dog</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Dog Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h2>Edit Dog</h2>
+            
+            <div class="photo-section">
+                <div class="photo-preview" id="editPhotoPreview" onclick="document.getElementById('editPhotoInput').click()">
+                    <div class="photo-placeholder">
+                        <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📸</span>
+                        <p style="font-size: 0.9rem; margin: 0;">Change Photo</p>
+                    </div>
+                </div>
+                <input type="file" id="editPhotoInput" accept="image/*" style="display: none;" onchange="handleEditPhotoUpload(event)">
+            </div>
+            
+            <form id="editDogForm">
+                <div class="form-group">
+                    <label for="editName">Name *</label>
+                    <input type="text" id="editName" required placeholder="Enter dog's name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="editBreed">Breed</label>
+                    <input type="text" id="editBreed" placeholder="e.g., Golden Retriever">
+                </div>
+                
+                <div class="form-group">
+                    <label for="editDateOfBirth">Date of Birth</label>
+                    <input type="date" id="editDateOfBirth" placeholder="Select date of birth">
+                </div>
+                
+                <div class="form-group">
+                    <label for="editGender">Gender</label>
+                    <select id="editGender">
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editNotes">Notes</label>
+                    <textarea id="editNotes" rows="3" placeholder="Any additional information..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editBehaviorIssues">Behavior Issues (optional)</label>
+                    <textarea id="editBehaviorIssues" rows="3" placeholder="e.g., separation anxiety, excessive barking, aggression, resource guarding, leash pulling..."></textarea>
+                    <small style="color: #666; font-size: 0.85rem;">List any behavioral concerns or issues you'd like AI analysis to focus on</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Example Week Modal -->
+    <div class="modal" id="exampleWeekModal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2>📅 Example Week Schedule</h2>
+                <button onclick="closeExampleWeek()" style="float: right; background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
+            </div>
+            <div class="example-week-content" id="exampleWeekContent">
+                <!-- Calendar will be generated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let dogs = [];
+        let currentDog = null;
+        let currentDate = null;
+        let currentPhoto = null;
+        let activities = {};
+        let dayRatings = {};
+        let calendarDate = new Date(); // Current month being viewed
+        
+        // AI analysis caching
+        let cachedAIAnalysis = null;
+        let lastAIAnalysisHash = null;
+
+        // Activity icon mapping
+        const activityIcons = {
+            'Nosework': '👃',
+            'Obedience Training': '🎯',
+            'Long Walk': '🚶',
+            'Playdate': '🐕',
+            'Vet Visit': '🏥',
+            'Rest Day': '💤',
+            'Agility': '🏃',
+            'Grooming': '✂️',
+            'Swimming': '🏊',
+            'Feeding': '🍽️',
+            'Play Time': '🎾'
+        };
+
+        // Show app after splash
+        setTimeout(() => {
+            document.getElementById('splash').style.display = 'none';
+        }, 2500);
+
+        // Load saved data on startup
+        function loadSavedData() {
+            const savedDogs = localStorage.getItem('doglog-dogs');
+            if (savedDogs) {
+                try {
+                    dogs = JSON.parse(savedDogs);
+                    console.log('Loaded dogs:', dogs);
+                } catch (e) {
+                    console.error('Error loading saved dogs:', e);
+                    dogs = [];
+                }
+            }
+        }
+
+        // Save data to localStorage with visual feedback
+        function saveData() {
+            try {
+                localStorage.setItem('doglog-dogs', JSON.stringify(dogs));
+                console.log('Data saved successfully');
+                showSaveIndicator();
+            } catch (e) {
+                console.error('Error saving data:', e);
+            }
+        }
+
+        // Show save indicator
+        function showSaveIndicator() {
+            // Create or get save indicator
+            let indicator = document.getElementById('saveIndicator');
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.id = 'saveIndicator';
+                indicator.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #4CAF50;
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    font-size: 0.9rem;
+                    z-index: 10000;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                `;
+                indicator.textContent = '✓ Saved';
+                document.body.appendChild(indicator);
+            }
+            
+            // Show and hide
+            indicator.style.opacity = '1';
+            setTimeout(() => {
+                indicator.style.opacity = '0';
+            }, 1500);
+        }
+
+        // Auto-save whenever dogs data changes
+        function updateDogs(newDogs) {
+            dogs = newDogs;
+            saveData();
+        }
+
+        // Settings Management
+        let currentLanguage = 'en';
+        let userApiKey = '';
+
+        const translations = {
+            en: {
+                appName: 'DogLog',
+                tagline: 'Your furry friends\' daily tracker',
+                addDog: 'Add New Dog',
+                settings: 'Settings',
+                language: 'Language',
+                privacy: 'Privacy',
+                back: 'Back',
+                save: 'Save',
+                cancel: 'Cancel',
+                name: 'Name',
+                breed: 'Breed',
+                age: 'Age',
+                gender: 'Gender',
+                notes: 'Notes',
+                activities: 'Activities',
+                goodDay: 'Good Day',
+                okayDay: 'Okay Day',
+                badDay: 'Bad Day',
+                patternAnalysis: 'AI Pattern Analysis',
+                localAnalysis: 'Use Local Analysis Instead',
+                realAI: 'Real AI (ChatGPT)',
+                analyzing: 'AI is analyzing behavior patterns...',
+                noDogs: 'No dogs yet!',
+                firstDog: 'Add your first furry friend to get started tracking their activities.',
+                activityLog: 'Activity Log',
+                todaysActivities: 'Today\'s Activities',
+                dayRating: 'How was the day overall?',
+                saveDay: 'Save Day',
+                testData: 'Test',
+                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                weekDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                male: 'Male',
+                female: 'Female',
+                other: 'Other',
+                requiredField: 'This field is required',
+                dataLoaded: 'Data loaded successfully',
+                dataError: 'Error loading data',
+                
+                // Local AI Analysis translations
+                localAI: {
+                    winningActivity: 'is a winning activity!',
+                    needsAttention: 'needs attention',
+                    excellentProgress: 'Excellent overall progress!',
+                    roomForImprovement: 'Room for improvement',
+                    activityVariety: 'Activity variety could be improved',
+                    badDayPredictor: 'Bad day predictor identified!',
+                    unexpectedPattern: 'Unexpected pattern detected',
+                    missingActivity: 'Missing activity correlation',
+                    successFormula: 'Success formula discovered!',
+                    activityConsistency: 'Activity consistency matters',
+                    personalizedStrategy: 'Personalized Weekly Strategy',
+                    optimalStrategy: 'Optimal Weekly Strategy for',
+                    focusOn: 'Focus on',
+                    whichHas: 'which has',
+                    successRate: 'success rate',
+                    reduce: 'Reduce',
+                    improve: 'and work to improve',
+                    daysTend: 'days tend to be',
+                    afterDoing: 'after doing',
+                    skipDays: 'Skipping activities on',
+                    correlatesWithBad: 'correlates with bad days',
+                    ensureDaily: 'Ensure daily activities to maintain good momentum',
+                    activityGaps: 'You have gaps between activities averaging',
+                    moreConsistent: 'days. More consistent scheduling could help',
+                    needMoreData: 'Need at least 5 days of data for meaningful pattern analysis. Current: {0} days.'
+                }
+            },
+            es: {
+                appName: 'DogLog',
+                tagline: 'El rastreador diario de tus amigos peludos',
+                addDog: 'Agregar Nuevo Perro',
+                settings: 'Configuración',
+                language: 'Idioma',
+                privacy: 'Privacidad',
+                back: 'Atrás',
+                save: 'Guardar',
+                cancel: 'Cancelar',
+                name: 'Nombre',
+                breed: 'Raza',
+                age: 'Edad',
+                gender: 'Género',
+                notes: 'Notas',
+                activities: 'Actividades',
+                goodDay: 'Buen Día',
+                okayDay: 'Día Regular',
+                badDay: 'Mal Día',
+                patternAnalysis: 'Análisis de Patrones IA',
+                localAnalysis: 'Usar Análisis Local',
+                realAI: 'IA Real (ChatGPT)',
+                analyzing: 'IA está analizando patrones de comportamiento...',
+                noDogs: '¡Aún no hay perros!',
+                firstDog: 'Agrega a tu primer amigo peludo para comenzar a rastrear sus actividades.',
+                activityLog: 'Registro de Actividades',
+                todaysActivities: 'Actividades de Hoy',
+                dayRating: '¿Cómo fue el día en general?',
+                saveDay: 'Guardar Día',
+                testData: 'Prueba',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                weekDays: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+                male: 'Macho',
+                female: 'Hembra',
+                other: 'Otro',
+                requiredField: 'Este campo es obligatorio',
+                dataLoaded: 'Datos cargados exitosamente',
+                dataError: 'Error cargando datos',
+                
+                // Local AI Analysis translations
+                localAI: {
+                    winningActivity: 'es una actividad ganadora!',
+                    needsAttention: 'necesita atención',
+                    excellentProgress: '¡Excelente progreso general!',
+                    roomForImprovement: 'Espacio para mejorar',
+                    activityVariety: 'La variedad de actividades podría mejorarse',
+                    badDayPredictor: '¡Predictor de mal día identificado!',
+                    unexpectedPattern: 'Patrón inesperado detectado',
+                    missingActivity: 'Correlación de actividad faltante',
+                    successFormula: '¡Fórmula de éxito descubierta!',
+                    activityConsistency: 'La consistencia de actividad importa',
+                    personalizedStrategy: 'Estrategia Semanal Personalizada',
+                    optimalStrategy: 'Estrategia Semanal Óptima para',
+                    focusOn: 'Enfócate en',
+                    whichHas: 'que tiene',
+                    successRate: 'tasa de éxito',
+                    reduce: 'Reduce',
+                    improve: 'y trabaja para mejorar',
+                    daysTend: 'los días tienden a ser',
+                    afterDoing: 'después de hacer',
+                    skipDays: 'Saltar actividades en',
+                    correlatesWithBad: 'se correlaciona con días malos',
+                    ensureDaily: 'Asegurar actividades diarias para mantener buen impulso',
+                    activityGaps: 'Tienes brechas entre actividades promediando',
+                    moreConsistent: 'días. Una programación más consistente podría ayudar',
+                    needMoreData: 'Se necesitan al menos 5 días de datos para un análisis de patrones significativo. Actual: {0} días.'
+                }
+            },
+            fr: {
+                appName: 'DogLog',
+                tagline: 'Le traqueur quotidien de vos amis à fourrure',
+                addDog: 'Ajouter un Nouveau Chien',
+                settings: 'Paramètres',
+                language: 'Langue',
+                privacy: 'Confidentialité',
+                back: 'Retour',
+                save: 'Sauvegarder',
+                cancel: 'Annuler',
+                name: 'Nom',
+                breed: 'Race',
+                age: 'Âge',
+                gender: 'Genre',
+                notes: 'Notes',
+                activities: 'Activités',
+                goodDay: 'Bonne Journée',
+                okayDay: 'Journée Correcte',
+                badDay: 'Mauvaise Journée',
+                patternAnalysis: 'Analyse de Motifs IA',
+                localAnalysis: 'Utiliser l\'Analyse Locale',
+                realAI: 'IA Réelle (ChatGPT)',
+                analyzing: 'L\'IA analyse les modèles de comportement...',
+                
+                // Local AI Analysis translations
+                localAI: {
+                    winningActivity: 'est une activité gagnante!',
+                    needsAttention: 'nécessite attention',
+                    excellentProgress: 'Excellent progrès général!',
+                    roomForImprovement: 'Possibilité d\'amélioration',
+                    activityVariety: 'La variété d\'activités pourrait être améliorée',
+                    badDayPredictor: 'Prédicteur de mauvais jour identifié!',
+                    unexpectedPattern: 'Motif inattendu détecté',
+                    missingActivity: 'Corrélation d\'activité manquante',
+                    successFormula: 'Formule de succès découverte!',
+                    activityConsistency: 'La cohérence des activités compte',
+                    personalizedStrategy: 'Stratégie Hebdomadaire Personnalisée',
+                    optimalStrategy: 'Stratégie Hebdomadaire Optimale pour',
+                    focusOn: 'Concentrez-vous sur',
+                    whichHas: 'qui a',
+                    successRate: 'taux de succès',
+                    reduce: 'Réduisez',
+                    improve: 'et travaillez pour améliorer',
+                    daysTend: 'les jours tendent à être',
+                    afterDoing: 'après avoir fait',
+                    skipDays: 'Sauter des activités le',
+                    correlatesWithBad: 'corrèle avec les mauvais jours',
+                    ensureDaily: 'Assurer des activités quotidiennes pour maintenir l\'élan',
+                    activityGaps: 'Vous avez des écarts entre activités moyennant',
+                    moreConsistent: 'jours. Un horaire plus cohérent pourrait aider',
+                    needMoreData: 'Besoin d\'au moins 5 jours de données pour une analyse de motifs significative. Actuel: {0} jours.'
+                }
+            },
+            de: {
+                appName: 'DogLog',
+                tagline: 'Der tägliche Tracker für deine pelzigen Freunde',
+                addDog: 'Neuen Hund Hinzufügen',
+                settings: 'Einstellungen',
+                language: 'Sprache',
+                privacy: 'Datenschutz',
+                back: 'Zurück',
+                save: 'Speichern',
+                cancel: 'Abbrechen',
+                name: 'Name',
+                breed: 'Rasse',
+                age: 'Alter',
+                gender: 'Geschlecht',
+                notes: 'Notizen',
+                activities: 'Aktivitäten',
+                goodDay: 'Guter Tag',
+                okayDay: 'Okay Tag',
+                badDay: 'Schlechter Tag',
+                patternAnalysis: 'KI-Musteranalyse',
+                localAnalysis: 'Lokale Analyse Verwenden',
+                realAI: 'Echte KI (ChatGPT)',
+                analyzing: 'KI analysiert Verhaltensmuster...'
+            },
+            sv: {
+                appName: 'DogLog',
+                tagline: 'Din pälsiga väns dagliga spårare',
+                addDog: 'Lägg till Ny Hund',
+                settings: 'Inställningar',
+                language: 'Språk',
+                privacy: 'Integritet',
+                back: 'Tillbaka',
+                save: 'Spara',
+                cancel: 'Avbryt',
+                name: 'Namn',
+                breed: 'Ras',
+                age: 'Ålder',
+                gender: 'Kön',
+                notes: 'Anteckningar',
+                activities: 'Aktiviteter',
+                goodDay: 'Bra Dag',
+                okayDay: 'Okej Dag',
+                badDay: 'Dålig Dag',
+                patternAnalysis: 'AI-Mönsteranalys',
+                localAnalysis: 'Använd Lokal Analys',
+                realAI: 'Riktig AI (ChatGPT)',
+                analyzing: 'AI analyserar beteendemönster...'
+            },
+            da: {
+                appName: 'DogLog',
+                tagline: 'Din pelsets vens daglige tracker',
+                addDog: 'Tilføj Ny Hund',
+                settings: 'Indstillinger',
+                language: 'Sprog',
+                privacy: 'Privatliv',
+                back: 'Tilbage',
+                save: 'Gem',
+                cancel: 'Annuller',
+                name: 'Navn',
+                breed: 'Race',
+                age: 'Alder',
+                gender: 'Køn',
+                notes: 'Noter',
+                activities: 'Aktiviteter',
+                goodDay: 'God Dag',
+                okayDay: 'Okay Dag',
+                badDay: 'Dårlig Dag',
+                patternAnalysis: 'AI-Mønsteranalyse',
+                localAnalysis: 'Brug Lokal Analyse',
+                realAI: 'Ægte AI (ChatGPT)',
+                analyzing: 'AI analyserer adfærdsmønstre...'
+            },
+            no: {
+                appName: 'DogLog',
+                tagline: 'Din pelskledde venns daglige sporer',
+                addDog: 'Legg til Ny Hund',
+                settings: 'Innstillinger',
+                language: 'Språk',
+                privacy: 'Personvern',
+                back: 'Tilbake',
+                save: 'Lagre',
+                cancel: 'Avbryt',
+                name: 'Navn',
+                breed: 'Rase',
+                age: 'Alder',
+                gender: 'Kjønn',
+                notes: 'Notater',
+                activities: 'Aktiviteter',
+                goodDay: 'Bra Dag',
+                okayDay: 'Grei Dag',
+                badDay: 'Dårlig Dag',
+                patternAnalysis: 'AI-Mønsteranalyse',
+                localAnalysis: 'Bruk Lokal Analyse',
+                realAI: 'Ekte AI (ChatGPT)',
+                analyzing: 'AI analyserer atferdsmønstre...'
+            },
+            it: {
+                appName: 'DogLog',
+                tagline: 'Il tracker quotidiano dei tuoi amici pelosi',
+                addDog: 'Aggiungi Nuovo Cane',
+                settings: 'Impostazioni',
+                language: 'Lingua',
+                privacy: 'Privacy',
+                back: 'Indietro',
+                save: 'Salva',
+                cancel: 'Annulla',
+                name: 'Nome',
+                breed: 'Razza',
+                age: 'Età',
+                gender: 'Sesso',
+                notes: 'Note',
+                activities: 'Attività',
+                goodDay: 'Buona Giornata',
+                okayDay: 'Giornata Normale',
+                badDay: 'Brutta Giornata',
+                patternAnalysis: 'Analisi Pattern AI',
+                localAnalysis: 'Usa Analisi Locale',
+                realAI: 'AI Reale (ChatGPT)',
+                analyzing: 'L\'AI sta analizzando i pattern comportamentali...'
+            },
+            pt: {
+                appName: 'DogLog',
+                tagline: 'O rastreador diário dos seus amigos peludos',
+                addDog: 'Adicionar Novo Cão',
+                settings: 'Configurações',
+                language: 'Idioma',
+                privacy: 'Privacidade',
+                back: 'Voltar',
+                save: 'Salvar',
+                cancel: 'Cancelar',
+                name: 'Nome',
+                breed: 'Raça',
+                age: 'Idade',
+                gender: 'Gênero',
+                notes: 'Notas',
+                activities: 'Atividades',
+                goodDay: 'Bom Dia',
+                okayDay: 'Dia Normal',
+                badDay: 'Dia Ruim',
+                patternAnalysis: 'Análise de Padrões IA',
+                localAnalysis: 'Usar Análise Local',
+                realAI: 'IA Real (ChatGPT)',
+                analyzing: 'IA está analisando padrões comportamentais...'
+            },
+            nl: {
+                appName: 'DogLog',
+                tagline: 'De dagelijkse tracker van je harige vrienden',
+                addDog: 'Nieuwe Hond Toevoegen',
+                settings: 'Instellingen',
+                language: 'Taal',
+                privacy: 'Privacy',
+                back: 'Terug',
+                save: 'Opslaan',
+                cancel: 'Annuleren',
+                name: 'Naam',
+                breed: 'Ras',
+                age: 'Leeftijd',
+                gender: 'Geslacht',
+                notes: 'Notities',
+                activities: 'Activiteiten',
+                goodDay: 'Goede Dag',
+                okayDay: 'Oké Dag',
+                badDay: 'Slechte Dag',
+                patternAnalysis: 'AI-Patroonanalyse',
+                localAnalysis: 'Lokale Analyse Gebruiken',
+                realAI: 'Echte AI (ChatGPT)',
+                analyzing: 'AI analyseert gedragspatronen...'
+            }
+        };
+
+        function loadSettings() {
+            try {
+                const savedApiKey = localStorage.getItem('doglog-apikey') || '';
+                
+                userApiKey = savedApiKey;
+                
+                document.getElementById('apiKeyInput').value = userApiKey;
+            } catch (e) {
+                console.error('Error loading settings:', e);
+            }
+        }
+
+
+        function saveApiKey() {
+            userApiKey = document.getElementById('apiKeyInput').value;
+            localStorage.setItem('doglog-apikey', userApiKey);
+            
+            // Update the backend with the new API key
+            if (userApiKey) {
+                updateBackendApiKey(userApiKey);
+            }
+        }
+
+        function clearApiKey() {
+            // Clear from input field
+            document.getElementById('apiKeyInput').value = '';
+            
+            // Clear from localStorage
+            localStorage.removeItem('doglog-apikey');
+            userApiKey = '';
+            
+            // Clear from backend
+            updateBackendApiKey('');
+            
+            alert('API key cleared successfully!');
+        }
+
+        function updateLanguage() {
+            const t = translations[currentLanguage] || translations.en;
+            console.log('Updating language with translations:', t);
+            
+            // Update common UI elements
+            const appNameElements = document.querySelectorAll('[data-translate="appName"]');
+            console.log('Found app name elements:', appNameElements.length);
+            appNameElements.forEach(el => el.textContent = t.appName);
+            
+            const taglineElements = document.querySelectorAll('[data-translate="tagline"]');
+            console.log('Found tagline elements:', taglineElements.length);
+            taglineElements.forEach(el => el.textContent = t.tagline);
+            
+            // Update settings page elements
+            const settingsTitle = document.querySelector('#settingsView h2');
+            if (settingsTitle) settingsTitle.textContent = t.settings;
+            
+            const backBtn = document.querySelector('#settingsView .back-btn');
+            if (backBtn) backBtn.textContent = `← ${t.back}`;
+            
+            // Update settings section titles
+            const languageSection = document.querySelector('#settingsView .settings-section:nth-child(1) h3');
+            if (languageSection) languageSection.textContent = `🌐 ${t.language}`;
+            
+            // Update day rating buttons
+            const goodDayBtn = document.getElementById('dayGood');
+            if (goodDayBtn) goodDayBtn.textContent = `😊 ${t.goodDay}`;
+            
+            const okayDayBtn = document.getElementById('dayOkay');
+            if (okayDayBtn) okayDayBtn.textContent = `😐 ${t.okayDay}`;
+            
+            const badDayBtn = document.getElementById('dayBad');
+            if (badDayBtn) badDayBtn.textContent = `😞 ${t.badDay}`;
+            
+            // Update add dog modal
+            const addDogTitle = document.querySelector('#addModal h2');
+            if (addDogTitle) addDogTitle.textContent = t.addDog;
+            
+            // Update form labels
+            const nameLabel = document.querySelector('label[for="name"]');
+            if (nameLabel) nameLabel.textContent = t.name + ':';
+            
+            const breedLabel = document.querySelector('label[for="breed"]');
+            if (breedLabel) breedLabel.textContent = t.breed + ':';
+            
+            const ageLabel = document.querySelector('label[for="age"]');
+            if (ageLabel) ageLabel.textContent = t.age + ':';
+            
+            const genderLabel = document.querySelector('label[for="gender"]');
+            if (genderLabel) genderLabel.textContent = t.gender + ':';
+            
+            const notesLabel = document.querySelector('label[for="notes"]');
+            if (notesLabel) notesLabel.textContent = t.notes + ':';
+            
+            // Update buttons
+            const saveBtn = document.querySelector('.save-btn');
+            if (saveBtn) saveBtn.textContent = t.save;
+            
+            const cancelBtn = document.querySelector('.cancel-btn');
+            if (cancelBtn) cancelBtn.textContent = t.cancel;
+            
+            // Update AI analysis section
+            const aiModeLabel = document.querySelector('.ai-mode-selector label[for="aiMode"]');
+            if (aiModeLabel) aiModeLabel.textContent = t.patternAnalysis + ':';
+            
+            const localAILabel = document.querySelector('label[for="localAI"]');
+            if (localAILabel) localAILabel.textContent = t.localAnalysis;
+            
+            const realAILabel = document.querySelector('label[for="realAI"]');
+            if (realAILabel) realAILabel.textContent = t.realAI;
+            
+            // Update activity page elements
+            const activitiesHeader = document.querySelector('#activityView .activity-header h2');
+            if (activitiesHeader) activitiesHeader.textContent = t.activityLog;
+            
+            const todaysActivitiesLabel = document.querySelector('#activityView h3');
+            if (todaysActivitiesLabel && todaysActivitiesLabel.textContent.includes('Activities')) {
+                todaysActivitiesLabel.textContent = t.todaysActivities;
+            }
+            
+            const dayRatingLabel = document.querySelector('#activityView h4');
+            if (dayRatingLabel && dayRatingLabel.textContent.includes('day overall')) {
+                dayRatingLabel.textContent = t.dayRating;
+            }
+            
+            const saveDayBtn = document.querySelector('#activityView .save-btn');
+            if (saveDayBtn && saveDayBtn.textContent === 'Save Day') {
+                saveDayBtn.textContent = t.saveDay;
+            }
+            
+            // Update test button
+            const testBtn = document.querySelector('.test-btn');
+            if (testBtn) testBtn.textContent = t.testData;
+            
+            // Update empty state
+            const emptyTitle = document.querySelector('.empty-state h2');
+            if (emptyTitle && emptyTitle.textContent.includes('No dogs')) {
+                emptyTitle.textContent = t.noDogs;
+            }
+            
+            const emptyDesc = document.querySelector('.empty-state p');
+            if (emptyDesc && emptyDesc.textContent.includes('Add your first')) {
+                emptyDesc.textContent = t.firstDog;
+            }
+            
+            // Update gender options in form
+            const maleOption = document.querySelector('#gender option[value="male"]');
+            if (maleOption) maleOption.textContent = t.male;
+            
+            const femaleOption = document.querySelector('#gender option[value="female"]');
+            if (femaleOption) femaleOption.textContent = t.female;
+            
+            const otherOption = document.querySelector('#gender option[value="other"]');
+            if (otherOption) otherOption.textContent = t.other;
+            
+            // Update loading message
+            const loadingMsg = document.querySelector('.no-insights');
+            if (loadingMsg && loadingMsg.textContent.includes('analyzing')) {
+                loadingMsg.innerHTML = `🧠 ${t.analyzing.replace('behavior patterns', currentDog?.name + '\'s behavior patterns')}<br><div style="margin-top: 10px;">This may take a few seconds.</div>`;
+            }
+            
+            document.documentElement.lang = currentLanguage;
+        }
+
+        async function updateBackendApiKey(apiKey) {
+            try {
+                await fetch('http://localhost:3001/api/update-key', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ apiKey })
+                });
+            } catch (error) {
+                console.log('Could not update backend API key - server may not be running');
+            }
+        }
+
+        // Example Week Functions
+        function showExampleWeek() {
+            if (!currentDog || !currentDog.activities) {
+                alert('No analysis data available to generate example week.');
+                return;
+            }
+            
+            generateExampleWeekCalendar();
+            document.getElementById('exampleWeekModal').style.display = 'flex';
+        }
+
+        function closeExampleWeek() {
+            document.getElementById('exampleWeekModal').style.display = 'none';
+        }
+
+        // Close example week modal when clicking outside
+        document.getElementById('exampleWeekModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeExampleWeek();
+            }
+        });
+
+        function generateExampleWeekCalendar() {
+            const activities = currentDog.activities;
+            const dayRatings = currentDog.dayRatings;
+            
+            // Analyze successful activities and patterns
+            const activitySuccess = {};
+            const dayPatterns = {};
+            
+            Object.keys(activities).forEach(date => {
+                const dayActivities = activities[date] || [];
+                const dayRating = dayRatings[date];
+                const dayOfWeek = new Date(date).toLocaleDateString('en-US', { weekday: 'long' });
+                
+                if (!dayPatterns[dayOfWeek]) dayPatterns[dayOfWeek] = { good: 0, total: 0, activities: [] };
+                
+                dayActivities.forEach(activity => {
+                    if (!activitySuccess[activity.name]) {
+                        activitySuccess[activity.name] = { good: 0, total: 0 };
+                    }
+                    activitySuccess[activity.name].total++;
+                    if (activity.outcome === 'good') {
+                        activitySuccess[activity.name].good++;
+                    }
+                    
+                    if (dayRating === 'good') {
+                        dayPatterns[dayOfWeek].activities.push(activity.name);
+                    }
+                });
+                
+                if (dayRating === 'good') dayPatterns[dayOfWeek].good++;
+                if (dayRating) dayPatterns[dayOfWeek].total++;
+            });
+            
+            // Create calendar for current week
+            const today = new Date();
+            const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            
+            let calendarHTML = `
+                <p style="text-align: center; color: #666; margin-bottom: 1rem;">
+                    Based on your ${currentDog.name}'s activity patterns and successful days
+                </p>
+                <div class="example-week-calendar">
+            `;
+            
+            days.forEach((dayName, index) => {
+                const currentDate = new Date(startOfWeek);
+                currentDate.setDate(startOfWeek.getDate() + index);
+                const isToday = currentDate.toDateString() === new Date().toDateString();
+                
+                // Get recommended activities for this day
+                const recommendedActivities = getRecommendedActivitiesForDay(dayName, activitySuccess, dayPatterns);
+                
+                calendarHTML += `
+                    <div class="example-day ${isToday ? 'today' : ''}">
+                        <div class="example-day-header">
+                            ${dayName}<br>
+                            <small>${currentDate.getMonth() + 1}/${currentDate.getDate()}</small>
+                        </div>
+                        <div class="example-activities">
+                            ${recommendedActivities.map(activity => 
+                                `<div class="example-activity ${activity.intensity}">${activity.name}</div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            calendarHTML += `</div>
+                <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <strong>Legend:</strong><br>
+                    <span class="example-activity" style="margin-right: 1rem;">High Success Activities</span>
+                    <span class="example-activity moderate" style="margin-right: 1rem;">Moderate Activities</span>
+                    <span class="example-activity light">Light/Recovery Activities</span>
+                </div>
+            `;
+            
+            document.getElementById('exampleWeekContent').innerHTML = calendarHTML;
+        }
+
+        function getRecommendedActivitiesForDay(dayName, activitySuccess, dayPatterns) {
+            const recommendations = [];
+            
+            // Get most successful activities
+            const sortedActivities = Object.keys(activitySuccess)
+                .map(name => ({
+                    name,
+                    successRate: activitySuccess[name].total > 0 ? 
+                        (activitySuccess[name].good / activitySuccess[name].total) : 0,
+                    total: activitySuccess[name].total
+                }))
+                .filter(a => a.total >= 2)
+                .sort((a, b) => b.successRate - a.successRate);
+            
+            // Weekend vs weekday logic
+            const isWeekend = dayName === 'Saturday' || dayName === 'Sunday';
+            const isMonday = dayName === 'Monday';
+            
+            if (isWeekend) {
+                // Weekend: More intensive activities
+                if (sortedActivities.length > 0) {
+                    recommendations.push({ name: sortedActivities[0].name, intensity: '' });
+                }
+                recommendations.push({ name: 'Extended Play', intensity: '' });
+                recommendations.push({ name: 'Socialization', intensity: 'moderate' });
+            } else if (isMonday) {
+                // Monday: Fresh start
+                recommendations.push({ name: 'Morning Walk', intensity: 'moderate' });
+                if (sortedActivities.length > 1) {
+                    recommendations.push({ name: sortedActivities[1].name, intensity: '' });
+                }
+                recommendations.push({ name: 'Training Session', intensity: 'light' });
+            } else {
+                // Regular weekdays
+                if (sortedActivities.length > 0) {
+                    const topActivity = sortedActivities[0];
+                    recommendations.push({ name: topActivity.name, intensity: topActivity.successRate > 0.8 ? '' : 'moderate' });
+                }
+                
+                // Add variety
+                const commonActivities = ['Walk', 'Play', 'Training', 'Exercise', 'Mental Stimulation'];
+                const availableActivities = commonActivities.filter(act => 
+                    !recommendations.some(rec => rec.name.toLowerCase().includes(act.toLowerCase()))
+                );
+                
+                if (availableActivities.length > 0 && recommendations.length < 3) {
+                    recommendations.push({ 
+                        name: availableActivities[Math.floor(Math.random() * availableActivities.length)], 
+                        intensity: 'light' 
+                    });
+                }
+            }
+            
+            return recommendations.slice(0, 3); // Max 3 activities per day
+        }
+
+        function generateExampleWeekForPDF() {
+            const activities = currentDog.activities;
+            const dayRatings = currentDog.dayRatings;
+            
+            // Analyze successful activities and patterns (same logic as modal)
+            const activitySuccess = {};
+            const dayPatterns = {};
+            
+            Object.keys(activities).forEach(date => {
+                const dayActivities = activities[date] || [];
+                const dayRating = dayRatings[date];
+                const dayOfWeek = new Date(date).toLocaleDateString('en-US', { weekday: 'long' });
+                
+                if (!dayPatterns[dayOfWeek]) dayPatterns[dayOfWeek] = { good: 0, total: 0, activities: [] };
+                
+                dayActivities.forEach(activity => {
+                    if (!activitySuccess[activity.name]) {
+                        activitySuccess[activity.name] = { good: 0, total: 0 };
+                    }
+                    activitySuccess[activity.name].total++;
+                    if (activity.outcome === 'good') {
+                        activitySuccess[activity.name].good++;
+                    }
+                    
+                    if (dayRating === 'good') {
+                        dayPatterns[dayOfWeek].activities.push(activity.name);
+                    }
+                });
+                
+                if (dayRating === 'good') dayPatterns[dayOfWeek].good++;
+                if (dayRating) dayPatterns[dayOfWeek].total++;
+            });
+            
+            // Create PDF-friendly calendar for current week
+            const today = new Date();
+            const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            
+            let calendarHTML = `
+                <div class="example-week-pdf">
+                    <div class="example-week-title">📅 Recommended Weekly Schedule</div>
+                    <p style="text-align: center; color: #666; margin-bottom: 1rem; font-style: italic;">
+                        Based on ${currentDog.name}'s activity patterns and successful days
+                    </p>
+                    <div class="pdf-week-grid">
+            `;
+            
+            days.forEach((dayName, index) => {
+                const currentDate = new Date(startOfWeek);
+                currentDate.setDate(startOfWeek.getDate() + index);
+                
+                // Get recommended activities for this day
+                const recommendedActivities = getRecommendedActivitiesForDay(dayName, activitySuccess, dayPatterns);
+                
+                calendarHTML += `
+                    <div class="pdf-day">
+                        <div class="pdf-day-header">
+                            ${dayName}<br>
+                            <small style="font-weight: normal; color: #666;">${currentDate.getMonth() + 1}/${currentDate.getDate()}</small>
+                        </div>
+                        <div class="pdf-activities">
+                            ${recommendedActivities.map(activity => 
+                                `<div class="pdf-activity ${activity.intensity}">${activity.name}</div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            calendarHTML += `
+                    </div>
+                    <div class="pdf-legend">
+                        <strong>Activity Legend:</strong> 
+                        <span style="border-left: 3px solid #28a745; padding-left: 5px; margin: 0 10px;">High Success</span>
+                        <span style="border-left: 3px solid #ffc107; padding-left: 5px; margin: 0 10px;">Moderate</span>
+                        <span style="border-left: 3px solid #17a2b8; padding-left: 5px; margin: 0 10px;">Light/Recovery</span>
+                    </div>
+                </div>
+            `;
+            
+            return calendarHTML;
+        }
+
+        // Generate behavior sliders for current dog and date
+        function generateBehaviorSliders() {
+            const behaviorSection = document.getElementById('behaviorTrackingSection');
+            const slidersContainer = document.getElementById('behaviorSliders');
+            
+            if (!currentDog || !currentDog.behaviorIssues || currentDog.behaviorIssues.trim() === '') {
+                behaviorSection.style.display = 'none';
+                return;
+            }
+            
+            behaviorSection.style.display = 'block';
+            
+            // Split behavior issues by common separators
+            const behaviors = currentDog.behaviorIssues
+                .split(/[,;]/)
+                .map(b => b.trim())
+                .filter(b => b.length > 0);
+            
+            if (behaviors.length === 0) {
+                behaviorSection.style.display = 'none';
+                return;
+            }
+            
+            // Initialize behavior ratings if not exists
+            if (!currentDog.behaviorRatings) {
+                currentDog.behaviorRatings = {};
+            }
+            if (!currentDog.behaviorRatings[currentDate]) {
+                currentDog.behaviorRatings[currentDate] = {};
+            }
+            
+            let slidersHTML = '';
+            behaviors.forEach((behavior, index) => {
+                const currentValue = currentDog.behaviorRatings[currentDate][behavior] || 50;
+                const valueText = getBehaviorValueText(currentValue);
+                const valueClass = getBehaviorValueClass(currentValue);
+                
+                slidersHTML += `
+                    <div class="behavior-slider-container">
+                        <div class="behavior-name">${behavior}</div>
+                        <div class="slider-container">
+                            <input 
+                                type="range" 
+                                min="0" 
+                                max="100" 
+                                value="${currentValue}" 
+                                class="behavior-slider" 
+                                id="behaviorSlider_${index}"
+                                onchange="updateBehaviorRating('${behavior}', this.value)"
+                                oninput="updateBehaviorDisplay('${behavior}', this.value, ${index})"
+                            >
+                            <div class="behavior-value ${valueClass}" id="behaviorValue_${index}">
+                                ${valueText}
+                            </div>
+                        </div>
+                        <div class="slider-labels">
+                            <span>Very Bad</span>
+                            <span>Bad</span>
+                            <span>Okay</span>
+                            <span>Good</span>
+                            <span>Excellent</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            slidersContainer.innerHTML = slidersHTML;
+        }
+
+        function getBehaviorValueText(value) {
+            if (value <= 20) return 'Very Bad';
+            if (value <= 40) return 'Bad';
+            if (value <= 60) return 'Okay';
+            if (value <= 80) return 'Good';
+            return 'Excellent';
+        }
+
+        function getBehaviorValueClass(value) {
+            if (value <= 20) return 'bad';
+            if (value <= 40) return 'bad';
+            if (value <= 60) return 'okay';
+            if (value <= 80) return 'good';
+            return 'excellent';
+        }
+
+        function updateBehaviorDisplay(behavior, value, index) {
+            const valueText = getBehaviorValueText(value);
+            const valueClass = getBehaviorValueClass(value);
+            const valueElement = document.getElementById(`behaviorValue_${index}`);
+            
+            valueElement.textContent = valueText;
+            valueElement.className = `behavior-value ${valueClass}`;
+        }
+
+        function updateBehaviorRating(behavior, value) {
+            if (!currentDog.behaviorRatings) {
+                currentDog.behaviorRatings = {};
+            }
+            if (!currentDog.behaviorRatings[currentDate]) {
+                currentDog.behaviorRatings[currentDate] = {};
+            }
+            
+            currentDog.behaviorRatings[currentDate][behavior] = parseInt(value);
+            
+            // Save to localStorage
+            saveData();
+            
+            console.log(`Behavior "${behavior}" rated ${getBehaviorValueText(value)} (${value}) for ${currentDate}`);
+        }
+
+        // Load data when app starts
+        loadSavedData();
+        
+        // Initial render after loading data
+        setTimeout(() => {
+            renderDogs();
+            loadAIMode();
+            loadSettings();
+        }, 100);
+
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        function showGallery() {
+            showView('galleryView');
+            renderDogs();
+        }
+
+        function showDogPage() {
+            showView('dogView');
+            renderCalendar();
+        }
+
+        function showSettings() {
+            showView('settingsView');
+            loadSettings();
+        }
+
+        function showActivityPage(dog, date) {
+            currentDog = dog;
+            currentDate = date;
+            showView('activityView');
+            
+            const dateObj = new Date(date + 'T00:00:00');
+            document.getElementById('activityDate').innerHTML = `
+                <h2>${dateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
+                <p>Log ${dog.name}'s activities</p>
+            `;
+            
+            // Load existing activities for this date from the dog's saved data
+            if (currentDog.activities && currentDog.activities[date]) {
+                activities[date] = [...currentDog.activities[date]];
+            } else if (!activities[date]) {
+                activities[date] = [];
+            }
+            
+            // Load existing day rating for this date from the dog's saved data
+            if (currentDog.dayRatings && currentDog.dayRatings[date]) {
+                dayRatings[date] = currentDog.dayRatings[date];
+            }
+            
+            renderActivities();
+            renderDayRating();
+            generateBehaviorSliders();
+        }
+
+        function openAddModal() {
+            document.getElementById('addModal').style.display = 'flex';
+        }
+
+        function closeAddModal() {
+            document.getElementById('addModal').style.display = 'none';
+            document.getElementById('dogForm').reset();
+            currentPhoto = null;
+            document.getElementById('photoPreview').innerHTML = `
+                <div class="photo-placeholder">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📸</span>
+                    <p style="font-size: 0.9rem; margin: 0;">Add Photo</p>
+                </div>
+            `;
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentPhoto = e.target.result;
+                    document.getElementById('photoPreview').innerHTML = `<img src="${currentPhoto}" alt="Dog photo">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addDog(dogData) {
+            const dog = {
+                id: Date.now(),
+                ...dogData,
+                photo: currentPhoto,
+                activities: {},
+                dayRatings: {}
+            };
+            dogs.push(dog);
+            saveData(); // Save after adding dog
+            renderDogs();
+            closeAddModal();
+        }
+
+        function renderDogs() {
+            const grid = document.getElementById('dogsGrid');
+            
+            if (dogs.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🐾</div>
+                        <h2>No dogs yet!</h2>
+                        <p>Add your first furry friend to get started tracking their activities.</p>
+                    </div>
+                    <div class="add-dog-card" onclick="openAddModal()">
+                        <div class="add-icon">+</div>
+                        <p>Add Dog</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = dogs.map(dog => `
+                <div class="dog-card" onclick="selectDog(${dog.id})">
+                    <div class="dog-photo">
+                        ${dog.photo ? `<img src="${dog.photo}" alt="${dog.name}">` : '<div class="dog-photo-placeholder">🐕</div>'}
+                    </div>
+                    <div class="dog-info">
+                        <h3>${dog.name}</h3>
+                        <p>${dog.breed || 'Mixed breed'}</p>
+                        <p>${dog.dateOfBirth ? formatAge(dog.dateOfBirth) + ' old' : 'Age not set'}</p>
+                    </div>
+                </div>
+            `).join('') + `
+                <div class="add-dog-card" onclick="openAddModal()">
+                    <div class="add-icon">+</div>
+                    <p>Add Dog</p>
+                </div>
+            `;
+        }
+
+        // Calculate age from date of birth
+        function calculateAge(dateOfBirth) {
+            if (!dateOfBirth) return null;
+            
+            const birthDate = new Date(dateOfBirth);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
+            return age;
+        }
+
+        // Format age for display
+        function formatAge(dateOfBirth) {
+            const age = calculateAge(dateOfBirth);
+            if (age === null) return '';
+            if (age === 0) return '< 1 year';
+            if (age === 1) return '1 year';
+            return `${age} years`;
+        }
+
+        // Generate hash of current dog's data for change detection
+        function generateDataHash(dog) {
+            if (!dog) return null;
+            
+            const dataString = JSON.stringify({
+                activities: dog.activities || {},
+                dayRatings: dog.dayRatings || {},
+                behaviorRatings: dog.behaviorRatings || {},
+                name: dog.name,
+                breed: dog.breed,
+                dateOfBirth: dog.dateOfBirth,
+                behaviorIssues: dog.behaviorIssues || ''
+            });
+            
+            // Simple hash function
+            let hash = 0;
+            for (let i = 0; i < dataString.length; i++) {
+                const char = dataString.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return hash.toString();
+        }
+
+        // Check if data has changed since last AI analysis
+        function hasDataChanged() {
+            if (!currentDog) return false;
+            const currentHash = generateDataHash(currentDog);
+            return lastAIAnalysisHash !== currentHash;
+        }
+
+        // Get localized text for local AI analysis
+        function getLocalAIText(key) {
+            const t = translations[currentLanguage] || translations.en;
+            return t.localAI ? t.localAI[key] || translations.en.localAI[key] : translations.en.localAI[key];
+        }
+
+        // Update AI button to show change indicator
+        function updateAIButton() {
+            const button = document.getElementById('chatGPTBtn');
+            if (!button) return;
+            
+            if (cachedAIAnalysis && hasDataChanged()) {
+                // Data has changed since last analysis - add indicator
+                button.innerHTML = '🤖 ChatGPT <span style="background: #ff6b6b; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; margin-left: 5px;">NEW</span>';
+                button.title = 'You have new activities since last AI analysis - click for fresh analysis';
+            } else if (cachedAIAnalysis && !hasDataChanged()) {
+                // Has cached analysis, no changes
+                button.innerHTML = '🤖 ChatGPT <span style="background: #51cf66; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; margin-left: 5px;">✓</span>';
+                button.title = 'AI analysis is up to date - click to refresh';
+            } else {
+                // No cached analysis
+                button.innerHTML = '🤖 ChatGPT';
+                button.title = 'Get professional AI analysis of behavior patterns';
+            }
+        }
+
+        function selectDog(dogId) {
+            currentDog = dogs.find(dog => dog.id === dogId);
+            calendarDate = new Date(); // Reset to current month when selecting a dog
+            
+            // Clear AI cache when switching dogs
+            cachedAIAnalysis = null;
+            lastAIAnalysisHash = null;
+            
+            const ageDisplay = currentDog.dateOfBirth ? ` • ${formatAge(currentDog.dateOfBirth)} old` : '';
+            
+            document.getElementById('dogTitle').innerHTML = `
+                <div class="dog-avatar">
+                    ${currentDog.photo ? `<img src="${currentDog.photo}" alt="${currentDog.name}">` : '<div style="font-size: 1.5rem; color: #999;">🐕</div>'}
+                </div>
+                <div class="dog-details">
+                    <h1>${currentDog.name}</h1>
+                    <p>${currentDog.breed || 'Mixed breed'}${ageDisplay}</p>
+                </div>
+            `;
+            showDogPage();
+        }
+
+        // Edit dog functions
+        function editCurrentDog() {
+            if (!currentDog) return;
+            
+            // Populate edit form with current dog data
+            document.getElementById('editName').value = currentDog.name || '';
+            document.getElementById('editBreed').value = currentDog.breed || '';
+            document.getElementById('editDateOfBirth').value = currentDog.dateOfBirth || '';
+            document.getElementById('editGender').value = currentDog.gender || '';
+            document.getElementById('editNotes').value = currentDog.notes || '';
+            document.getElementById('editBehaviorIssues').value = currentDog.behaviorIssues || '';
+            
+            // Update photo preview
+            const editPhotoPreview = document.getElementById('editPhotoPreview');
+            if (currentDog.photo) {
+                editPhotoPreview.innerHTML = `<img src="${currentDog.photo}" alt="${currentDog.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+            } else {
+                editPhotoPreview.innerHTML = `
+                    <div class="photo-placeholder">
+                        <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📸</span>
+                        <p style="font-size: 0.9rem; margin: 0;">Change Photo</p>
+                    </div>
+                `;
+            }
+            
+            // Show edit modal
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            currentPhoto = null; // Reset photo state
+        }
+
+        function handleEditPhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentPhoto = e.target.result;
+                    document.getElementById('editPhotoPreview').innerHTML = 
+                        `<img src="${currentPhoto}" alt="Dog photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function previousMonth() {
+            calendarDate.setMonth(calendarDate.getMonth() - 1);
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            calendarDate.setMonth(calendarDate.getMonth() + 1);
+            renderCalendar();
+        }
+
+        async function analyzePatterns() {
+            if (!currentDog || !currentDog.activities || !currentDog.dayRatings) {
+                document.getElementById('insightsList').innerHTML = `
+                    <div class="no-insights">
+                        Add more activity data to see AI-powered insights about your dog's patterns.
+                    </div>
+                `;
+                return;
+            }
+
+            // Check if we have cached AI analysis - if so, show it by default
+            if (cachedAIAnalysis && lastAIAnalysisHash) {
+                showCachedAIAnalysis();
+                updateAIButton(); // Update button indicator
+                return;
+            }
+
+            // Otherwise, run local analysis
+            analyzeWithLocalAI();
+            updateAIButton(); // Update button indicator
+        }
+
+        // Real AI Analysis using OpenAI backend
+        async function analyzeWithRealAI() {
+            try {
+                // Show animated loading indicator
+                document.getElementById('insightsList').innerHTML = `
+                    <div class="ai-loading">
+                        <div class="ai-brain">🧠</div>
+                        <div class="loading-text">
+                            <span>AI is analyzing ${currentDog.name}'s behavior patterns...</span>
+                            ${currentDog.behaviorIssues ? `<br><small style="color: #666; margin-top: 0.5rem; display: block;">🎯 Including focus on: ${currentDog.behaviorIssues}</small>` : ''}
+                        </div>
+                        <div class="loading-dots">
+                            <span class="loading-dot"></span>
+                            <span class="loading-dot"></span>
+                            <span class="loading-dot"></span>
+                        </div>
+                        <div class="wave-pattern">
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                        </div>
+                    </div>
+                `;
+
+                const requestData = {
+                    dogName: currentDog.name,
+                    breed: currentDog.breed || 'Mixed breed',
+                    age: calculateAge(currentDog.dateOfBirth),
+                    activities: currentDog.activities || {},
+                    dayRatings: currentDog.dayRatings || {},
+                    behaviorRatings: currentDog.behaviorRatings || {},
+                    behaviorIssues: currentDog.behaviorIssues || '',
+                    language: currentLanguage
+                };
+                
+                // Log behavior issues being sent (for debugging)
+                if (requestData.behaviorIssues) {
+                    console.log(`🎯 Sending behavior issues to AI: "${requestData.behaviorIssues}"`);
+                }
+
+                const response = await fetch('http://localhost:3001/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                if (data.message) {
+                    // Not enough data for AI analysis
+                    document.getElementById('insightsList').innerHTML = `
+                        <div class="no-insights">
+                            🤖 AI says: ${data.message}<br><br>
+                            <small style="color: #666;">The local analysis below is still available.</small>
+                        </div>
+                    `;
+                    // Run local analysis as fallback
+                    analyzeWithLocalAI();
+                    return;
+                }
+
+                // Display AI insights
+                if (data.insights && data.insights.length > 0) {
+                    document.getElementById('insightsList').innerHTML = `
+                        <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+                            <strong>🤖 Real AI Analysis by ChatGPT-4</strong><br>
+                            <small style="color: #666;">Professional dog behaviorist analysis based on your data</small>
+                            ${currentDog.behaviorIssues ? `<br><div style="background: #fff3cd; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; border-left: 4px solid #ffc107;"><small style="color: #856404;"><strong>🎯 Behavior Focus:</strong> Analysis includes specific attention to: ${currentDog.behaviorIssues}</small></div>` : ''}
+                        </div>
+                        ${data.insights.map(insight => `
+                            <div class="insight-item ${insight.type}">
+                                <div class="insight-title">
+                                    ${insight.title}
+                                    ${insight.title.toLowerCase().includes('strategy') ? 
+                                        `<button onclick="showExampleWeek()" style="float: right; padding: 4px 8px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 10px;">📅 Example Week</button>` : ''}
+                                </div>
+                                <div class="insight-description">${insight.description.replace(/\n/g, '<br>')}</div>
+                            </div>
+                        `).join('')}
+                        <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
+                            <small style="color: #666;">✨ Professional AI analysis complete!</small>
+                        </div>
+                    `;
+                    
+                    // Cache the successful AI analysis
+                    cachedAIAnalysis = data;
+                    lastAIAnalysisHash = generateDataHash(currentDog);
+                    
+                    // Update button to reflect current state
+                    updateAIButton();
+                    
+                    // Show export button after ChatGPT analysis
+                    document.getElementById('exportSection').style.display = 'block';
+                } else {
+                    throw new Error('No insights received from AI');
+                }
+
+            } catch (error) {
+                console.error('Real AI Analysis failed:', error);
+                
+                // Show error and fallback to local analysis
+                document.getElementById('insightsList').innerHTML = `
+                    <div class="insight-item negative">
+                        <div class="insight-title">🚨 AI Analysis Unavailable</div>
+                        <div class="insight-description">
+                            Could not connect to AI backend: ${error.message}<br><br>
+                            <strong>Possible issues:</strong><br>
+                            • Backend server not running (run: <code>npm start</code> in doglog-backend folder)<br>
+                            • OpenAI API key not configured<br>
+                            • Network connection problems<br><br>
+                            <small style="color: #666;">Local analysis is still available below.</small>
+                        </div>
+                    </div>
+                `;
+                
+                // Run local analysis as fallback
+                analyzeWithLocalAI(true);
+            }
+        }
+
+        // Local AI Analysis (existing functionality)
+        function analyzeWithLocalAI(appendMode = false) {
+            const insights = [];
+            const strategicInsights = []; // For Weekly Strategy, Action Plan, Success Metrics
+            const patternInsights = []; // For detailed pattern analysis
+            const activities = currentDog.activities;
+            const dayRatings = currentDog.dayRatings;
+            
+            // Get all dates with data, sorted chronologically
+            const allDates = Object.keys(activities).filter(date => activities[date] && activities[date].length > 0).sort();
+            
+            if (allDates.length < 5) {
+                document.getElementById('insightsList').innerHTML = `
+                    <div class="no-insights">
+                        ${getLocalAIText('needMoreData').replace('{0}', allDates.length)}
+                    </div>
+                `;
+                return;
+            }
+
+            // Analysis 1: Activity Success Patterns
+            const activityOutcomes = {};
+            allDates.forEach(date => {
+                activities[date].forEach(activity => {
+                    if (!activityOutcomes[activity.name]) {
+                        activityOutcomes[activity.name] = { good: 0, okay: 0, bad: 0, total: 0 };
+                    }
+                    activityOutcomes[activity.name][activity.outcome]++;
+                    activityOutcomes[activity.name].total++;
+                });
+            });
+
+            // Find best and worst performing activities
+            let bestActivity = null, worstActivity = null;
+            let bestScore = 0, worstScore = 1;
+            
+            Object.keys(activityOutcomes).forEach(activityName => {
+                const data = activityOutcomes[activityName];
+                if (data.total >= 3) { // Only consider activities with enough data
+                    const successRate = data.good / data.total;
+                    if (successRate > bestScore) {
+                        bestScore = successRate;
+                        bestActivity = activityName;
+                    }
+                    if (successRate < worstScore) {
+                        worstScore = successRate;
+                        worstActivity = activityName;
+                    }
+                }
+            });
+
+            if (bestActivity) {
+                const bestData = activityOutcomes[bestActivity];
+                patternInsights.push({
+                    type: 'positive',
+                    title: `🌟 ${bestActivity} ${getLocalAIText('winningActivity')}`,
+                    description: `${currentDog.name} excels at ${bestActivity} with a ${Math.round(bestScore * 100)}% ${getLocalAIText('successRate')} (${bestData.good}/${bestData.total} sessions went well).`
+                });
+            }
+
+            if (worstActivity && worstScore < 0.5) {
+                const worstData = activityOutcomes[worstActivity];
+                patternInsights.push({
+                    type: 'warning',
+                    title: `⚠️ ${worstActivity} ${getLocalAIText('needsAttention')}`,
+                    description: `${currentDog.name} struggles with ${worstActivity} (only ${Math.round(worstScore * 100)}% ${getLocalAIText('successRate')}). Consider shorter sessions, different timing, or breaking it into smaller steps.`
+                });
+            }
+
+            // Analysis 2: Day Rating Patterns
+            const dayRatingCounts = { good: 0, okay: 0, bad: 0 };
+            Object.values(dayRatings).forEach(rating => {
+                if (dayRatingCounts[rating] !== undefined) {
+                    dayRatingCounts[rating]++;
+                }
+            });
+
+            const totalRatedDays = Object.values(dayRatingCounts).reduce((a, b) => a + b, 0);
+            if (totalRatedDays >= 5) {
+                const goodPercent = Math.round((dayRatingCounts.good / totalRatedDays) * 100);
+                const badPercent = Math.round((dayRatingCounts.bad / totalRatedDays) * 100);
+
+                if (goodPercent >= 70) {
+                    patternInsights.push({
+                        type: 'positive',
+                        title: `🎉 ${getLocalAIText('excellentProgress')}`,
+                        description: `${goodPercent}% of ${currentDog.name}'s days are rated as good! You're doing a fantastic job maintaining consistent care and activities.`
+                    });
+                } else if (badPercent >= 30) {
+                    patternInsights.push({
+                        type: 'negative',
+                        title: `📈 ${getLocalAIText('roomForImprovement')}`,
+                        description: `${badPercent}% of tracked days were challenging. Consider reviewing what activities or circumstances lead to difficult days and adjusting your routine.`
+                    });
+                }
+            }
+
+            // Analysis 3: Activity Frequency Patterns
+            const activityFrequency = {};
+            Object.keys(activityOutcomes).forEach(activity => {
+                activityFrequency[activity] = activityOutcomes[activity].total;
+            });
+
+            const sortedByFrequency = Object.keys(activityFrequency).sort((a, b) => activityFrequency[b] - activityFrequency[a]);
+            if (sortedByFrequency.length >= 3) {
+                const mostFrequent = sortedByFrequency[0];
+                const leastFrequent = sortedByFrequency[sortedByFrequency.length - 1];
+                
+                if (activityFrequency[mostFrequent] >= activityFrequency[leastFrequent] * 3) {
+                    patternInsights.push({
+                        type: 'warning',
+                        title: `🔄 Activity variety could be improved`,
+                        description: `${mostFrequent} makes up a large portion of ${currentDog.name}'s activities (${activityFrequency[mostFrequent]} times vs ${activityFrequency[leastFrequent]} for ${leastFrequent}). Adding more variety could prevent boredom and provide better mental stimulation.`
+                    });
+                }
+            }
+
+            // Analysis 4: Deep Causal Pattern Analysis
+            const badDays = allDates.filter(date => dayRatings[date] === 'bad');
+            
+            if (badDays.length >= 2) {
+                // What activities precede bad days?
+                const activitiesBeforeBadDays = {};
+                const activitiesMissingBeforeBadDays = {};
+                const allActivityTypes = Object.keys(activityOutcomes);
+                
+                badDays.forEach(badDate => {
+                    const badDateIndex = allDates.indexOf(badDate);
+                    
+                    // Check 1-4 days before bad days for deeper pattern analysis
+                    for (let daysBack = 1; daysBack <= 4; daysBack++) {
+                        if (badDateIndex - daysBack >= 0) {
+                            const priorDate = allDates[badDateIndex - daysBack];
+                            const priorActivities = activities[priorDate] || [];
+                            
+                            // Track what activities happened before bad days
+                            priorActivities.forEach(activity => {
+                                const key = `${activity.name}_${activity.outcome}_${daysBack} days before`;
+                                activitiesBeforeBadDays[key] = (activitiesBeforeBadDays[key] || 0) + 1;
+                            });
+                            
+                            // Track what activities were missing before bad days
+                            const presentActivities = priorActivities.map(a => a.name);
+                            allActivityTypes.forEach(activityType => {
+                                if (!presentActivities.includes(activityType)) {
+                                    const key = `missing_${activityType}_${daysBack} days before`;
+                                    activitiesMissingBeforeBadDays[key] = (activitiesMissingBeforeBadDays[key] || 0) + 1;
+                                }
+                            });
+                        }
+                    }
+                });
+                
+                // Find strong correlations (activities that precede 60%+ of bad days)
+                const strongPredictors = [];
+                const threshold = Math.max(2, Math.ceil(badDays.length * 0.6));
+                
+                Object.keys(activitiesBeforeBadDays).forEach(key => {
+                    if (activitiesBeforeBadDays[key] >= threshold) {
+                        const parts = key.split('_');
+                        const activity = parts[0];
+                        const outcome = parts[1];
+                        const timing = parts.slice(2).join(' ');
+                        strongPredictors.push({
+                            type: 'activity',
+                            activity,
+                            outcome,
+                            timing,
+                            count: activitiesBeforeBadDays[key],
+                            total: badDays.length
+                        });
+                    }
+                });
+                
+                Object.keys(activitiesMissingBeforeBadDays).forEach(key => {
+                    if (activitiesMissingBeforeBadDays[key] >= threshold) {
+                        const parts = key.split('_');
+                        const activity = parts[1];
+                        const timing = parts.slice(2).join(' ');
+                        strongPredictors.push({
+                            type: 'missing',
+                            activity,
+                            timing,
+                            count: activitiesMissingBeforeBadDays[key],
+                            total: badDays.length
+                        });
+                    }
+                });
+                
+                // Generate insights from predictors
+                strongPredictors.forEach(predictor => {
+                    const percentage = Math.round((predictor.count / predictor.total) * 100);
+                    
+                    if (predictor.type === 'activity') {
+                        if (predictor.outcome === 'bad') {
+                            patternInsights.push({
+                                type: 'negative',
+                                title: `🚨 Bad day predictor identified!`,
+                                description: `${percentage}% of ${currentDog.name}'s bad days were preceded by difficult ${predictor.activity} sessions ${predictor.timing}. Consider adjusting this activity's timing, duration, or approach to prevent challenging days.`
+                            });
+                        } else if (predictor.outcome === 'good') {
+                            patternInsights.push({
+                                type: 'warning',
+                                title: `🤔 Unexpected pattern detected`,
+                                description: `Interestingly, ${percentage}% of bad days followed good ${predictor.activity} sessions ${predictor.timing}. This might indicate overstimulation or fatigue after intense activities. Consider rest periods.`
+                            });
+                        }
+                    } else if (predictor.type === 'missing') {
+                        patternInsights.push({
+                            type: 'warning',
+                            title: `📝 Missing activity correlation`,
+                            description: `${percentage}% of ${currentDog.name}'s bad days occurred when ${predictor.activity} was skipped ${predictor.timing}. This activity might be more important for daily well-being than expected. Try maintaining consistency.`
+                        });
+                    }
+                });
+            }
+            
+            // Analysis 5: Good Day Predictors (what leads to success)
+            const goodDays = allDates.filter(date => dayRatings[date] === 'good');
+            
+            if (goodDays.length >= 3) {
+                const activitiesBeforeGoodDays = {};
+                
+                goodDays.forEach(goodDate => {
+                    const goodDateIndex = allDates.indexOf(goodDate);
+                    
+                    if (goodDateIndex - 1 >= 0) {
+                        const priorDate = allDates[goodDateIndex - 1];
+                        const priorActivities = activities[priorDate] || [];
+                        
+                        priorActivities.forEach(activity => {
+                            const key = `${activity.name}_${activity.outcome}`;
+                            activitiesBeforeGoodDays[key] = (activitiesBeforeGoodDays[key] || 0) + 1;
+                        });
+                    }
+                });
+                
+                // Find activities that frequently precede good days
+                const goodThreshold = Math.max(2, Math.ceil(goodDays.length * 0.5));
+                
+                Object.keys(activitiesBeforeGoodDays).forEach(key => {
+                    if (activitiesBeforeGoodDays[key] >= goodThreshold) {
+                        const [activity, outcome] = key.split('_');
+                        const percentage = Math.round((activitiesBeforeGoodDays[key] / goodDays.length) * 100);
+                        
+                        if (outcome === 'good') {
+                            patternInsights.push({
+                                type: 'positive',
+                                title: `🌟 Success formula discovered!`,
+                                description: `${percentage}% of ${currentDog.name}'s good days follow successful ${activity} sessions. This activity seems to set a positive tone - consider prioritizing it the day before important events.`
+                            });
+                        }
+                    }
+                });
+            }
+            
+            // Analysis 6: Activity Gap Analysis
+            const activityGaps = [];
+            for (let i = 1; i < allDates.length; i++) {
+                const currentDate = new Date(allDates[i] + 'T00:00:00');
+                const prevDate = new Date(allDates[i-1] + 'T00:00:00');
+                const daysDiff = Math.floor((currentDate - prevDate) / (1000 * 60 * 60 * 24));
+                
+                if (daysDiff > 1 && dayRatings[allDates[i]] === 'bad') {
+                    activityGaps.push(daysDiff);
+                }
+            }
+            
+            if (activityGaps.length >= 2) {
+                const avgGap = Math.round(activityGaps.reduce((a, b) => a + b, 0) / activityGaps.length);
+                patternInsights.push({
+                    type: 'warning',
+                    title: `⏰ Activity consistency matters`,
+                    description: `${currentDog.name} tends to have bad days after ${avgGap}-day breaks in activity logging. Consistent daily engagement seems important for maintaining good days.`
+                });
+            }
+
+            // Generate strategic suggestions first (if we have pattern data)
+            if (patternInsights.length > 0) {
+                const overallSuggestions = generateOverallSuggestions(patternInsights, allDates, activities, dayRatings, activityOutcomes);
+                strategicInsights.push(...overallSuggestions);
+            }
+
+            // Combine insights: Strategic suggestions first, then pattern analysis
+            const allInsights = [...strategicInsights, ...patternInsights];
+
+            // Display insights
+            const insightsList = document.getElementById('insightsList');
+            const localInsightsHTML = allInsights.length === 0 
+                ? `<div class="no-insights">No significant patterns detected yet. Generate more test data or continue tracking for deeper insights!</div>`
+                : allInsights.map(insight => `
+                    <div class="insight-item ${insight.type}">
+                        <div class="insight-title">
+                            ${insight.title}
+                            ${insight.title.toLowerCase().includes('strategy') ? 
+                                `<button onclick="showExampleWeek()" style="float: right; padding: 4px 8px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 10px;">📅 Example Week</button>` : ''}
+                        </div>
+                        <div class="insight-description">${insight.description.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `).join('');
+            
+            if (appendMode) {
+                // Append to existing content (after AI results)
+                insightsList.innerHTML += localInsightsHTML;
+            } else {
+                // Replace all content (normal local analysis)
+                insightsList.innerHTML = localInsightsHTML;
+                // Show export button after local analysis
+                document.getElementById('exportSection').style.display = 'block';
+            }
+        }
+
+        function generateOverallSuggestions(insights, allDates, activities, dayRatings, activityOutcomes) {
+            const suggestions = [];
+            
+            // Analyze all insights to create strategic recommendations
+            const hasGoodPredictors = insights.some(i => i.type === 'positive' && i.title.includes('Success formula'));
+            const hasBadPredictors = insights.some(i => i.type === 'negative' && i.title.includes('Bad day predictor'));
+            const hasMissingActivity = insights.some(i => i.type === 'warning' && i.title.includes('Missing activity'));
+            const hasVarietyIssue = insights.some(i => i.type === 'warning' && i.title.includes('Activity variety'));
+            
+            // Calculate overall metrics
+            const totalRatedDays = Object.values(dayRatings).length;
+            const goodDays = Object.values(dayRatings).filter(r => r === 'good').length;
+            const badDays = Object.values(dayRatings).filter(r => r === 'bad').length;
+            const goodPercent = Math.round((goodDays / totalRatedDays) * 100);
+            const badPercent = Math.round((badDays / totalRatedDays) * 100);
+            
+            // Find most and least successful activities
+            const activitySuccessRates = {};
+            Object.keys(activityOutcomes).forEach(activity => {
+                const data = activityOutcomes[activity];
+                if (data.total >= 3) {
+                    activitySuccessRates[activity] = data.good / data.total;
+                }
+            });
+            
+            const sortedActivities = Object.keys(activitySuccessRates).sort((a, b) => activitySuccessRates[b] - activitySuccessRates[a]);
+            const bestActivities = sortedActivities.slice(0, 2);
+            const challengingActivities = sortedActivities.slice(-2).reverse();
+            
+            // Generate comprehensive weekly strategy with proper line breaks
+            let weeklyStrategy = "📅 **Optimal Weekly Strategy for " + currentDog.name + ":**\n\n";
+            
+            if (bestActivities.length > 0) {
+                weeklyStrategy += `• **Monday/Wednesday/Friday**: Focus on your winning activities (${bestActivities.join(', ')}) - these create positive momentum\n\n`;
+            }
+            
+            if (challengingActivities.length > 0) {
+                weeklyStrategy += `• **Tuesday/Thursday**: Schedule challenging activities (${challengingActivities.join(', ')}) with extra support and shorter sessions\n\n`;
+            }
+            
+            if (hasMissingActivity) {
+                weeklyStrategy += `• **Daily non-negotiables**: Based on patterns, certain activities are crucial for next-day success - don't skip these\n\n`;
+            }
+            
+            weeklyStrategy += `• **Weekend recovery**: Use Saturdays for fun, low-pressure activities; Sundays for routine reinforcement\n\n`;
+            weeklyStrategy += `• **Weather backup**: Have indoor alternatives ready for your most important activities`;
+            
+            suggestions.push({
+                type: 'positive',
+                title: `🎯 ${getLocalAIText('personalizedStrategy')}`,
+                description: weeklyStrategy
+            });
+            
+            // Generate specific action plan with proper line breaks
+            let actionPlan = "🚀 **This Week's Action Plan:**\n\n";
+            
+            if (hasBadPredictors) {
+                actionPlan += "1. **Avoid Bad Day Triggers**: When you must do challenging activities, schedule them early in the week and follow with proven winners\n\n";
+            }
+            
+            if (hasGoodPredictors) {
+                actionPlan += "2. **Maximize Success Predictors**: Schedule your most successful activities before important days or events\n\n";
+            }
+            
+            if (hasVarietyIssue) {
+                actionPlan += "3. **Increase Variety**: Add 1-2 new activity types this week to prevent boredom and build resilience\n\n";
+            } else {
+                actionPlan += "3. **Maintain Balance**: Your activity variety looks good - keep the current mix\n\n";
+            }
+            
+            if (badPercent > 25) {
+                actionPlan += "4. **Recovery Focus**: With " + badPercent + "% challenging days, prioritize stress reduction and shorter activity sessions\n\n";
+            } else if (goodPercent >= 70) {
+                actionPlan += "4. **Optimization Mode**: With " + goodPercent + "% good days, you can gradually increase activity complexity\n\n";
+            } else {
+                actionPlan += "4. **Steady Progress**: Continue current approach while fine-tuning based on patterns above\n\n";
+            }
+            
+            actionPlan += "5. **Pattern Tracking**: Pay extra attention to the day after implementing these changes to validate improvements";
+            
+            suggestions.push({
+                type: 'warning',
+                title: `📋 Action Plan`,
+                description: actionPlan
+            });
+            
+            // Generate success metrics to track with proper line breaks
+            let metrics = "📊 **Key Metrics to Track This Week:**\n\n";
+            metrics += `• **Current baseline**: ${goodPercent}% good days, ${badPercent}% challenging days\n\n`;
+            metrics += `• **Target improvement**: Aim for ${Math.min(goodPercent + 10, 90)}% good days\n\n`;
+            
+            if (bestActivities.length > 0) {
+                metrics += `• **Success rate goal**: Maintain ${bestActivities[0]} success above ${Math.round(activitySuccessRates[bestActivities[0]] * 100)}%\n\n`;
+            }
+            
+            if (challengingActivities.length > 0) {
+                metrics += `• **Improvement focus**: Boost ${challengingActivities[0]} success from ${Math.round(activitySuccessRates[challengingActivities[0]] * 100)}% to ${Math.min(Math.round(activitySuccessRates[challengingActivities[0]] * 100) + 15, 85)}%\n\n`;
+            }
+            
+            metrics += `• **Consistency target**: Log activities ${Math.min(7, Math.max(5, Math.round(allDates.length / 4)))} days this week\n\n`;
+            metrics += `• **Pattern validation**: Confirm if identified triggers/predictors repeat`;
+            
+            suggestions.push({
+                type: 'positive',
+                title: `📈 Success Metrics`,
+                description: metrics
+            });
+            
+            return suggestions;
+        }
+
+        // Toggle between AI modes
+        // Ask Real AI function - triggered by button click
+        async function askRealAI() {
+            if (!currentDog || !currentDog.activities || !currentDog.dayRatings) {
+                alert('Please add some activity data first before asking AI for analysis.');
+                return;
+            }
+
+            // Update button states
+            updateButtonStates('chatgpt');
+
+            // Check if we have cached analysis and no changes - show cached instead of new query
+            if (cachedAIAnalysis && !hasDataChanged()) {
+                showCachedAIAnalysis();
+                return;
+            }
+
+            // Otherwise get fresh analysis
+            await analyzeWithRealAI();
+        }
+
+        // Show cached AI analysis
+        function showCachedAIAnalysis() {
+            if (!cachedAIAnalysis) return;
+            
+            const hasChanges = hasDataChanged();
+            const statusText = hasChanges 
+                ? 'Professional dog behaviorist analysis (data changed since analysis)'
+                : 'Professional dog behaviorist analysis';
+            
+            document.getElementById('insightsList').innerHTML = `
+                <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+                    <strong>🤖 Real AI Analysis by ChatGPT-4</strong><br>
+                    <small style="color: #666;">${statusText}</small>
+                    ${currentDog.behaviorIssues ? `<br><div style="background: #fff3cd; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; border-left: 4px solid #ffc107;"><small style="color: #856404;"><strong>🎯 Behavior Focus:</strong> Analysis includes specific attention to: ${currentDog.behaviorIssues}</small></div>` : ''}
+                </div>
+                ${cachedAIAnalysis.insights.map(insight => `
+                    <div class="insight-item ${insight.type}">
+                        <div class="insight-title">
+                            ${insight.title}
+                            ${insight.title.toLowerCase().includes('strategy') ? 
+                                `<button onclick="showExampleWeek()" style="float: right; padding: 4px 8px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 10px;">📅 Example Week</button>` : ''}
+                        </div>
+                        <div class="insight-description">${insight.description.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `).join('')}
+            `;
+            
+            // Show export button after cached ChatGPT analysis
+            document.getElementById('exportSection').style.display = 'block';
+        }
+
+        function useLocalAI() {
+            if (!currentDog || !currentDog.activities || !currentDog.dayRatings) {
+                document.getElementById('insightsList').innerHTML = `
+                    <div class="no-insights">
+                        Add more activity data to see AI-powered insights about your dog's patterns.
+                    </div>
+                `;
+                document.getElementById('exportSection').style.display = 'none';
+                return;
+            }
+            
+            // Update button states
+            updateButtonStates('local');
+            
+            // Run local analysis
+            analyzeWithLocalAI();
+        }
+
+        function updateButtonStates(activeMode) {
+            const localBtn = document.getElementById('localAIBtn');
+            const chatGPTBtn = document.getElementById('chatGPTBtn');
+            
+            if (activeMode === 'local') {
+                localBtn.style.background = '#28a745';
+                chatGPTBtn.style.background = '#6c757d';
+            } else {
+                localBtn.style.background = '#6c757d';
+                chatGPTBtn.style.background = '#28a745';
+            }
+        }
+
+        // PDF Export functionality
+        function exportAnalysisToPDF() {
+            const analysisContent = document.getElementById('insightsList');
+            if (!analysisContent || analysisContent.innerHTML.includes('no-insights')) {
+                alert('No analysis available to export. Please run an analysis first.');
+                return;
+            }
+            
+            // Create a new window with printable content
+            const printWindow = window.open('', '_blank');
+            const dogName = currentDog ? currentDog.name : 'Dog';
+            const currentDate = new Date().toLocaleDateString();
+            
+            // Determine analysis type by checking the content, not button state
+            const isChatGPTAnalysis = analysisContent.innerHTML.includes('Real AI Analysis by ChatGPT-4') || 
+                                     analysisContent.innerHTML.includes('Professional dog behaviorist analysis');
+            const analysisType = isChatGPTAnalysis ? 'ChatGPT AI Analysis' : 'Local AI Analysis';
+            
+            // Get the analysis content HTML and clean it up for PDF
+            let analysisHTML = analysisContent.innerHTML;
+            
+            // Remove the redundant analysis type headers that would duplicate info in our PDF header
+            analysisHTML = analysisHTML.replace(/<div[^>]*background[^>]*Real AI Analysis by ChatGPT-4[^>]*>[\s\S]*?<\/div>/g, '');
+            analysisHTML = analysisHTML.replace(/<div[^>]*background[^>]*Local Analysis[^>]*>[\s\S]*?<\/div>/g, '');
+            analysisHTML = analysisHTML.replace(/<div[^>]*Professional dog behaviorist analysis[^>]*>[\s\S]*?<\/div>/g, '');
+            
+            // Remove Example Week buttons from PDF content
+            analysisHTML = analysisHTML.replace(/<button[^>]*Example Week[^>]*>[\s\S]*?<\/button>/g, '');
+            
+            // Generate Example Week content if there are strategy insights
+            let exampleWeekHTML = '';
+            if (analysisHTML.toLowerCase().includes('strategy') && currentDog && currentDog.activities) {
+                exampleWeekHTML = generateExampleWeekForPDF();
+            }
+            
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${dogName} - ${analysisType}</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            line-height: 1.6;
+                            color: #333;
+                            max-width: 800px;
+                            margin: 0 auto;
+                            padding: 20px;
+                        }
+                        .header {
+                            text-align: center;
+                            border-bottom: 2px solid #333;
+                            padding-bottom: 20px;
+                            margin-bottom: 30px;
+                        }
+                        .insight-item {
+                            margin-bottom: 25px;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            padding: 15px;
+                            break-inside: avoid;
+                        }
+                        .insight-item.positive {
+                            border-left: 4px solid #28a745;
+                            background: #f8fff9;
+                        }
+                        .insight-item.warning {
+                            border-left: 4px solid #ffc107;
+                            background: #fffdf7;
+                        }
+                        .insight-item.negative {
+                            border-left: 4px solid #dc3545;
+                            background: #fff8f8;
+                        }
+                        .insight-title {
+                            font-weight: bold;
+                            font-size: 1.1rem;
+                            margin-bottom: 10px;
+                            color: #333;
+                        }
+                        .insight-description {
+                            color: #555;
+                            line-height: 1.6;
+                        }
+                        .ai-loading {
+                            display: none;
+                        }
+                        .no-insights {
+                            text-align: center;
+                            color: #666;
+                            font-style: italic;
+                        }
+                        .example-week-pdf {
+                            margin-top: 2rem;
+                            page-break-inside: avoid;
+                        }
+                        .example-week-title {
+                            font-size: 1.3rem;
+                            font-weight: bold;
+                            margin-bottom: 1rem;
+                            color: #333;
+                            text-align: center;
+                            border-bottom: 2px solid #ddd;
+                            padding-bottom: 0.5rem;
+                        }
+                        .pdf-week-grid {
+                            display: grid;
+                            grid-template-columns: repeat(7, 1fr);
+                            gap: 0.5rem;
+                            margin-bottom: 1rem;
+                        }
+                        .pdf-day {
+                            border: 1px solid #ddd;
+                            padding: 0.5rem;
+                            min-height: 80px;
+                            text-align: center;
+                        }
+                        .pdf-day-header {
+                            font-weight: bold;
+                            margin-bottom: 0.3rem;
+                            font-size: 0.9rem;
+                            color: #333;
+                        }
+                        .pdf-activity {
+                            background: #f0f0f0;
+                            padding: 2px 4px;
+                            margin: 2px 0;
+                            border-radius: 3px;
+                            font-size: 0.7rem;
+                            border-left: 3px solid #28a745;
+                        }
+                        .pdf-activity.moderate {
+                            border-left-color: #ffc107;
+                        }
+                        .pdf-activity.light {
+                            border-left-color: #17a2b8;
+                        }
+                        .pdf-legend {
+                            margin-top: 1rem;
+                            padding: 0.5rem;
+                            background: #f8f9fa;
+                            border-radius: 5px;
+                            font-size: 0.8rem;
+                        }
+                        @media print {
+                            body { margin: 0; }
+                            .header { margin-bottom: 20px; }
+                            .example-week-pdf { page-break-inside: avoid; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>🐕 ${dogName} - Behavioral Analysis Report</h1>
+                        <p><strong>Analysis Type:</strong> ${analysisType}</p>
+                        <p><strong>Generated:</strong> ${currentDate}</p>
+                        <p><strong>Application:</strong> DogLog - Track • Analyze • Improve</p>
+                    </div>
+                    <div class="analysis-content">
+                        ${analysisHTML}
+                    </div>
+                    ${exampleWeekHTML}
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            
+            // Wait for content to load, then print
+            setTimeout(() => {
+                printWindow.focus();
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        }
+
+        // Load AI mode preference on startup
+        function loadAIMode() {
+            const useRealAI = localStorage.getItem('doglog-use-real-ai') === 'true';
+            if (useRealAI) {
+                document.querySelector('input[name="aiMode"][value="real"]').checked = true;
+                document.querySelector('input[name="aiMode"][value="local"]').checked = false;
+            }
+        }
+
+        function renderCalendar() {
+            const now = new Date();
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+            
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startingDay = firstDay.getDay();
+            const daysInMonth = lastDay.getDate();
+            
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            
+            let calendarHTML = `
+                <div class="calendar-header">
+                    <button class="nav-arrow" onclick="previousMonth()">‹</button>
+                    <h2>${monthNames[month]} ${year}</h2>
+                    <button class="nav-arrow" onclick="nextMonth()">›</button>
+                </div>
+                <div class="calendar-grid">
+            `;
+            
+            // Weekday headers
+            dayNames.forEach(day => {
+                calendarHTML += `<div class="weekday">${day}</div>`;
+            });
+            
+            // Empty cells before first day
+            for (let i = 0; i < startingDay; i++) {
+                calendarHTML += `<div class="calendar-day empty"></div>`;
+            }
+            
+            // Calendar days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const isToday = day === now.getDate() && month === now.getMonth() && year === now.getFullYear();
+                const dayActivities = currentDog.activities && currentDog.activities[dateKey] ? currentDog.activities[dateKey] : [];
+                const dayRating = currentDog.dayRatings && currentDog.dayRatings[dateKey] ? currentDog.dayRatings[dateKey] : null;
+                
+                let dayClass = '';
+                if (dayRating) {
+                    dayClass = `day-${dayRating}`;
+                }
+                if (isToday) {
+                    dayClass += ' today';
+                }
+                
+                let iconsHTML = '';
+                if (dayActivities.length > 0) {
+                    const iconElements = dayActivities.slice(0, 6).map(activity => {
+                        const icon = activityIcons[activity.name] || '📝';
+                        return `<div class="activity-icon ${activity.outcome}" title="${activity.name} - ${activity.outcome}">${icon}</div>`;
+                    }).join('');
+                    
+                    iconsHTML = `<div class="activity-icons">${iconElements}</div>`;
+                }
+                
+                calendarHTML += `
+                    <div class="calendar-day ${dayClass}" onclick="showActivityPage(currentDog, '${dateKey}')">
+                        <div class="day-number">${day}</div>
+                        ${iconsHTML}
+                    </div>
+                `;
+            }
+            
+            calendarHTML += `</div>`;
+            
+            document.getElementById('calendar').innerHTML = calendarHTML;
+            
+            // Run pattern analysis after rendering calendar
+            analyzePatterns();
+        }
+
+        function addActivity(activityName) {
+            if (!activities[currentDate]) {
+                activities[currentDate] = [];
+            }
+            
+            const activity = {
+                id: Date.now(),
+                name: activityName,
+                outcome: 'good'
+            };
+            
+            activities[currentDate].push(activity);
+            renderActivities();
+            autoSaveCurrentDay();
+        }
+
+        function setDayRating(rating) {
+            if (!dayRatings[currentDate]) {
+                dayRatings[currentDate] = {};
+            }
+            dayRatings[currentDate] = rating;
+            
+            // Update the current dog's day ratings
+            if (!currentDog.dayRatings) {
+                currentDog.dayRatings = {};
+            }
+            currentDog.dayRatings[currentDate] = rating;
+            
+            // Save data after rating change
+            const dogIndex = dogs.findIndex(dog => dog.id === currentDog.id);
+            if (dogIndex !== -1) {
+                dogs[dogIndex] = currentDog;
+                saveData();
+            }
+            
+            renderDayRating();
+        }
+
+        function renderDayRating() {
+            const rating = (currentDog.dayRatings && currentDog.dayRatings[currentDate]) || null;
+            
+            // Reset all buttons
+            document.getElementById('dayGood').classList.remove('active');
+            document.getElementById('dayOkay').classList.remove('active');
+            document.getElementById('dayBad').classList.remove('active');
+            
+            // Set active button
+            if (rating) {
+                document.getElementById(`day${rating.charAt(0).toUpperCase() + rating.slice(1)}`).classList.add('active');
+            }
+        }
+
+        function generateTestData() {
+            if (!currentDog) return;
+            
+            const activities = ['Nosework', 'Obedience Training', 'Long Walk', 'Playdate', 'Vet Visit', 'Rest Day', 'Agility', 'Grooming', 'Swimming', 'Feeding', 'Play Time'];
+            const outcomes = ['good', 'okay', 'bad'];
+            const dayRatings = ['good', 'okay', 'bad'];
+            
+            const now = new Date();
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Check if we're viewing a future month
+            const isCurrentMonth = year === now.getFullYear() && month === now.getMonth();
+            const isFutureMonth = year > now.getFullYear() || (year === now.getFullYear() && month > now.getMonth());
+            
+            // Generate data for each day of the viewed month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                
+                // Skip future dates if we're in current month, or skip entire future months
+                if (isFutureMonth) continue;
+                if (isCurrentMonth && day > now.getDate()) continue;
+                
+                // Randomly decide if this day has activities (80% chance)
+                if (Math.random() < 0.8) {
+                    const dayActivities = [];
+                    
+                    // Generate 1-4 random activities per day
+                    const numActivities = Math.floor(Math.random() * 4) + 1;
+                    const usedActivities = new Set();
+                    
+                    for (let i = 0; i < numActivities; i++) {
+                        let activity;
+                        do {
+                            activity = activities[Math.floor(Math.random() * activities.length)];
+                        } while (usedActivities.has(activity) && usedActivities.size < activities.length);
+                        
+                        if (!usedActivities.has(activity)) {
+                            usedActivities.add(activity);
+                            
+                            // Create more realistic patterns for better AI analysis
+                            let outcome;
+                            const rand = Math.random();
+                            
+                            // Create specific patterns for certain activities
+                            if (activity === 'Nosework') {
+                                // Nosework usually goes well and leads to good next days
+                                if (rand < 0.85) outcome = 'good';
+                                else if (rand < 0.95) outcome = 'okay';
+                                else outcome = 'bad';
+                            } else if (activity === 'Vet Visit') {
+                                // Vet visits often lead to bad next days
+                                if (rand < 0.3) outcome = 'good';
+                                else if (rand < 0.5) outcome = 'okay';
+                                else outcome = 'bad';
+                            } else if (activity === 'Long Walk') {
+                                // Long walks are crucial - when they go well, next day is usually good
+                                if (rand < 0.75) outcome = 'good';
+                                else if (rand < 0.9) outcome = 'okay';
+                                else outcome = 'bad';
+                            } else {
+                                // Standard weighting for other activities
+                                if (rand < 0.6) outcome = 'good';
+                                else if (rand < 0.9) outcome = 'okay';
+                                else outcome = 'bad';
+                            }
+                            
+                            dayActivities.push({
+                                id: Date.now() + Math.random(),
+                                name: activity,
+                                outcome: outcome
+                            });
+                        }
+                    }
+                    
+                    // Save activities to currentDog
+                    if (!currentDog.activities) {
+                        currentDog.activities = {};
+                    }
+                    currentDog.activities[dateKey] = dayActivities;
+                    
+                    // Generate overall day rating influenced by previous day's activities
+                    let dayRating;
+                    let dayRatingBonus = 0;
+                    
+                    // Check previous day's activities for influence
+                    if (day > 1) {
+                        const prevDateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day - 1).padStart(2, '0')}`;
+                        const prevActivities = currentDog.activities && currentDog.activities[prevDateKey] ? currentDog.activities[prevDateKey] : [];
+                        
+                        prevActivities.forEach(prevActivity => {
+                            if (prevActivity.name === 'Nosework' && prevActivity.outcome === 'good') {
+                                dayRatingBonus += 0.3; // Good nosework yesterday increases chance of good day
+                            } else if (prevActivity.name === 'Long Walk' && prevActivity.outcome === 'good') {
+                                dayRatingBonus += 0.2; // Good walk yesterday helps
+                            } else if (prevActivity.name === 'Vet Visit') {
+                                dayRatingBonus -= 0.4; // Vet visit yesterday often leads to bad day
+                            } else if (prevActivity.outcome === 'bad') {
+                                dayRatingBonus -= 0.15; // Any bad activity yesterday affects today
+                            }
+                        });
+                        
+                        // Missing Long Walk yesterday affects today
+                        const hadLongWalk = prevActivities.some(a => a.name === 'Long Walk');
+                        if (!hadLongWalk && Math.random() < 0.7) {
+                            dayRatingBonus -= 0.25;
+                        }
+                    }
+                    
+                    const dayRand = Math.random() + dayRatingBonus;
+                    if (dayRand < 0.7) dayRating = 'good';
+                    else if (dayRand < 0.9) dayRating = 'okay';
+                    else dayRating = 'bad';
+                    
+                    // Save day rating to currentDog
+                    if (!currentDog.dayRatings) {
+                        currentDog.dayRatings = {};
+                    }
+                    currentDog.dayRatings[dateKey] = dayRating;
+                }
+            }
+            
+            // Update the dog in the main dogs array and save all data
+            const dogIndex = dogs.findIndex(dog => dog.id === currentDog.id);
+            if (dogIndex !== -1) {
+                dogs[dogIndex] = currentDog;
+                saveData();
+            }
+            
+            // Refresh the calendar to show new data
+            renderCalendar();
+            
+            // Run pattern analysis on the new data
+            analyzePatterns();
+            
+            const monthName = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'][month];
+                
+            if (isFutureMonth) {
+                alert(`⏰ Can't generate data for future months!\n\nNavigate to past months to generate test data.`);
+            } else {
+                alert(`🎉 Generated realistic test data for ${currentDog.name} in ${monthName} ${year}!\n\nThis data includes realistic patterns:\n• Nosework → leads to good next days\n• Vet Visits → often cause bad next days  \n• Missing Long Walks → affects day quality\n\nLook for AI insights below the calendar!`);
+            }
+        }
+
+        function removeActivity(activityId) {
+            if (activities[currentDate]) {
+                activities[currentDate] = activities[currentDate].filter(a => a.id !== activityId);
+                renderActivities();
+                autoSaveCurrentDay();
+            }
+        }
+
+        function setOutcome(activityId, outcome) {
+            if (activities[currentDate]) {
+                const activity = activities[currentDate].find(a => a.id === activityId);
+                if (activity) {
+                    activity.outcome = outcome;
+                    renderActivities();
+                    autoSaveCurrentDay();
+                }
+            }
+        }
+
+        function autoSaveCurrentDay() {
+            if (currentDog && currentDate) {
+                // Auto-save activities to dog's data
+                if (activities[currentDate]) {
+                    if (!currentDog.activities) {
+                        currentDog.activities = {};
+                    }
+                    currentDog.activities[currentDate] = [...activities[currentDate]];
+                }
+
+                // Update the dog in the main dogs array and save
+                const dogIndex = dogs.findIndex(dog => dog.id === currentDog.id);
+                if (dogIndex !== -1) {
+                    dogs[dogIndex] = currentDog;
+                    saveData();
+                }
+            }
+        }
+
+        function renderActivities() {
+            const dayActivities = activities[currentDate] || [];
+            document.getElementById('activityCount').textContent = dayActivities.length;
+            
+            if (dayActivities.length === 0) {
+                document.getElementById('activitiesList').innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #666;">
+                        No activities logged yet. Add some activities above!
+                    </div>
+                `;
+                return;
+            }
+            
+            const listHTML = dayActivities.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-main">
+                        <h4>${activity.name}</h4>
+                        <button class="remove-btn" onclick="removeActivity(${activity.id})">×</button>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.9rem; color: #666;">How did it go?</span>
+                        <div class="outcome-buttons">
+                            <button class="outcome-btn good ${activity.outcome === 'good' ? 'active' : ''}" 
+                                    onclick="setOutcome(${activity.id}, 'good')">😊 Good</button>
+                            <button class="outcome-btn okay ${activity.outcome === 'okay' ? 'active' : ''}" 
+                                    onclick="setOutcome(${activity.id}, 'okay')">😐 Okay</button>
+                            <button class="outcome-btn bad ${activity.outcome === 'bad' ? 'active' : ''}" 
+                                    onclick="setOutcome(${activity.id}, 'bad')">😞 Bad</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('activitiesList').innerHTML = listHTML;
+        }
+
+        function saveActivities() {
+            if (currentDog && currentDate) {
+                // Save activities
+                if (activities[currentDate] && activities[currentDate].length > 0) {
+                    if (!currentDog.activities) {
+                        currentDog.activities = {};
+                    }
+                    currentDog.activities[currentDate] = [...activities[currentDate]];
+                }
+                
+                // Save day rating if it exists
+                if (dayRatings[currentDate]) {
+                    if (!currentDog.dayRatings) {
+                        currentDog.dayRatings = {};
+                    }
+                    currentDog.dayRatings[currentDate] = dayRatings[currentDate];
+                }
+                
+                // Update the dog in the main dogs array and save
+                const dogIndex = dogs.findIndex(dog => dog.id === currentDog.id);
+                if (dogIndex !== -1) {
+                    dogs[dogIndex] = currentDog;
+                    saveData();
+                }
+                
+                alert('Day saved! Calendar will show activities and rating.');
+                showDogPage();
+                
+                // Update AI button to reflect data changes
+                updateAIButton();
+            }
+        }
+
+        // Form submission
+        document.getElementById('dogForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const dogData = {
+                name: document.getElementById('name').value,
+                breed: document.getElementById('breed').value,
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                gender: document.getElementById('gender').value,
+                notes: document.getElementById('notes').value,
+                behaviorIssues: document.getElementById('behaviorIssues').value
+            };
+            
+            if (dogData.name.trim()) {
+                addDog(dogData);
+            }
+        });
+
+        // Edit dog form submission
+        document.getElementById('editDogForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!currentDog) return;
+            
+            const updatedData = {
+                name: document.getElementById('editName').value,
+                breed: document.getElementById('editBreed').value,
+                dateOfBirth: document.getElementById('editDateOfBirth').value,
+                gender: document.getElementById('editGender').value,
+                notes: document.getElementById('editNotes').value,
+                behaviorIssues: document.getElementById('editBehaviorIssues').value
+            };
+            
+            if (updatedData.name.trim()) {
+                // Update current dog with new data
+                currentDog.name = updatedData.name;
+                currentDog.breed = updatedData.breed;
+                currentDog.dateOfBirth = updatedData.dateOfBirth;
+                currentDog.gender = updatedData.gender;
+                currentDog.notes = updatedData.notes;
+                currentDog.behaviorIssues = updatedData.behaviorIssues;
+                
+                // Update photo if changed
+                if (currentPhoto) {
+                    currentDog.photo = currentPhoto;
+                }
+                
+                // Update the dog in the main dogs array and save
+                const dogIndex = dogs.findIndex(dog => dog.id === currentDog.id);
+                if (dogIndex !== -1) {
+                    dogs[dogIndex] = currentDog;
+                    saveData();
+                }
+                
+                // Update the display with new information
+                selectDog(currentDog.id);
+                
+                closeEditModal();
+                renderGallery();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('addModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAddModal();
+            }
+        });
+
+        // Close edit modal when clicking outside
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditModal();
+            }
+        });
+
+        // Initialize
+        renderDogs();
+    </script>
+</body>
+</html>

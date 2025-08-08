@@ -1,0 +1,6 @@
+
+> doglog-backend@1.0.0 start
+> node server.js
+
+🐕 DogLog AI Backend running on http://localhost:3001
+📊 OpenAI integration: ❌ Missing API Key

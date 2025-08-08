@@ -1,0 +1,169 @@
+.dog-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.dog-header {
+  background: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.header-left,
+.header-right {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+}
+
+.header-right {
+  justify-content: flex-end;
+}
+
+.back-btn,
+.edit-btn,
+.delete-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-btn {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.back-btn:hover {
+  background: #e5e5e5;
+}
+
+.edit-btn {
+  background: #667eea;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #5a67d8;
+}
+
+.delete-btn {
+  background: #e53e3e;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c53030;
+}
+
+.dog-title {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.dog-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dog-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  font-size: 1.5rem;
+  color: #999;
+}
+
+.dog-details h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.dog-details p {
+  margin: 0.25rem 0 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.view-nav {
+  background: white;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.nav-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e1e5e9;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.nav-btn.active {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+.dog-content {
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .dog-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .header-left,
+  .header-right {
+    flex: none;
+  }
+  
+  .dog-title {
+    flex: none;
+  }
+  
+  .view-nav {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .nav-btn {
+    width: 100%;
+  }
+  
+  .dog-content {
+    padding: 1rem;
+  }
+}
