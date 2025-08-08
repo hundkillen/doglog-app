@@ -12,9 +12,10 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #fafafa;
             min-height: 100vh;
+            color: #262626;
         }
 
         /* Views */
@@ -27,14 +28,14 @@
             animation: fadeIn 0.3s ease-in;
         }
 
-        /* Splash Screen */
+        /* Splash Screen - Instagram style */
         .splash-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -44,7 +45,7 @@
 
         .splash-content {
             text-align: center;
-            color: white;
+            color: #262626;
             animation: slideUp 1s ease-out;
         }
 
@@ -55,103 +56,203 @@
         }
 
         .app-name {
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 300;
             margin: 0 0 0.5rem 0;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .app-tagline {
-            font-size: 1.2rem;
-            opacity: 0.8;
+            font-size: 0.9rem;
+            color: #8e8e8e;
             margin: 0;
+            font-weight: 400;
         }
 
-        /* Gallery */
+        /* Gallery - Instagram Feed Style */
         .dog-gallery {
             min-height: 100vh;
-            padding: 2rem;
+            padding: 0;
+            background: #fafafa;
         }
 
         .gallery-header {
-            text-align: center;
-            margin-bottom: 3rem;
+            background: #fff;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 0;
         }
 
         .header-top {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            position: relative;
-            margin-bottom: 0.5rem;
-        }
-
-        .gallery-header h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin: 0;
-        }
-
-        .settings-btn {
-            position: absolute;
-            right: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .settings-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg);
-        }
-
-        .gallery-header p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .dogs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+            max-width: 935px;
             margin: 0 auto;
         }
 
-        .dog-card, .add-dog-card {
-            background: white;
-            border-radius: 20px;
-            padding: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        .gallery-header h1 {
+            font-size: 1.75rem;
+            color: #262626;
+            margin: 0;
+            font-weight: 400;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .settings-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            color: #262626;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .settings-btn:hover {
+            background: #fafafa;
+        }
+
+        .header-actions {
             display: flex;
-            flex-direction: column;
+            gap: 16px;
             align-items: center;
-            min-height: 280px;
         }
 
-        .dog-card:hover, .add-dog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        .add-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #262626;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
         }
 
-        .dog-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 60px;
+        .add-btn:hover {
+            background: #fafafa;
+        }
+
+        .gallery-header p {
+            display: none;
+        }
+
+        .dogs-grid {
+            max-width: 614px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Instagram-style post header */
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border-bottom: 1px solid #efefef;
+        }
+
+        .post-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1rem;
+            padding: 2px;
+            overflow: hidden;
+        }
+
+        .post-avatar img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .gallery-item {
             background: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
             overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-username {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #262626;
+            flex: 1;
+        }
+
+        .post-actions {
+            color: #8e8e8e;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .dog-card, .add-dog-card {
+            background: white;
+            border-radius: 8px;
+            padding: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #dbdbdb;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .dog-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .add-dog-card:hover {
+            border-color: #0095f6;
+            background: #fafafa;
+        }
+
+        .dog-photo {
+            width: 100%;
+            height: 300px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #8e8e8e;
+            border-bottom: 1px solid #efefef;
         }
 
         .dog-photo img {
@@ -166,26 +267,33 @@
         }
 
         .dog-info {
-            text-align: center;
+            padding: 16px;
+            text-align: left;
         }
 
         .dog-info h3 {
-            font-size: 1.5rem;
-            color: #333;
-            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            color: #262626;
+            margin: 0 0 4px 0;
+            font-weight: 600;
         }
 
         .dog-info p {
-            color: #666;
-            margin: 0.25rem 0;
-            font-size: 0.9rem;
+            color: #8e8e8e;
+            margin: 2px 0;
+            font-size: 0.875rem;
+            font-weight: 400;
         }
 
         .add-dog-card {
-            border: 2px dashed #ddd;
-            background: transparent;
-            color: #999;
+            border: 2px dashed #dbdbdb;
+            background: #fafafa;
+            color: #8e8e8e;
             justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            min-height: 200px;
         }
 
         .add-dog-card:hover {
@@ -506,7 +614,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.65);
             display: none;
             align-items: center;
             justify-content: center;
@@ -515,32 +623,128 @@
 
         .modal-content {
             background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 500px;
+            border-radius: 12px;
+            padding: 0;
+            max-width: 400px;
             width: 90%;
             max-height: 80vh;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #dbdbdb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #262626;
+            margin: 0;
+        }
+
+        .modal-body {
+            padding: 20px;
+            max-height: 60vh;
             overflow-y: auto;
         }
 
         .photo-section {
-            text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        .photo-preview {
-            width: 120px;
-            height: 120px;
-            border-radius: 60px;
-            background: #f5f5f5;
-            border: 3px dashed #ddd;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .gallery-upload {
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            padding: 12px;
+            background: #fafafa;
+        }
+
+        .gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            min-height: 60px;
+        }
+
+        .gallery-thumbnail {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
             overflow: hidden;
-            margin: 0 auto;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .gallery-thumbnail.profile {
+            border-color: #0095f6;
+            box-shadow: 0 0 0 2px rgba(0, 149, 246, 0.3);
+        }
+
+        .gallery-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-thumbnail .remove-btn {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ff3040;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .gallery-thumbnail:hover .remove-btn {
+            display: block;
+        }
+
+        .gallery-thumbnail .profile-badge {
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            background: #0095f6;
+            color: white;
+            font-size: 10px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .upload-btn {
+            background: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            background: #1877f2;
+        }
+
+        .gallery-empty {
+            text-align: center;
+            color: #8e8e8e;
+            padding: 20px;
+            font-size: 0.875rem;
         }
 
         .photo-preview:hover {
@@ -571,15 +775,26 @@
 
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            background: #fafafa;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
         }
 
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #0095f6;
+            background: white;
+        }
+
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #262626;
+            margin-bottom: 6px;
+            display: block;
         }
 
         .form-actions {
@@ -604,12 +819,35 @@
         }
 
         .save-btn {
-            background: #667eea;
+            background: #0095f6;
             color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
         }
 
         .save-btn:hover {
-            background: #5a67d8;
+            background: #1877f2;
+        }
+
+        .cancel-btn {
+            background: none;
+            color: #262626;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .cancel-btn:hover {
+            background: #fafafa;
         }
 
         .remove-btn {
@@ -1095,9 +1333,11 @@
             <header class="gallery-header">
                 <div class="header-top">
                     <h1 data-translate="appName">DogLog</h1>
-                    <button class="settings-btn" onclick="showSettings()" title="Settings">⚙️</button>
+                    <div class="header-actions">
+                        <button class="add-btn" onclick="openAddModal()" title="Add New Dog">➕</button>
+                        <button class="settings-btn" onclick="showSettings()" title="Settings">⚙️</button>
+                    </div>
                 </div>
-                <p data-translate="tagline">Your furry friends' daily tracker</p>
             </header>
             
             <div class="dogs-grid" id="dogsGrid">
@@ -1258,16 +1498,25 @@
     <!-- Add Dog Modal -->
     <div class="modal" id="addModal">
         <div class="modal-content">
-            <h2>Add New Dog</h2>
+            <div class="modal-header">
+                <h2>Add New Dog</h2>
+                <button type="button" onclick="closeAddModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #8e8e8e;">×</button>
+            </div>
+            <div class="modal-body">
             
             <div class="photo-section">
-                <div class="photo-preview" id="photoPreview" onclick="document.getElementById('photoInput').click()">
-                    <div class="photo-placeholder">
-                        <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📸</span>
-                        <p style="font-size: 0.9rem; margin: 0;">Add Photo</p>
+                <h3 style="margin: 0 0 12px 0; font-size: 1rem; color: #262626;">Gallery & Profile Picture</h3>
+                <div class="gallery-upload">
+                    <div class="gallery-preview" id="galleryPreview">
+                        <!-- Gallery thumbnails will appear here -->
+                    </div>
+                    <div class="upload-actions">
+                        <button type="button" class="upload-btn" onclick="document.getElementById('galleryInput').click()">
+                            📷 Add Photos
+                        </button>
+                        <input type="file" id="galleryInput" accept="image/*" multiple style="display: none;" onchange="handleGalleryUpload(event)">
                     </div>
                 </div>
-                <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
             </div>
             
             <form id="dogForm">
@@ -1310,22 +1559,32 @@
                     <button type="submit" class="save-btn">Add Dog</button>
                 </div>
             </form>
+            </div>
         </div>
     </div>
 
     <!-- Edit Dog Modal -->
     <div class="modal" id="editModal">
         <div class="modal-content">
-            <h2>Edit Dog</h2>
+            <div class="modal-header">
+                <h2>Edit Dog</h2>
+                <button type="button" onclick="closeEditModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #8e8e8e;">×</button>
+            </div>
+            <div class="modal-body">
             
             <div class="photo-section">
-                <div class="photo-preview" id="editPhotoPreview" onclick="document.getElementById('editPhotoInput').click()">
-                    <div class="photo-placeholder">
-                        <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📸</span>
-                        <p style="font-size: 0.9rem; margin: 0;">Change Photo</p>
+                <h3 style="margin: 0 0 12px 0; font-size: 1rem; color: #262626;">Gallery & Profile Picture</h3>
+                <div class="gallery-upload">
+                    <div class="gallery-preview" id="editGalleryPreview">
+                        <!-- Gallery thumbnails will appear here -->
+                    </div>
+                    <div class="upload-actions">
+                        <button type="button" class="upload-btn" onclick="document.getElementById('editGalleryInput').click()">
+                            📷 Add More Photos
+                        </button>
+                        <input type="file" id="editGalleryInput" accept="image/*" multiple style="display: none;" onchange="handleEditGalleryUpload(event)">
                     </div>
                 </div>
-                <input type="file" id="editPhotoInput" accept="image/*" style="display: none;" onchange="handleEditPhotoUpload(event)">
             </div>
             
             <form id="editDogForm">
@@ -1369,6 +1628,7 @@
                     <button type="submit" class="save-btn">Save Changes</button>
                 </div>
             </form>
+            </div>
         </div>
     </div>
 
@@ -1389,7 +1649,10 @@
         let dogs = [];
         let currentDog = null;
         let currentDate = null;
-        let currentPhoto = null;
+        let currentGallery = [];
+        let currentProfilePicture = null;
+        let editGallery = [];
+        let editProfilePicture = null;
         let activities = {};
         let dayRatings = {};
         let calendarDate = new Date(); // Current month being viewed
@@ -2444,15 +2707,86 @@
             `;
         }
 
-        function handlePhotoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    currentPhoto = e.target.result;
-                    document.getElementById('photoPreview').innerHTML = `<img src="${currentPhoto}" alt="Dog photo">`;
-                };
-                reader.readAsDataURL(file);
+        // Gallery upload functions
+        function handleGalleryUpload(event) {
+            const files = Array.from(event.target.files);
+            files.forEach(file => {
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        currentGallery.push(e.target.result);
+                        if (!currentProfilePicture && currentGallery.length === 1) {
+                            currentProfilePicture = e.target.result;
+                        }
+                        renderGalleryPreview('galleryPreview', currentGallery, currentProfilePicture, 'current');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        function handleEditGalleryUpload(event) {
+            const files = Array.from(event.target.files);
+            files.forEach(file => {
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        editGallery.push(e.target.result);
+                        if (!editProfilePicture && editGallery.length === 1) {
+                            editProfilePicture = e.target.result;
+                        }
+                        renderGalleryPreview('editGalleryPreview', editGallery, editProfilePicture, 'edit');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        function renderGalleryPreview(containerId, gallery, profilePicture, mode) {
+            const container = document.getElementById(containerId);
+            
+            if (gallery.length === 0) {
+                container.innerHTML = '<div class="gallery-empty">No photos added yet. Click "Add Photos" to start building your gallery.</div>';
+                return;
+            }
+            
+            container.innerHTML = gallery.map((img, index) => {
+                const isProfile = img === profilePicture;
+                return `
+                    <div class="gallery-thumbnail ${isProfile ? 'profile' : ''}" onclick="setProfilePicture('${img}', '${mode}')">
+                        <img src="${img}" alt="Gallery photo ${index + 1}">
+                        <button class="remove-btn" onclick="event.stopPropagation(); removeFromGallery(${index}, '${mode}')">×</button>
+                        ${isProfile ? '<div class="profile-badge">PROFILE</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function setProfilePicture(img, mode) {
+            if (mode === 'current') {
+                currentProfilePicture = img;
+                renderGalleryPreview('galleryPreview', currentGallery, currentProfilePicture, 'current');
+            } else {
+                editProfilePicture = img;
+                renderGalleryPreview('editGalleryPreview', editGallery, editProfilePicture, 'edit');
+            }
+        }
+
+        function removeFromGallery(index, mode) {
+            if (mode === 'current') {
+                const removedImg = currentGallery[index];
+                currentGallery.splice(index, 1);
+                if (currentProfilePicture === removedImg) {
+                    currentProfilePicture = currentGallery.length > 0 ? currentGallery[0] : null;
+                }
+                renderGalleryPreview('galleryPreview', currentGallery, currentProfilePicture, 'current');
+            } else {
+                const removedImg = editGallery[index];
+                editGallery.splice(index, 1);
+                if (editProfilePicture === removedImg) {
+                    editProfilePicture = editGallery.length > 0 ? editGallery[0] : null;
+                }
+                renderGalleryPreview('editGalleryPreview', editGallery, editProfilePicture, 'edit');
             }
         }
 
@@ -2460,9 +2794,11 @@
             const dog = {
                 id: Date.now(),
                 ...dogData,
-                photo: currentPhoto,
+                gallery: currentGallery.length > 0 ? [...currentGallery] : [],
+                profilePicture: currentProfilePicture || (currentGallery.length > 0 ? currentGallery[0] : null),
                 activities: {},
-                dayRatings: {}
+                dayRatings: {},
+                behaviorRatings: {}
             };
             dogs.push(dog);
             saveData(); // Save after adding dog
@@ -2488,18 +2824,44 @@
                 return;
             }
 
-            grid.innerHTML = dogs.map(dog => `
-                <div class="dog-card" onclick="selectDog(${dog.id})">
-                    <div class="dog-photo">
-                        ${dog.photo ? `<img src="${dog.photo}" alt="${dog.name}">` : '<div class="dog-photo-placeholder">🐕</div>'}
+            grid.innerHTML = dogs.map(dog => {
+                const profileImg = dog.profilePicture ? `<img src="${dog.profilePicture}" alt="${dog.name}">` : '🐕';
+                const gallery = dog.gallery || [];
+                
+                let photoContent;
+                if (gallery.length === 0) {
+                    photoContent = '<div style="font-size: 4rem; color: #8e8e8e;">🐕</div>';
+                } else if (gallery.length === 1) {
+                    photoContent = `<img src="${gallery[0]}" alt="${dog.name}" style="width: 100%; height: 100%; object-fit: cover;">`;
+                } else {
+                    // Show gallery grid for multiple images
+                    const maxImages = Math.min(gallery.length, 9);
+                    photoContent = `<div class="gallery-grid">${gallery.slice(0, maxImages).map((img, index) => 
+                        `<div class="gallery-item">
+                            <img src="${img}" alt="${dog.name} ${index + 1}">
+                        </div>`
+                    ).join('')}</div>`;
+                }
+                
+                return `
+                    <div class="dog-card" onclick="selectDog(${dog.id})">
+                        <div class="post-header">
+                            <div class="post-avatar">${profileImg}</div>
+                            <div class="post-username">${dog.name}</div>
+                            <div class="post-actions">⋯</div>
+                        </div>
+                        <div class="dog-photo">
+                            ${photoContent}
+                        </div>
+                        <div class="dog-info">
+                            <h3><span style="font-weight: 600;">${dog.name}</span></h3>
+                            <p>${dog.breed || 'Mixed breed'} • ${dog.dateOfBirth ? formatAge(dog.dateOfBirth) + ' old' : 'Age not set'}</p>
+                            ${gallery.length > 1 ? `<p style="color: #8e8e8e; font-size: 0.8rem;">📷 ${gallery.length} photos</p>` : ''}
+                            ${dog.behaviorIssues ? `<p style="color: #0095f6;">#behaviortracking ${dog.behaviorIssues.split(/[,;]/).map(b => '#' + b.trim().replace(/\s+/g, '')).join(' ')}</p>` : ''}
+                        </div>
                     </div>
-                    <div class="dog-info">
-                        <h3>${dog.name}</h3>
-                        <p>${dog.breed || 'Mixed breed'}</p>
-                        <p>${dog.dateOfBirth ? formatAge(dog.dateOfBirth) + ' old' : 'Age not set'}</p>
-                    </div>
-                </div>
-            `).join('') + `
+                `;
+            }).join('') + `
                 <div class="add-dog-card" onclick="openAddModal()">
                     <div class="add-icon">+</div>
                     <p>Add Dog</p>
@@ -2623,18 +2985,10 @@
             document.getElementById('editNotes').value = currentDog.notes || '';
             document.getElementById('editBehaviorIssues').value = currentDog.behaviorIssues || '';
             
-            // Update photo preview
-            const editPhotoPreview = document.getElementById('editPhotoPreview');
-            if (currentDog.photo) {
-                editPhotoPreview.innerHTML = `<img src="${currentDog.photo}" alt="${currentDog.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
-            } else {
-                editPhotoPreview.innerHTML = `
-                    <div class="photo-placeholder">
-                        <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📸</span>
-                        <p style="font-size: 0.9rem; margin: 0;">Change Photo</p>
-                    </div>
-                `;
-            }
+            // Initialize gallery for editing
+            editGallery = currentDog.gallery ? [...currentDog.gallery] : [];
+            editProfilePicture = currentDog.profilePicture || null;
+            renderGalleryPreview('editGalleryPreview', editGallery, editProfilePicture, 'edit');
             
             // Show edit modal
             document.getElementById('editModal').style.display = 'flex';
@@ -2642,7 +2996,8 @@
 
         function closeEditModal() {
             document.getElementById('editModal').style.display = 'none';
-            currentPhoto = null; // Reset photo state
+            editGallery = [];
+            editProfilePicture = null;
         }
 
         function handleEditPhotoUpload(event) {
@@ -3916,7 +4271,9 @@
                 dateOfBirth: document.getElementById('editDateOfBirth').value,
                 gender: document.getElementById('editGender').value,
                 notes: document.getElementById('editNotes').value,
-                behaviorIssues: document.getElementById('editBehaviorIssues').value
+                behaviorIssues: document.getElementById('editBehaviorIssues').value,
+                gallery: editGallery.length > 0 ? [...editGallery] : [],
+                profilePicture: editProfilePicture
             };
             
             if (updatedData.name.trim()) {
@@ -3926,6 +4283,8 @@
                 currentDog.dateOfBirth = updatedData.dateOfBirth;
                 currentDog.gender = updatedData.gender;
                 currentDog.notes = updatedData.notes;
+                currentDog.gallery = updatedData.gallery;
+                currentDog.profilePicture = updatedData.profilePicture;
                 currentDog.behaviorIssues = updatedData.behaviorIssues;
                 
                 // Update photo if changed
@@ -3962,6 +4321,12 @@
             }
         });
 
+        // Initialize gallery previews on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderGalleryPreview('galleryPreview', currentGallery, currentProfilePicture, 'current');
+            renderGalleryPreview('editGalleryPreview', editGallery, editProfilePicture, 'edit');
+        });
+        
         // Initialize
         renderDogs();
     </script>
