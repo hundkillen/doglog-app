@@ -14,6 +14,7 @@ app.use(cors({
     'https://localhost:3000',
     'https://localhost:8080',
     // Add your production domains here
+    'https://superb-empanada-e605b6.netlify.app',
     'https://doglog-app.netlify.app',
     'https://doglog-app.vercel.app',
     // Allow any subdomain for deployment flexibility
