@@ -25,10 +25,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Initialize OpenAI
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Initialize OpenAI - will be updated per request
+let openai;
 
 // Health check endpoint
 app.get('/health', (req, res) => {
