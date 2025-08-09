@@ -3,7 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DogLog - Full Demo</title>
+    <title>DogLog - AI-Powered Dog Behavior Tracker</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Track your dog's behavior patterns with AI-powered insights, trigger analysis, and professional training recommendations.">
+    <meta name="keywords" content="dog, behavior, training, pet, AI, tracking, veterinary, behaviorist">
+    <meta name="author" content="DogLog">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- iOS PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="DogLog">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icons/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png">
+    
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#0095f6">
+    <meta name="msapplication-TileColor" content="#0095f6">
+    
+    <!-- Prevent zoom on iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         * {
             box-sizing: border-box;
@@ -218,6 +249,49 @@
             color: #8e8e8e;
             font-size: 1.2rem;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+            position: relative;
+        }
+        
+        .post-actions:hover {
+            background: #f0f0f0;
+            color: #262626;
+        }
+        
+        /* Dog Menu Dropdown */
+        .dog-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 120px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .dog-menu-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 0.875rem;
+            color: #262626;
+        }
+        
+        .dog-menu-item:hover {
+            background: #f0f0f0;
+        }
+        
+        .dog-menu-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .dog-menu-item:last-child {
+            border-radius: 0 0 8px 8px;
         }
 
         .dog-card, .add-dog-card {
@@ -286,26 +360,18 @@
         }
 
         .add-dog-card {
-            border: 2px dashed #dbdbdb;
-            background: #fafafa;
-            color: #8e8e8e;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            min-height: 200px;
+            border: 2px dashed #0095f6;
+            background: white;
         }
 
         .add-dog-card:hover {
-            border-color: #667eea;
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
+            border-color: #1877f2;
+            background: #fafafa;
         }
 
-        .add-icon {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
+        .add-dog-card .post-avatar {
+            background: #0095f6;
+            color: white;
         }
 
         /* Dog Page */
@@ -724,6 +790,10 @@
             font-weight: 600;
         }
 
+        .upload-actions {
+            text-align: center;
+        }
+
         .upload-btn {
             background: #0095f6;
             color: white;
@@ -745,6 +815,331 @@
             color: #8e8e8e;
             padding: 20px;
             font-size: 0.875rem;
+            grid-column: 1 / -1;
+            display: block;
+        }
+
+        /* Trigger & Context Tracking */
+        .trigger-categories {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .trigger-category h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #262626;
+            margin: 0 0 8px 0;
+        }
+
+        .trigger-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .trigger-tag {
+            background: #f0f0f0;
+            color: #262626;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .trigger-tag:hover {
+            background: #e0e0e0;
+        }
+
+        .trigger-tag.selected {
+            background: #0095f6;
+            color: white;
+            border-color: #0095f6;
+        }
+
+        .trigger-category textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            resize: vertical;
+            background: #fafafa;
+        }
+
+        .trigger-category textarea:focus {
+            outline: none;
+            border-color: #0095f6;
+            background: white;
+        }
+
+        /* Training Session Logger */
+        .training-session-list {
+            margin-bottom: 1rem;
+        }
+
+        .training-session-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .training-session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .training-session-title {
+            font-weight: 600;
+            color: #262626;
+            font-size: 0.9rem;
+        }
+
+        .training-session-duration {
+            font-size: 0.8rem;
+            color: #8e8e8e;
+        }
+
+        .training-session-commands {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .command-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .training-session-notes {
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .add-session-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+
+        .add-session-btn:hover {
+            background: #218838;
+        }
+
+        .session-remove-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .training-session-item:hover .session-remove-btn {
+            display: block;
+        }
+        
+        /* Training Modal Command Selector */
+        .command-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            padding: 12px;
+            background: #fafafa;
+        }
+        
+        .command-option {
+            background: white;
+            color: #262626;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border: 1px solid #dbdbdb;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        
+        .command-option:hover {
+            background: #f0f0f0;
+            border-color: #0095f6;
+        }
+        
+        .command-option.selected {
+            background: #0095f6;
+            color: white;
+            border-color: #0095f6;
+        }
+        
+        /* Dog Page Gallery */
+        .dog-gallery-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        
+        .dog-gallery-section h3 {
+            color: #333;
+            margin: 0 0 1.5rem 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dog-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+        }
+        
+        .dog-gallery-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .dog-gallery-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .dog-gallery-item.profile-picture {
+            border-color: #0095f6;
+            box-shadow: 0 0 0 2px rgba(0, 149, 246, 0.3);
+        }
+        
+        .dog-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .dog-gallery-item .profile-badge {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            background: #0095f6;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .photo-delete-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .photo-delete-btn:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        .dog-gallery-item:hover .photo-delete-btn {
+            display: flex;
+        }
+        
+        /* Don't show delete button on add photo button */
+        .add-photo-btn .photo-delete-btn {
+            display: none !important;
+        }
+        
+        .gallery-empty {
+            text-align: center;
+            color: #8e8e8e;
+            padding: 2rem;
+            font-size: 0.9rem;
+            grid-column: 1 / -1;
+        }
+        
+        .add-photo-btn {
+            border: 2px dashed #dbdbdb !important;
+            background: #fafafa !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .add-photo-btn:hover {
+            border-color: #0095f6 !important;
+            background: #f0f8ff !important;
+            transform: scale(1.02);
+        }
+        
+        .add-photo-content {
+            text-align: center;
+            color: #8e8e8e;
+        }
+        
+        .add-photo-btn:hover .add-photo-content {
+            color: #0095f6;
+        }
+        
+        .plus-icon {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .add-photo-text {
+            font-size: 0.8rem;
+            font-weight: 500;
         }
 
         .photo-preview:hover {
@@ -848,6 +1243,10 @@
 
         .cancel-btn:hover {
             background: #fafafa;
+        }
+        
+        .delete-btn:hover {
+            background: #c82333 !important;
         }
 
         .remove-btn {
@@ -965,6 +1364,52 @@
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-20px); }
             60% { transform: translateY(-10px); }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        /* PWA and Mobile Optimizations */
+        .pwa-mode {
+            /* Additional padding for status bar in PWA mode */
+            padding-top: env(safe-area-inset-top);
+        }
+        
+        /* Touch-friendly interactions */
+        @media (hover: none) and (pointer: coarse) {
+            .dog-card:hover,
+            .add-dog-card:hover,
+            .post-actions:hover {
+                transform: none;
+                background: none;
+            }
+            
+            .dog-card:active {
+                transform: scale(0.98);
+                opacity: 0.8;
+            }
+            
+            .post-actions:active,
+            button:active {
+                opacity: 0.7;
+            }
+        }
+        
+        /* iOS safe area support */
+        @supports (padding: max(0px)) {
+            .gallery-header,
+            .dog-header,
+            .activity-header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+            }
         }
 
         .demo-note {
@@ -1348,8 +1793,17 @@
                 </div>
                 
                 <div class="add-dog-card" onclick="openAddModal()">
-                    <div class="add-icon">+</div>
-                    <p>Add Dog</p>
+                    <div class="post-header">
+                        <div class="post-avatar">➕</div>
+                        <div class="post-username">Add New Dog</div>
+                        <div class="post-actions"></div>
+                    </div>
+                    <div class="dog-photo">
+                        <div style="font-size: 3rem; color: #8e8e8e;">🐕</div>
+                    </div>
+                    <div class="dog-info">
+                        <p style="color: #0095f6; font-weight: 600;">Tap to add your first furry friend!</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1371,6 +1825,16 @@
             
             <div class="calendar" id="calendar">
                 <!-- Calendar will be generated here -->
+            </div>
+            
+            <div class="dog-gallery-section" id="dogGallerySection">
+                <h3 style="margin: 0 0 1rem 0; color: #262626; font-size: 1.2rem; display: flex; align-items: center;">
+                    📷 Gallery
+                    <span id="galleryCount" style="font-size: 0.8rem; color: #8e8e8e; margin-left: 8px;"></span>
+                </h3>
+                <div class="dog-gallery-grid" id="dogGalleryGrid">
+                    <!-- Gallery will be generated here -->
+                </div>
             </div>
             
             <div class="pattern-analysis" id="patternAnalysis">
@@ -1451,6 +1915,54 @@
                     <p style="color: #666; margin-bottom: 1rem;">Rate how each behavior issue was today</p>
                     <div id="behaviorSliders">
                         <!-- Behavior sliders will be generated here -->
+                    </div>
+                </div>
+
+                <div class="activity-section" id="triggerTrackingSection" style="display: none;">
+                    <h3>🎆 Triggers & Context Today</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Track what might have influenced behavior</p>
+                    
+                    <div class="trigger-categories">
+                        <div class="trigger-category">
+                            <h4>🌤️ Environment</h4>
+                            <div class="trigger-options" id="environmentTriggers">
+                                <!-- Environment triggers will be generated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="trigger-category">
+                            <h4>👥 Social Context</h4>
+                            <div class="trigger-options" id="socialTriggers">
+                                <!-- Social triggers will be generated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="trigger-category">
+                            <h4>⚠️ Known Triggers</h4>
+                            <div class="trigger-options" id="knownTriggers">
+                                <!-- Known triggers will be generated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="trigger-category">
+                            <h4>📝 Custom Notes</h4>
+                            <textarea id="triggerNotes" placeholder="Any specific situations, events, or observations today..." rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-section" id="trainingSessionSection" style="display: none;">
+                    <h3>🎯 Training Sessions Today</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Log training exercises and progress</p>
+                    
+                    <div class="training-logger">
+                        <div class="training-session-list" id="trainingSessionList">
+                            <!-- Training sessions will be listed here -->
+                        </div>
+                        
+                        <button type="button" class="add-session-btn" onclick="openTrainingModal()">
+                            ➕ Add Training Session
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1624,14 +2136,59 @@
                 </div>
                 
                 <div class="form-actions">
-                    <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
-                    <button type="submit" class="save-btn">Save Changes</button>
+                    <button type="button" class="delete-btn" onclick="confirmDeleteDog()" style="background: #dc3545; color: white; border: none; border-radius: 4px; padding: 8px 16px; font-weight: 600; font-size: 0.875rem; cursor: pointer; margin-right: auto;">
+                        🗑️ Delete Dog
+                    </button>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </div>
                 </div>
             </form>
             </div>
         </div>
     </div>
 
+    <!-- Training Session Modal -->
+    <div class="modal" id="trainingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎯 Add Training Session</h2>
+                <button type="button" onclick="closeTrainingModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #8e8e8e;">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="trainingForm">
+                    <div class="form-group">
+                        <label for="trainingTitle">Session Title *</label>
+                        <input type="text" id="trainingTitle" required placeholder="e.g., Basic Obedience, Leash Training">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="trainingDuration">Duration (minutes) *</label>
+                        <input type="number" id="trainingDuration" required min="1" max="120" placeholder="15">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Commands Practiced</label>
+                        <div class="command-selector" id="commandSelector">
+                            <!-- Commands will be generated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="trainingNotes">Session Notes</label>
+                        <textarea id="trainingNotes" rows="3" placeholder="How did it go? Any breakthroughs or challenges?"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="closeTrainingModal()">Cancel</button>
+                        <button type="submit" class="save-btn">Save Session</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <!-- Example Week Modal -->
     <div class="modal" id="exampleWeekModal">
         <div class="modal-content" style="max-width: 800px;">
@@ -1653,6 +2210,20 @@
         let currentProfilePicture = null;
         let editGallery = [];
         let editProfilePicture = null;
+        
+        // Trigger tracking data
+        const triggerData = {
+            environment: ['Rainy Weather', 'Hot Day', 'Thunderstorm', 'Windy', 'Construction Noise', 'Fireworks/Loud Noises', 'New Location', 'Vet Office', 'Car Ride', 'Home Alone'],
+            social: ['Visitors at Home', 'Other Dogs Present', 'Children Around', 'Crowded Area', 'Owner Stressed', 'Family Argument', 'Delivery Person', 'Neighborhood Cats', 'Dog Park', 'Training Class'],
+            triggers: ['Doorbell/Knocking', 'Vacuum Cleaner', 'Motorcycle/Truck', 'Sudden Movements', 'Being Touched/Handled', 'Food Guarding Situation', 'Leash/Collar Put On', 'Bath Time', 'Nail Trimming', 'Being Left Behind']
+        };
+        
+        // Training commands database
+        const trainingCommands = [
+            'Sit', 'Stay', 'Down', 'Come', 'Heel', 'Leave It', 'Drop It', 'Wait', 'Place/Go to Bed', 
+            'Touch/Target', 'Spin', 'Shake/Paw', 'Roll Over', 'Play Dead', 'Speak/Quiet', 'Look/Focus',
+            'Loose Leash Walking', 'Recall Training', 'Impulse Control', 'Crate Training'
+        ];
         let activities = {};
         let dayRatings = {};
         let calendarDate = new Date(); // Current month being viewed
@@ -2633,6 +3204,527 @@
             console.log(`Behavior "${behavior}" rated ${getBehaviorValueText(value)} (${value}) for ${currentDate}`);
         }
 
+        // Trigger & Context Tracking Functions
+        function generateTriggerTracking() {
+            const triggerSection = document.getElementById('triggerTrackingSection');
+            
+            if (!currentDog || !currentDog.behaviorIssues || currentDog.behaviorIssues.trim() === '') {
+                triggerSection.style.display = 'none';
+                return;
+            }
+            
+            triggerSection.style.display = 'block';
+            
+            // Initialize trigger data if not exists
+            if (!currentDog.triggerData) {
+                currentDog.triggerData = {};
+            }
+            if (!currentDog.triggerData[currentDate]) {
+                currentDog.triggerData[currentDate] = {
+                    environment: [],
+                    social: [],
+                    triggers: [],
+                    notes: ''
+                };
+            }
+            
+            const dayTriggers = currentDog.triggerData[currentDate];
+            
+            // Generate environment triggers
+            generateTriggerOptions('environmentTriggers', triggerData.environment, dayTriggers.environment, 'environment');
+            
+            // Generate social triggers
+            generateTriggerOptions('socialTriggers', triggerData.social, dayTriggers.social, 'social');
+            
+            // Generate known triggers
+            generateTriggerOptions('knownTriggers', triggerData.triggers, dayTriggers.triggers, 'triggers');
+            
+            // Set notes
+            document.getElementById('triggerNotes').value = dayTriggers.notes || '';
+        }
+        
+        function generateTriggerOptions(containerId, options, selectedOptions, category) {
+            const container = document.getElementById(containerId);
+            
+            container.innerHTML = options.map(option => {
+                const isSelected = selectedOptions.includes(option);
+                return `<div class="trigger-tag ${isSelected ? 'selected' : ''}" onclick="toggleTrigger('${option}', '${category}')">${option}</div>`;
+            }).join('');
+        }
+        
+        function toggleTrigger(trigger, category) {
+            if (!currentDog.triggerData[currentDate]) {
+                currentDog.triggerData[currentDate] = {
+                    environment: [],
+                    social: [],
+                    triggers: [],
+                    notes: ''
+                };
+            }
+            
+            const dayTriggers = currentDog.triggerData[currentDate];
+            const triggerArray = dayTriggers[category];
+            
+            if (triggerArray.includes(trigger)) {
+                // Remove trigger
+                const index = triggerArray.indexOf(trigger);
+                triggerArray.splice(index, 1);
+            } else {
+                // Add trigger
+                triggerArray.push(trigger);
+            }
+            
+            // Re-render the category
+            const containerMap = {
+                'environment': 'environmentTriggers',
+                'social': 'socialTriggers', 
+                'triggers': 'knownTriggers'
+            };
+            
+            generateTriggerOptions(containerMap[category], triggerData[category], triggerArray, category);
+            saveData();
+        }
+        
+        function saveTriggerNotes() {
+            if (!currentDog.triggerData[currentDate]) {
+                currentDog.triggerData[currentDate] = {
+                    environment: [],
+                    social: [],
+                    triggers: [],
+                    notes: ''
+                };
+            }
+            
+            currentDog.triggerData[currentDate].notes = document.getElementById('triggerNotes').value;
+            saveData();
+        }
+
+        // Training Session Functions
+        function generateTrainingSection() {
+            const trainingSection = document.getElementById('trainingSessionSection');
+            
+            if (!currentDog || !currentDog.behaviorIssues || currentDog.behaviorIssues.trim() === '') {
+                trainingSection.style.display = 'none';
+                return;
+            }
+            
+            trainingSection.style.display = 'block';
+            
+            // Initialize training data if not exists
+            if (!currentDog.trainingSessions) {
+                currentDog.trainingSessions = {};
+            }
+            if (!currentDog.trainingSessions[currentDate]) {
+                currentDog.trainingSessions[currentDate] = [];
+            }
+            
+            renderTrainingSessions();
+        }
+        
+        function renderTrainingSessions() {
+            const container = document.getElementById('trainingSessionList');
+            const sessions = currentDog.trainingSessions[currentDate] || [];
+            
+            if (sessions.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #8e8e8e; padding: 20px; font-size: 0.875rem;">No training sessions logged today. Click "Add Training Session" to get started!</div>';
+                return;
+            }
+            
+            container.innerHTML = sessions.map((session, index) => `
+                <div class="training-session-item">
+                    <button class="session-remove-btn" onclick="removeTrainingSession(${index})">×</button>
+                    <div class="training-session-header">
+                        <div class="training-session-title">${session.title}</div>
+                        <div class="training-session-duration">${session.duration} min</div>
+                    </div>
+                    <div class="training-session-commands">
+                        ${session.commands.map(cmd => `<span class="command-tag">${cmd}</span>`).join('')}
+                    </div>
+                    ${session.notes ? `<div class="training-session-notes">${session.notes}</div>` : ''}
+                </div>
+            `).join('');
+        }
+        
+        function removeTrainingSession(index) {
+            currentDog.trainingSessions[currentDate].splice(index, 1);
+            renderTrainingSessions();
+            saveData();
+        }
+        
+        // Training Modal Functions
+        function openTrainingModal() {
+            generateCommandSelector();
+            document.getElementById('trainingModal').style.display = 'flex';
+        }
+        
+        function closeTrainingModal() {
+            document.getElementById('trainingModal').style.display = 'none';
+            document.getElementById('trainingForm').reset();
+            // Clear command selections
+            const commands = document.querySelectorAll('.command-option.selected');
+            commands.forEach(cmd => cmd.classList.remove('selected'));
+        }
+        
+        function generateCommandSelector() {
+            const container = document.getElementById('commandSelector');
+            
+            container.innerHTML = trainingCommands.map(command => `
+                <div class="command-option" onclick="toggleCommand('${command}')">${command}</div>
+            `).join('');
+        }
+        
+        function toggleCommand(command) {
+            const element = event.target;
+            element.classList.toggle('selected');
+        }
+        
+        function getSelectedCommands() {
+            const selected = document.querySelectorAll('.command-option.selected');
+            return Array.from(selected).map(el => el.textContent);
+        }
+        
+        // Dog Gallery Rendering
+        function renderDogGallery() {
+            if (!currentDog) return;
+            
+            const galleryGrid = document.getElementById('dogGalleryGrid');
+            const galleryCount = document.getElementById('galleryCount');
+            const gallery = currentDog.gallery || [];
+            const profilePicture = currentDog.profilePicture;
+            
+            // Update count
+            galleryCount.textContent = gallery.length > 0 ? `(${gallery.length} photos)` : '';
+            
+            if (gallery.length === 0) {
+                galleryGrid.innerHTML = `
+                    <div class="dog-gallery-item add-photo-btn" onclick="openGalleryUpload()" title="Add first photo">
+                        <div class="add-photo-content">
+                            <div class="plus-icon">+</div>
+                            <div class="add-photo-text">Add Photo</div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const galleryHTML = gallery.map((img, index) => {
+                const isProfile = img === profilePicture;
+                return `
+                    <div class="dog-gallery-item ${isProfile ? 'profile-picture' : ''}" onclick="openImageModal('${img}', ${index})">
+                        <img src="${img}" alt="${currentDog.name} photo ${index + 1}">
+                        ${isProfile ? '<div class="profile-badge">PROFILE</div>' : ''}
+                        <div class="photo-delete-btn" onclick="event.stopPropagation(); confirmDeletePhoto(${index})" title="Delete photo">
+                            🗑️
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Add plus button for adding more photos
+            const plusButton = `
+                <div class="dog-gallery-item add-photo-btn" onclick="openGalleryUpload()" title="Add more photos">
+                    <div class="add-photo-content">
+                        <div class="plus-icon">+</div>
+                        <div class="add-photo-text">Add Photo</div>
+                    </div>
+                </div>
+            `;
+            
+            galleryGrid.innerHTML = galleryHTML + plusButton;
+        }
+        
+        function openImageModal(imageSrc, index) {
+            // Create a modal to view the image in full size
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 2000; cursor: pointer;';
+            
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            img.style.cssText = 'max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px;';
+            
+            const closeBtn = document.createElement('div');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.cssText = 'position: absolute; top: 20px; right: 30px; color: white; font-size: 2rem; cursor: pointer; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;';
+            
+            modal.appendChild(img);
+            modal.appendChild(closeBtn);
+            document.body.appendChild(modal);
+            
+            // Close modal on click
+            modal.addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+        }
+        
+        // Dog Menu Functions
+        let currentDogMenu = null;
+        
+        function showDogMenu(dogId, event) {
+            // Close any existing menu
+            closeDogMenu();
+            
+            const dog = dogs.find(d => d.id === dogId);
+            if (!dog) return;
+            
+            // Create menu
+            const menu = document.createElement('div');
+            menu.className = 'dog-menu';
+            menu.innerHTML = `
+                <div class="dog-menu-item" onclick="editDogFromMenu(${dogId})">
+                    ✏️ Edit ${dog.name}
+                </div>
+            `;
+            
+            // Position menu
+            const rect = event.target.getBoundingClientRect();
+            menu.style.position = 'fixed';
+            menu.style.top = (rect.bottom + 5) + 'px';
+            menu.style.right = (window.innerWidth - rect.right) + 'px';
+            menu.style.display = 'block';
+            
+            document.body.appendChild(menu);
+            currentDogMenu = menu;
+            
+            // Close menu when clicking outside
+            setTimeout(() => {
+                document.addEventListener('click', closeDogMenuOnClickOutside);
+            }, 10);
+        }
+        
+        function closeDogMenu() {
+            if (currentDogMenu) {
+                document.body.removeChild(currentDogMenu);
+                currentDogMenu = null;
+                document.removeEventListener('click', closeDogMenuOnClickOutside);
+            }
+        }
+        
+        function closeDogMenuOnClickOutside(event) {
+            if (currentDogMenu && !currentDogMenu.contains(event.target)) {
+                closeDogMenu();
+            }
+        }
+        
+        function editDogFromMenu(dogId) {
+            closeDogMenu();
+            const dog = dogs.find(d => d.id === dogId);
+            if (!dog) return;
+            
+            // Set current dog and open edit modal
+            currentDog = dog;
+            editCurrentDog();
+        }
+        
+        // Delete Dog Functions
+        function confirmDeleteDog() {
+            if (!currentDog) return;
+            
+            const confirmMessage = `Are you sure you want to delete ${currentDog.name}?\n\nThis will permanently remove:\n• All activity data\n• All behavior ratings\n• All photos\n• All training sessions\n• All trigger data\n\nThis action cannot be undone.`;
+            
+            if (confirm(confirmMessage)) {
+                deleteDog(currentDog.id);
+            }
+        }
+        
+        function deleteDog(dogId) {
+            // Find dog index
+            const dogIndex = dogs.findIndex(dog => dog.id === dogId);
+            if (dogIndex === -1) return;
+            
+            const dogName = dogs[dogIndex].name;
+            
+            // Remove dog from array
+            dogs.splice(dogIndex, 1);
+            
+            // Clear current dog if it was the deleted one
+            if (currentDog && currentDog.id === dogId) {
+                currentDog = null;
+                cachedAIAnalysis = null;
+                lastAIAnalysisHash = null;
+            }
+            
+            // Save data
+            saveData();
+            
+            // Close modal and return to gallery
+            closeEditModal();
+            showGallery();
+            
+            // Show success message
+            setTimeout(() => {
+                alert(`${dogName} has been successfully deleted.`);
+            }, 100);
+        }
+        
+        // Gallery Upload from Dog Page
+        function openGalleryUpload() {
+            // Create a hidden file input if it doesn't exist
+            let fileInput = document.getElementById('dogPageGalleryInput');
+            if (!fileInput) {
+                fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.id = 'dogPageGalleryInput';
+                fileInput.accept = 'image/*';
+                fileInput.multiple = true;
+                fileInput.style.display = 'none';
+                fileInput.onchange = handleDogPageGalleryUpload;
+                document.body.appendChild(fileInput);
+            }
+            
+            fileInput.click();
+        }
+        
+        function handleDogPageGalleryUpload(event) {
+            if (!currentDog) return;
+            
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+            
+            let processed = 0;
+            const totalFiles = files.length;
+            
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Initialize gallery if not exists
+                    if (!currentDog.gallery) {
+                        currentDog.gallery = [];
+                    }
+                    
+                    // Add new image to gallery
+                    currentDog.gallery.push(e.target.result);
+                    
+                    // Set as profile picture if it's the first image
+                    if (!currentDog.profilePicture && currentDog.gallery.length === 1) {
+                        currentDog.profilePicture = e.target.result;
+                    }
+                    
+                    processed++;
+                    
+                    // When all files are processed
+                    if (processed === totalFiles) {
+                        // Save data
+                        saveData();
+                        
+                        // Re-render gallery and dogs
+                        renderDogGallery();
+                        renderDogs(); // Update the gallery view in case we're there too
+                        
+                        // Show success message
+                        const message = totalFiles === 1 ? 
+                            `Photo added to ${currentDog.name}'s gallery!` : 
+                            `${totalFiles} photos added to ${currentDog.name}'s gallery!`;
+                        
+                        // Simple toast notification
+                        showToast(message);
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            // Clear the file input
+            event.target.value = '';
+        }
+        
+        function showToast(message) {
+            // Create a simple toast notification
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 0.875rem;
+                font-weight: 600;
+                z-index: 2000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                animation: slideInRight 0.3s ease;
+            `;
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(toast)) {
+                        document.body.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // Photo Deletion Functions
+        function confirmDeletePhoto(photoIndex) {
+            if (!currentDog || !currentDog.gallery || photoIndex < 0 || photoIndex >= currentDog.gallery.length) {
+                return;
+            }
+            
+            const photoToDelete = currentDog.gallery[photoIndex];
+            const isProfilePicture = photoToDelete === currentDog.profilePicture;
+            
+            let confirmMessage = `Are you sure you want to delete this photo?`;
+            
+            if (isProfilePicture) {
+                confirmMessage += `\n\n⚠️ This is ${currentDog.name}'s profile picture.`;
+                if (currentDog.gallery.length > 1) {
+                    confirmMessage += ` The next photo will become the new profile picture.`;
+                } else {
+                    confirmMessage += ` ${currentDog.name} will have no profile picture after deletion.`;
+                }
+            }
+            
+            confirmMessage += `\n\nThis action cannot be undone.`;
+            
+            if (confirm(confirmMessage)) {
+                deletePhoto(photoIndex);
+            }
+        }
+        
+        function deletePhoto(photoIndex) {
+            if (!currentDog || !currentDog.gallery || photoIndex < 0 || photoIndex >= currentDog.gallery.length) {
+                return;
+            }
+            
+            const deletedPhoto = currentDog.gallery[photoIndex];
+            const wasProfilePicture = deletedPhoto === currentDog.profilePicture;
+            
+            // Remove photo from gallery
+            currentDog.gallery.splice(photoIndex, 1);
+            
+            // Handle profile picture logic
+            if (wasProfilePicture) {
+                if (currentDog.gallery.length > 0) {
+                    // Set the first remaining photo as profile picture
+                    currentDog.profilePicture = currentDog.gallery[0];
+                } else {
+                    // No photos left, clear profile picture
+                    currentDog.profilePicture = null;
+                }
+            }
+            
+            // Save data
+            saveData();
+            
+            // Re-render gallery and dogs
+            renderDogGallery();
+            renderDogs(); // Update the main gallery view too
+            
+            // Show success message
+            let message = 'Photo deleted successfully!';
+            if (wasProfilePicture && currentDog.gallery.length > 0) {
+                message = 'Photo deleted! New profile picture set.';
+            } else if (wasProfilePicture && currentDog.gallery.length === 0) {
+                message = 'Photo deleted! No profile picture set.';
+            }
+            
+            showToast(message);
+        }
+
         // Load data when app starts
         loadSavedData();
         
@@ -2656,6 +3748,7 @@
         function showDogPage() {
             showView('dogView');
             renderCalendar();
+            renderDogGallery();
         }
 
         function showSettings() {
@@ -2689,6 +3782,8 @@
             renderActivities();
             renderDayRating();
             generateBehaviorSliders();
+            generateTriggerTracking();
+            generateTrainingSection();
         }
 
         function openAddModal() {
@@ -2817,8 +3912,17 @@
                         <p>Add your first furry friend to get started tracking their activities.</p>
                     </div>
                     <div class="add-dog-card" onclick="openAddModal()">
-                        <div class="add-icon">+</div>
-                        <p>Add Dog</p>
+                        <div class="post-header">
+                            <div class="post-avatar">➕</div>
+                            <div class="post-username">Add New Dog</div>
+                            <div class="post-actions"></div>
+                        </div>
+                        <div class="dog-photo">
+                            <div style="font-size: 3rem; color: #8e8e8e;">🐕</div>
+                        </div>
+                        <div class="dog-info">
+                            <p style="color: #0095f6; font-weight: 600;">Tap to add your first furry friend!</p>
+                        </div>
                     </div>
                 `;
                 return;
@@ -2848,7 +3952,7 @@
                         <div class="post-header">
                             <div class="post-avatar">${profileImg}</div>
                             <div class="post-username">${dog.name}</div>
-                            <div class="post-actions">⋯</div>
+                            <div class="post-actions" onclick="event.stopPropagation(); showDogMenu(${dog.id}, event)" title="More options">⋯</div>
                         </div>
                         <div class="dog-photo">
                             ${photoContent}
@@ -2863,8 +3967,17 @@
                 `;
             }).join('') + `
                 <div class="add-dog-card" onclick="openAddModal()">
-                    <div class="add-icon">+</div>
-                    <p>Add Dog</p>
+                    <div class="post-header">
+                        <div class="post-avatar">➕</div>
+                        <div class="post-username">Add New Dog</div>
+                        <div class="post-actions"></div>
+                    </div>
+                    <div class="dog-photo">
+                        <div style="font-size: 3rem; color: #8e8e8e;">🐕</div>
+                    </div>
+                    <div class="dog-info">
+                        <p style="color: #0095f6; font-weight: 600;">Tap to add your first furry friend!</p>
+                    </div>
                 </div>
             `;
         }
@@ -3040,8 +4153,24 @@
                 return;
             }
 
-            // Otherwise, run local analysis
-            analyzeWithLocalAI();
+            // Show prompt to choose AI mode instead of running local analysis automatically
+            document.getElementById('insightsList').innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: #666;">
+                    <h3 style="color: #262626; margin-bottom: 1rem;">🧠 Choose Your Analysis</h3>
+                    <p style="margin-bottom: 1.5rem;">Select how you'd like to analyze ${currentDog.name}'s behavior patterns:</p>
+                    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="askRealAI()" style="background: #0095f6; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem;">
+                            🤖 ChatGPT Analysis
+                        </button>
+                        <button onclick="useLocalAI()" style="background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem;">
+                            📊 Local Analysis
+                        </button>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #8e8e8e; margin-top: 1rem;">
+                        ChatGPT provides professional behaviorist insights • Local analysis works offline with pattern detection
+                    </p>
+                </div>
+            `;
             updateAIButton(); // Update button indicator
         }
 
@@ -3077,6 +4206,8 @@
                     dayRatings: currentDog.dayRatings || {},
                     behaviorRatings: currentDog.behaviorRatings || {},
                     behaviorIssues: currentDog.behaviorIssues || '',
+                    triggerData: currentDog.triggerData || {},
+                    trainingSessions: currentDog.trainingSessions || {},
                     language: currentLanguage
                 };
                 
@@ -3151,7 +4282,7 @@
             } catch (error) {
                 console.error('Real AI Analysis failed:', error);
                 
-                // Show error and fallback to local analysis
+                // Show error without fallback to local analysis
                 document.getElementById('insightsList').innerHTML = `
                     <div class="insight-item negative">
                         <div class="insight-title">🚨 AI Analysis Unavailable</div>
@@ -3161,13 +4292,19 @@
                             • Backend server not running (run: <code>npm start</code> in doglog-backend folder)<br>
                             • OpenAI API key not configured<br>
                             • Network connection problems<br><br>
-                            <small style="color: #666;">Local analysis is still available below.</small>
+                            <div style="margin-top: 12px;">
+                                <button onclick="useLocalAI()" style="background: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; margin-right: 8px;">
+                                    📊 Use Local Analysis Instead
+                                </button>
+                                <button onclick="askRealAI()" style="background: #0095f6; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">
+                                    🔄 Retry ChatGPT
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
                 
-                // Run local analysis as fallback
-                analyzeWithLocalAI(true);
+                // Don't run local analysis automatically - let user choose
             }
         }
 
@@ -4306,6 +5443,43 @@
                 renderGallery();
             }
         });
+        
+        // Training form submission
+        document.getElementById('trainingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('trainingTitle').value;
+            const duration = parseInt(document.getElementById('trainingDuration').value);
+            const commands = getSelectedCommands();
+            const notes = document.getElementById('trainingNotes').value;
+            
+            if (title.trim() && duration > 0) {
+                const session = {
+                    title: title.trim(),
+                    duration: duration,
+                    commands: commands,
+                    notes: notes.trim(),
+                    timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+                };
+                
+                // Add session to current date
+                if (!currentDog.trainingSessions) {
+                    currentDog.trainingSessions = {};
+                }
+                if (!currentDog.trainingSessions[currentDate]) {
+                    currentDog.trainingSessions[currentDate] = [];
+                }
+                
+                currentDog.trainingSessions[currentDate].push(session);
+                
+                // Save and refresh
+                saveData();
+                renderTrainingSessions();
+                closeTrainingModal();
+                
+                console.log('Training session added:', session);
+            }
+        });
 
         // Close modal when clicking outside
         document.getElementById('addModal').addEventListener('click', function(e) {
@@ -4320,6 +5494,21 @@
                 closeEditModal();
             }
         });
+        
+        // Close training modal when clicking outside
+        document.getElementById('trainingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTrainingModal();
+            }
+        });
+        
+        // Add trigger notes event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            const triggerNotes = document.getElementById('triggerNotes');
+            if (triggerNotes) {
+                triggerNotes.addEventListener('input', saveTriggerNotes);
+            }
+        });
 
         // Initialize gallery previews on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -4329,6 +5518,110 @@
         
         // Initialize
         renderDogs();
+        
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('🐕 DogLog PWA: Service Worker registered successfully', registration);
+                        
+                        // Listen for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available
+                                    if (confirm('🎆 DogLog update available! Reload to get the latest features?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('🐕 DogLog PWA: Service Worker registration failed', error);
+                    });
+            });
+        }
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            
+            // Show custom install button if not already installed
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                showInstallPrompt();
+            }
+        });
+        
+        function showInstallPrompt() {
+            // Create install prompt banner
+            const installBanner = document.createElement('div');
+            installBanner.id = 'installBanner';
+            installBanner.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+                color: white;
+                padding: 16px;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 0.9rem;
+                font-weight: 600;
+            `;
+            
+            installBanner.innerHTML = `
+                <div>
+                    <div style="font-size: 1.1rem; margin-bottom: 4px;">📱 Install DogLog</div>
+                    <div style="opacity: 0.9; font-weight: 400; font-size: 0.8rem;">Get the app experience on your home screen!</div>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button onclick="installApp()" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem;">Install</button>
+                    <button onclick="dismissInstallPrompt()" style="background: none; color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem;">Later</button>
+                </div>
+            `;
+            
+            document.body.appendChild(installBanner);
+        }
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('🐕 DogLog PWA: User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                    dismissInstallPrompt();
+                });
+            }
+        }
+        
+        function dismissInstallPrompt() {
+            const banner = document.getElementById('installBanner');
+            if (banner) {
+                banner.remove();
+            }
+        }
+        
+        // Detect if app is running as PWA
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+            console.log('🐕 DogLog: Running as PWA!');
+            // Add PWA-specific styles or behaviors here
+            document.body.classList.add('pwa-mode');
+        }
     </script>
 </body>
 </html>

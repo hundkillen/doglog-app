@@ -7,7 +7,22 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:8080',
+    'https://localhost:3000',
+    'https://localhost:8080',
+    // Add your production domains here
+    'https://doglog-app.netlify.app',
+    'https://doglog-app.vercel.app',
+    // Allow any subdomain for deployment flexibility
+    /^https:\/\/.*\.netlify\.app$/,
+    /^https:\/\/.*\.vercel\.app$/,
+    /^https:\/\/.*\.railway\.app$/
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Initialize OpenAI
@@ -54,14 +69,14 @@ app.post('/api/update-key', (req, res) => {
 // AI Analysis endpoint
 app.post('/api/analyze', async (req, res) => {
   try {
-    const { dogName, activities, dayRatings, behaviorRatings = {}, breed, age, behaviorIssues = '', language = 'en' } = req.body;
+    const { dogName, activities, dayRatings, behaviorRatings = {}, breed, age, behaviorIssues = '', triggerData = {}, trainingSessions = {}, language = 'en' } = req.body;
 
     if (!dogName || !activities || !dayRatings) {
       return res.status(400).json({ error: 'Missing required data' });
     }
 
     // Prepare data for AI analysis
-    const analysisData = prepareAnalysisData(dogName, activities, dayRatings, behaviorRatings, breed, age, behaviorIssues);
+    const analysisData = prepareAnalysisData(dogName, activities, dayRatings, behaviorRatings, breed, age, behaviorIssues, triggerData, trainingSessions);
     
     if (analysisData.totalDays < 3) {
       return res.json({
@@ -118,8 +133,84 @@ app.post('/api/analyze', async (req, res) => {
   }
 });
 
+// Analyze trigger patterns
+function analyzeTriggerPatterns(triggerData, allDates) {
+  const analysis = {
+    commonTriggers: {},
+    environmentalPatterns: {},
+    socialPatterns: {},
+    triggerFrequency: {},
+    totalTriggerDays: 0
+  };
+  
+  const triggerDates = Object.keys(triggerData);
+  analysis.totalTriggerDays = triggerDates.length;
+  
+  triggerDates.forEach(date => {
+    const dayTriggers = triggerData[date];
+    
+    // Count all triggers
+    ['environment', 'social', 'triggers'].forEach(category => {
+      if (dayTriggers[category]) {
+        dayTriggers[category].forEach(trigger => {
+          if (!analysis.commonTriggers[trigger]) {
+            analysis.commonTriggers[trigger] = 0;
+          }
+          analysis.commonTriggers[trigger]++;
+        });
+      }
+    });
+  });
+  
+  return analysis;
+}
+
+// Analyze training sessions
+function analyzeTrainingSessions(trainingSessions, allDates) {
+  const analysis = {
+    totalSessions: 0,
+    totalMinutes: 0,
+    commandsWorked: {},
+    sessionsPerWeek: 0,
+    averageSessionLength: 0,
+    mostCommonCommands: [],
+    trainingDays: 0
+  };
+  
+  const sessionDates = Object.keys(trainingSessions);
+  analysis.trainingDays = sessionDates.length;
+  
+  sessionDates.forEach(date => {
+    const daySessions = trainingSessions[date] || [];
+    daySessions.forEach(session => {
+      analysis.totalSessions++;
+      analysis.totalMinutes += session.duration;
+      
+      session.commands.forEach(command => {
+        if (!analysis.commandsWorked[command]) {
+          analysis.commandsWorked[command] = 0;
+        }
+        analysis.commandsWorked[command]++;
+      });
+    });
+  });
+  
+  if (analysis.totalSessions > 0) {
+    analysis.averageSessionLength = Math.round(analysis.totalMinutes / analysis.totalSessions);
+    analysis.sessionsPerWeek = Math.round((analysis.totalSessions / allDates.length) * 7);
+    
+    // Get most common commands
+    analysis.mostCommonCommands = Object.entries(analysis.commandsWorked)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([command, count]) => ({ command, count }));
+  }
+  
+  return analysis;
+}
+
 // Prepare data for AI analysis
-function prepareAnalysisData(dogName, activities, dayRatings, behaviorRatings = {}, breed = 'Mixed breed', age = null, behaviorIssues = '') {
+function prepareAnalysisData(dogName, activities, dayRatings, behaviorRatings = {}, breed = 'Mixed breed', age = null, behaviorIssues = '', triggerData = {}, trainingSessions = {}) {
   const allDates = Object.keys(activities).filter(date => activities[date] && activities[date].length > 0).sort();
   
   const activitySummary = {};
@@ -195,12 +286,20 @@ function prepareAnalysisData(dogName, activities, dayRatings, behaviorRatings = 
     });
   }
 
+  // Analyze trigger patterns
+  const triggerAnalysis = analyzeTriggerPatterns(triggerData, allDates);
+  
+  // Analyze training sessions
+  const trainingAnalysis = analyzeTrainingSessions(trainingSessions, allDates);
+
   return {
     dogName,
     breed,
     age,
     behaviorIssues,
     behaviorProgress,
+    triggerAnalysis,
+    trainingAnalysis,
     totalDays: allDates.length,
     dateRange: allDates.length > 0 ? `${allDates[0]} to ${allDates[allDates.length - 1]}` : 'No data',
     activitySummary,
@@ -212,7 +311,7 @@ function prepareAnalysisData(dogName, activities, dayRatings, behaviorRatings = 
 
 // Create detailed prompt for AI analysis
 function createAnalysisPrompt(data, language = 'en') {
-  const { dogName, breed, age, behaviorIssues, behaviorProgress, totalDays, activitySummary, dayRatingCounts, sequentialPatterns } = data;
+  const { dogName, breed, age, behaviorIssues, behaviorProgress, triggerAnalysis, trainingAnalysis, totalDays, activitySummary, dayRatingCounts, sequentialPatterns } = data;
   
   const languageInstructions = {
     en: 'Please respond in English.',
@@ -255,7 +354,19 @@ ${sequentialPatterns.map(pattern =>
 **Behavior Progress Tracking:**
 ${Object.entries(behaviorProgress).map(([behavior, progress]) => 
   `- ${behavior}: ${progress.recentAverage}/100 average (${progress.trend}) - ${progress.totalRatings} days tracked`
-).join('\n')}` : ''}
+).join('\n')}` : ''}${triggerAnalysis.totalTriggerDays > 0 ? `
+
+**Trigger & Environmental Analysis:**
+- Total days with trigger data: ${triggerAnalysis.totalTriggerDays}
+- Most common triggers: ${Object.entries(triggerAnalysis.commonTriggers).sort((a,b) => b[1] - a[1]).slice(0,5).map(([trigger, count]) => `${trigger} (${count}x)`).join(', ')}
+${Object.keys(triggerAnalysis.commonTriggers).length > 0 ? '- Key insight: Identify correlation between triggers and behavior ratings' : ''}` : ''}${trainingAnalysis.totalSessions > 0 ? `
+
+**Training Progress Analysis:**
+- Total training sessions: ${trainingAnalysis.totalSessions} sessions (${trainingAnalysis.totalMinutes} minutes)
+- Training frequency: ${trainingAnalysis.sessionsPerWeek} sessions/week
+- Average session length: ${trainingAnalysis.averageSessionLength} minutes
+- Most practiced commands: ${trainingAnalysis.mostCommonCommands.map(cmd => `${cmd.command} (${cmd.count}x)`).join(', ')}
+- Training consistency: ${trainingAnalysis.trainingDays}/${totalDays} days with training` : ''}
 
 Please provide analysis in exactly this format:
 
@@ -279,7 +390,16 @@ Focus on:
 2. Optimal scheduling based on success patterns
 3. Specific breed-related considerations for ${breed}
 4. Data-driven recommendations, not generic advice
-5. Actionable insights the owner can implement immediately${behaviorIssues ? `
+5. Actionable insights the owner can implement immediately${triggerAnalysis.totalTriggerDays > 0 ? `
+6. **TRIGGER ANALYSIS:** Use trigger data to identify environmental and social patterns affecting behavior
+   - Recommend trigger avoidance or desensitization strategies
+   - Connect specific triggers to behavior decline patterns
+   - Suggest environmental modifications based on trigger frequency` : ''}${trainingAnalysis.totalSessions > 0 ? `
+${triggerAnalysis.totalTriggerDays > 0 ? '7' : '6'}. **TRAINING OPTIMIZATION:** Analyze training effectiveness and provide specific improvements
+   - Evaluate training consistency and session frequency
+   - Recommend focus areas based on command practice data
+   - Suggest training schedule adjustments for better results
+   - Connect training progress to behavior improvement trends` : ''}${behaviorIssues ? `
 6. **CRITICAL PRIORITY:** The dog has these specific behavior problems that MUST be addressed: ${behaviorIssues}
    - Every recommendation should consider how it helps with: ${behaviorIssues}
    - Analyze if current activities are making these behaviors better or worse
