@@ -35,8 +35,17 @@ const Calendar = ({ dog, onDateSelect }) => {
     if (!dayActivities || dayActivities.length === 0) {
       return 'none';
     }
+
+    // Check for daily rating first (from notes)
+    const notesEntry = dayActivities.find(a => a.type === 'notes');
+    if (notesEntry && notesEntry.rating) {
+      return notesEntry.rating;
+    }
     
-    const outcomes = dayActivities.map(activity => activity.outcome);
+    // Fallback to activity outcomes
+    const outcomes = dayActivities.filter(a => a.outcome).map(activity => activity.outcome);
+    if (outcomes.length === 0) return 'none';
+    
     const goodCount = outcomes.filter(o => o === 'good').length;
     const badCount = outcomes.filter(o => o === 'bad').length;
     const okayCount = outcomes.filter(o => o === 'okay').length;
@@ -79,15 +88,15 @@ const Calendar = ({ dog, onDateSelect }) => {
           <span className="day-number">{day}</span>
           {hasActivities && (
             <div className="activity-indicators">
-              {dog.activities[dateKey].slice(0, 3).map((activity, index) => (
+              {dog.activities[dateKey].filter(a => a.outcome).slice(0, 3).map((activity, index) => (
                 <div 
                   key={index} 
                   className={`activity-dot ${activity.outcome}`}
                   title={activity.name}
                 ></div>
               ))}
-              {dog.activities[dateKey].length > 3 && (
-                <div className="activity-dot more">+{dog.activities[dateKey].length - 3}</div>
+              {dog.activities[dateKey].filter(a => a.outcome).length > 3 && (
+                <div className="activity-dot more">+{dog.activities[dateKey].filter(a => a.outcome).length - 3}</div>
               )}
             </div>
           )}

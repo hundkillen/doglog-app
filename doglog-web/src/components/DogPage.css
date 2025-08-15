@@ -26,7 +26,8 @@
 
 .back-btn,
 .edit-btn,
-.delete-btn {
+.delete-btn,
+.test-btn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
@@ -60,6 +61,15 @@
 
 .delete-btn:hover {
   background: #c53030;
+}
+
+.test-btn {
+  background: #38a169;
+  color: white;
+}
+
+.test-btn:hover {
+  background: #2f855a;
 }
 
 .dog-title {

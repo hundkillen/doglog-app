@@ -11,6 +11,7 @@ function App() {
   const [selectedDog, setSelectedDog] = useState(null);
   const [editingDog, setEditingDog] = useState(null);
   const [dogs, setDogs] = useState([]);
+  const [customActivities, setCustomActivities] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowSplash(false), 2500);
@@ -21,6 +22,11 @@ function App() {
     const savedDogs = localStorage.getItem('doglog-dogs');
     if (savedDogs) {
       setDogs(JSON.parse(savedDogs));
+    }
+    
+    const savedCustomActivities = localStorage.getItem('doglog-custom-activities');
+    if (savedCustomActivities) {
+      setCustomActivities(JSON.parse(savedCustomActivities));
     }
   }, []);
 
@@ -72,6 +78,14 @@ function App() {
     saveDogs(updatedDogs);
   };
 
+  const addCustomActivity = (activityName) => {
+    if (!customActivities.includes(activityName)) {
+      const updatedActivities = [...customActivities, activityName];
+      setCustomActivities(updatedActivities);
+      localStorage.setItem('doglog-custom-activities', JSON.stringify(updatedActivities));
+    }
+  };
+
   if (showSplash) {
     return <SplashScreen />;
   }
@@ -102,6 +116,8 @@ function App() {
           }}
           onDelete={() => deleteDog(selectedDog.id)}
           onUpdateActivities={updateDogActivities}
+          customActivities={customActivities}
+          onAddCustomActivity={addCustomActivity}
         />
       )}
       

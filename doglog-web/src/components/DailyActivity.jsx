@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import './DailyActivity.css';
 
-const DailyActivity = ({ dog, date, onSave, onBack }) => {
+const DailyActivity = ({ dog, date, onSave, onBack, customActivities, onAddCustomActivity }) => {
   const [activities, setActivities] = useState([]);
-  const [availableActivities, setAvailableActivities] = useState([
-    'Nosework', 'Obedience Training', 'Long Walk', 'Playdate', 'Vet Visit',
-    'Rest Day', 'Agility', 'Grooming', 'Swimming', 'Feeding', 'Play Time'
-  ]);
+  const [availableActivities, setAvailableActivities] = useState([]);
   const [newActivity, setNewActivity] = useState('');
   const [dailyNotes, setDailyNotes] = useState('');
+  const [dailyRating, setDailyRating] = useState('');
+  const [showDailyRatingPopup, setShowDailyRatingPopup] = useState(false);
   
+  useEffect(() => {
+    const defaultActivities = [
+      'Nosework', 'Obedience Training', 'Long Walk', 'Playdate', 'Vet Visit',
+      'Rest Day', 'Agility', 'Grooming', 'Swimming', 'Feeding', 'Play Time'
+    ];
+    setAvailableActivities([...defaultActivities, ...customActivities]);
+  }, [customActivities]);
+
   useEffect(() => {
     const existingActivities = dog.activities?.[date] || [];
     setActivities(existingActivities);
     
-    const existingNotes = existingActivities.find(a => a.type === 'notes')?.content || '';
-    setDailyNotes(existingNotes);
+    const notesEntry = existingActivities.find(a => a.type === 'notes');
+    setDailyNotes(notesEntry?.content || '');
+    setDailyRating(notesEntry?.rating || '');
   }, [dog, date]);
 
   const formatDate = (dateString) => {
@@ -51,21 +59,31 @@ const DailyActivity = ({ dog, date, onSave, onBack }) => {
   const addCustomActivity = () => {
     if (newActivity.trim()) {
       addActivity(newActivity.trim());
-      setAvailableActivities([...availableActivities, newActivity.trim()]);
+      onAddCustomActivity(newActivity.trim());
       setNewActivity('');
     }
   };
 
   const handleSave = () => {
     const activitiesToSave = [...activities];
-    if (dailyNotes.trim()) {
+    if (dailyNotes.trim() || dailyRating) {
       activitiesToSave.push({
         id: 'notes',
         type: 'notes',
-        content: dailyNotes
+        content: dailyNotes,
+        rating: dailyRating
       });
     }
     onSave(activitiesToSave);
+  };
+
+  const handleDailyNotesClick = () => {
+    setShowDailyRatingPopup(true);
+  };
+
+  const handleDailyRatingSelect = (rating) => {
+    setDailyRating(rating);
+    setShowDailyRatingPopup(false);
   };
 
   const getOutcomeColor = (outcome) => {
@@ -175,7 +193,19 @@ const DailyActivity = ({ dog, date, onSave, onBack }) => {
           </section>
 
           <section className="daily-notes-section">
-            <h3>Daily Notes</h3>
+            <div className="daily-notes-header">
+              <h3>Daily Notes</h3>
+              <button 
+                className={`daily-rating-btn ${dailyRating}`}
+                onClick={handleDailyNotesClick}
+              >
+                {dailyRating ? 
+                  (dailyRating === 'good' ? '😊 Good Day' : 
+                   dailyRating === 'okay' ? '😐 Okay Day' : 
+                   '😞 Bad Day') : 
+                  '📝 Rate Day'}
+              </button>
+            </div>
             <textarea
               value={dailyNotes}
               onChange={(e) => setDailyNotes(e.target.value)}
@@ -184,6 +214,40 @@ const DailyActivity = ({ dog, date, onSave, onBack }) => {
               className="daily-notes"
             />
           </section>
+
+          {showDailyRatingPopup && (
+            <div className="rating-popup-overlay" onClick={() => setShowDailyRatingPopup(false)}>
+              <div className="rating-popup" onClick={(e) => e.stopPropagation()}>
+                <h3>How was {dog.name}'s day overall?</h3>
+                <div className="rating-options">
+                  <button 
+                    className="rating-option good"
+                    onClick={() => handleDailyRatingSelect('good')}
+                  >
+                    😊 Good Day
+                  </button>
+                  <button 
+                    className="rating-option okay"
+                    onClick={() => handleDailyRatingSelect('okay')}
+                  >
+                    😐 Okay Day
+                  </button>
+                  <button 
+                    className="rating-option bad"
+                    onClick={() => handleDailyRatingSelect('bad')}
+                  >
+                    😞 Bad Day
+                  </button>
+                </div>
+                <button 
+                  className="cancel-rating"
+                  onClick={() => setShowDailyRatingPopup(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
