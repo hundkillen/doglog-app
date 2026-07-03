@@ -412,7 +412,7 @@ struct DogDetailView: View {
             if daycareDays.contains(day) {
                 let daycare = Activity(
                     date: date,
-                    activityType: "test.daycare".localized,
+                    activityType: "test.daycare",
                     outcome: "okay",
                     notes: nil
                 )

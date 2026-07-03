@@ -306,7 +306,6 @@
 "forecast.factor.yesterday_many_bad" = "Flera utmanande aktiviteter igår – ta det lugnt idag";
 "forecast.factor.yesterday_many_good" = "Mycket bra aktivitetsdag igår – rid på den positiva vågen!";
 "forecast.factor.weekday_pattern" = "Din hund har vanligtvis %@ %@";
-"forecast.dr_elias_recommendationer" = "Dr. Barkleys rekommendationer";
 "forecast.dr_elias_recommendations" = "Dr. Barkleys rekommendationer";
 /* Forecast info popups */
 "forecast.info.historical" = "📊 Historiskt mönster\n\nBarkley har analyserat tidigare dagar som liknar idag (samma veckodag, liknande förutsättningar). \n\nDetta mönster är %d%% tillförlitligt. Det bygger på: %@";
@@ -761,6 +760,11 @@
 "insights.high_priority_desc" = "Hög: Bör testas först för störst effekt.";
 "insights.medium_priority_desc" = "Medel: Testa när högre prioriterade steg är på plats.";
 "insights.low_priority_desc" = "Låg: Bra som komplement när tid finns.";
+
+"insights.mood_trend_analysis" = "Humöranalys";
+"insights.behavior_insight" = "Beteendeinsikt";
+"chatgpt.professional_description" = "Få professionella hundbeteendeinsikter baserat på din data";
+"ui.sample_dog_name" = "Buddy";
 
 /* Lagged Patterns (day-after analysis) */
 "lagged.section_title" = "Dagen-efter-mönster";

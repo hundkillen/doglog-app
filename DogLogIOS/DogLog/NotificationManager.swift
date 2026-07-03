@@ -199,7 +199,7 @@ class NotificationManager: ObservableObject {
 
         do {
             try await UNUserNotificationCenter.current().add(request)
-            DogLogLogger.notifications.info("Scheduled daily morning forecast for \(dog.name ?? "dog", privacy: .public) at \(self.formatTime(morningForecastTime), privacy: .public)")
+            DogLogLogger.notifications.info("Scheduled daily morning forecast for \(dog.name ?? "dog", privacy: .public) at \(self.formatTime(self.morningForecastTime), privacy: .public)")
         } catch {
             DogLogLogger.notifications.error("Error scheduling morning forecast: \(error.localizedDescription, privacy: .public)")
         }

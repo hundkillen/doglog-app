@@ -24,6 +24,7 @@ final class ActivityCatalog {
 
     static let customIcon = "pawprint.fill"
     private static let migrationFlag = "migration_v2_activity_keys_done"
+    private static let testDaycareMigrationFlag = "migration_v3_test_daycare_key_done"
 
     /// Snapshot of definitions for synchronous lookups from views/models.
     /// Custom name is stored raw and default names resolve via `.localized`
@@ -45,6 +46,8 @@ final class ActivityCatalog {
     func displayName(forStoredType storedType: String) -> String {
         if let entry = byKey[storedType] { return entry.customName ?? storedType.localized }
         if storedType.hasPrefix("activity.") { return storedType.localized }
+        let localized = storedType.localized
+        if localized != storedType { return localized }
         return storedType
     }
 
@@ -133,6 +136,28 @@ final class ActivityCatalog {
 
                 try context.save()
                 defaults.set(true, forKey: Self.migrationFlag)
+            }
+
+            // One-shot: legacy test data stored "Doggy daycare" / "Hunddagis"
+            // as localized strings — normalize to the stable key.
+            if !defaults.bool(forKey: Self.testDaycareMigrationFlag) {
+                var localizedToKey: [String: String] = [:]
+                for language in ["en", "sv"] {
+                    let table = Self.localizedTable(for: language)
+                    if let localizedName = table["test.daycare"] {
+                        localizedToKey[localizedName] = "test.daycare"
+                    }
+                }
+                let activities = try context.fetch(FetchDescriptor<Activity>())
+                var changed = false
+                for activity in activities {
+                    if let key = localizedToKey[activity.activityType] {
+                        activity.activityType = key
+                        changed = true
+                    }
+                }
+                if changed { try context.save() }
+                defaults.set(true, forKey: Self.testDaycareMigrationFlag)
             }
 
             refresh(from: definitions)
