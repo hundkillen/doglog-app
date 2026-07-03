@@ -801,3 +801,36 @@
 "tutorial.lagged_patterns_description" = "DogLog upptäcker när gårdagens aktiviteter förutsäger morgondagens humör — till exempel hunddagis följt av en tuff dag. Se mönstren lokalt och under AI-insikter.";
 "tutorial.context_tags_title" = "Kontexttaggar";
 "tutorial.context_tags_description" = "Tagga saker som inte är aktiviteter men ändå spelar roll — åska, gäster, dålig sömn, löptid. Det hjälper appen att inte skylla på fel aktivitet när det blir en dålig dag.";
+
+/* Vet report PDF */
+"vet.report.title" = "Veterinärrapport — %@";
+"vet.report.period" = "Period: %@ – %@";
+"vet.report.dog_info" = "Hund: %@ · %@";
+"vet.report.age" = "Ålder: %@ år";
+"vet.report.summary" = "Sammanfattning";
+"vet.report.summary_line" = "Bra dagar: %d · Okej: %d · Dåliga: %d · Betygsatta dagar: %d";
+"vet.report.lagged_patterns" = "Dagen-efter-mönster";
+"vet.report.no_patterns" = "Inga tydliga dagen-efter-mönster för den här hunden ännu.";
+"vet.report.daily_log" = "Dagslogg";
+"vet.report.day_rating" = "Hela dagen: %@";
+"vet.report.activities" = "Aktiviteter: %@";
+"vet.report.context_tags" = "Kontext: %@";
+"vet.report.notes" = "Anteckningar: %@";
+"vet.report.footer" = "Genererad av DogLog · %@";
+"vet.report.export_pdf" = "Exportera veterinärrapport (PDF)";
+"vet.report.export_failed" = "Kunde inte skapa PDF-rapporten.";
+"vet.report.no_data_month" = "Inga aktiviteter eller dagbetyg loggade för den valda kalendermånaden.";
+"vet.report.generating" = "Förbereder veterinärrapport…";
+"vet.report.analysis" = "Klinisk analys";
+"vet.report.analysis_ai" = "Professionell AI-analys av Barkley (OpenAI)";
+"vet.report.analysis_local" = "Lokal mönsteranalys (ingen API-nyckel — endast på enheten)";
+"vet.report.mood_line" = "Helhetshumör denna månad: %@. Trend: %@. Förändring jämfört med tidigare i perioden: %d%%.";
+"vet.report.best_days" = "Starkaste veckodagar: %@.";
+"vet.report.challenging_days" = "Mest utmanande veckodagar: %@.";
+"vet.report.activity_pattern" = "%@ — %d%% framgång, cirka %dx per vecka";
+"vet.report.strengths" = "Styrkor: %@";
+"vet.report.concerns" = "Områden att bevaka: %@";
+"vet.report.ai_lagged_item" = "Dagen-efter-mönster: efter %@ → %@ (%@)";
+"vet.report.ai_recommendation" = "Rekommendation — %@: %@";
+"vet.report.local_fallback" = "Fortsätt logga dagliga betyg och aktiviteter för rikare analys.";
+"vet.report.daily_log_subtitle" = "Detaljerad dag-för-dag-bilaga som referens.";

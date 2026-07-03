@@ -30,6 +30,11 @@ struct DogDetailView: View {
     @State private var showTrainingWeekPrompt = false
     @State private var hasTrainingWeek = false
     @State private var needsTrainingWeekRegeneration = false
+    @State private var showingVetPDFShare = false
+    @State private var exportedVetPDFURL: URL?
+    @State private var showingVetExportAlert = false
+    @State private var vetExportAlertMessage = ""
+    @State private var isExportingVetPDF = false
     
     @ObservedObject private var chatGPTService = ChatGPTService.shared
     
@@ -238,6 +243,10 @@ struct DogDetailView: View {
                         Divider()
                     }
                     
+                    Button("vet.report.export_pdf".localized) {
+                        exportVetReportPDF()
+                    }
+
                     Button("dog.edit_dog".localized) {
                         showingEditDog = true
                     }
@@ -255,6 +264,32 @@ struct DogDetailView: View {
                     Image(systemName: "ellipsis.circle")
                 }
             )
+        }
+        .overlay {
+            if isExportingVetPDF {
+                ZStack {
+                    Color.black.opacity(0.25).ignoresSafeArea()
+                    VStack(spacing: 12) {
+                        ProgressView()
+                        Text("vet.report.generating".localized)
+                            .font(.subheadline)
+                            .foregroundColor(.primary)
+                    }
+                    .padding(24)
+                    .background(.regularMaterial)
+                    .cornerRadius(12)
+                }
+            }
+        }
+        .sheet(isPresented: $showingVetPDFShare) {
+            if let url = exportedVetPDFURL {
+                ActivityView(activityItems: [url])
+            }
+        }
+        .alert("vet.report.export_failed".localized, isPresented: $showingVetExportAlert) {
+            Button("common.ok".localized, role: .cancel) {}
+        } message: {
+            Text(vetExportAlertMessage)
         }
         .sheet(isPresented: $showingEditDog) {
             AddEditDogView(dog: dog)
@@ -361,6 +396,30 @@ struct DogDetailView: View {
         }
     }
     
+    private func exportVetReportPDF() {
+        guard !isExportingVetPDF else { return }
+        isExportingVetPDF = true
+
+        Task {
+            let narrative = await VetReportPDFExporter.prepareNarrative(dog: dog, month: currentMonth)
+            await MainActor.run {
+                isExportingVetPDF = false
+                do {
+                    exportedVetPDFURL = try VetReportPDFExporter.export(
+                        dog: dog, month: currentMonth, narrative: narrative
+                    )
+                    showingVetPDFShare = true
+                } catch VetReportPDFExporter.ExportError.noData {
+                    vetExportAlertMessage = "vet.report.no_data_month".localized
+                    showingVetExportAlert = true
+                } catch {
+                    vetExportAlertMessage = "vet.report.export_failed".localized
+                    showingVetExportAlert = true
+                }
+            }
+        }
+    }
+
     private func generateTestData() {
         // Store stable keys, matching what the activity picker now saves.
         let activities = ActivityCatalog.defaultSeed.map { $0.key }

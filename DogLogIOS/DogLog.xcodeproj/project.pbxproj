@@ -37,6 +37,7 @@
 		AA00000000000000000000A1 /* AIPatternAnalyzerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A3 /* AIPatternAnalyzerTests.swift */; };
 		AB00000000000000000000B1 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000000000000000000B2 /* KeychainHelper.swift */; };
 		AC00000000000000000000C1 /* ActivityCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000000000000000000C2 /* ActivityCatalog.swift */; };
+		AD00000000000000000000D1 /* VetReportPDFExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00000000000000000000D2 /* VetReportPDFExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		AA00000000000000000000A3 /* AIPatternAnalyzerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPatternAnalyzerTests.swift; sourceTree = "<group>"; };
 		AB00000000000000000000B2 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		AC00000000000000000000C2 /* ActivityCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCatalog.swift; sourceTree = "<group>"; };
+		AD00000000000000000000D2 /* VetReportPDFExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetReportPDFExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				AC00000000000000000000C2 /* ActivityCatalog.swift */,
 				64703B112E4F597300EAC2B1 /* AIPatternAnalyzer.swift */,
 				B8C9D0E1F2A3B4C5D6E7F8A9 /* LaggedPatternAnalyzer.swift */,
+				AD00000000000000000000D2 /* VetReportPDFExporter.swift */,
 				1538ACEA6F4740159F49D1C4 /* PredictiveAnalyzer.swift */,
 				11BDE9804FF245F4A922D582 /* NotificationManager.swift */,
 				3F4E5D6C7B8A9E1F2A3B4C5D /* LocalizationManager.swift */,
@@ -288,6 +291,7 @@
 				64703B142E4F609500EAC2B1 /* ChatGPTService.swift in Sources */,
 				AB00000000000000000000B1 /* KeychainHelper.swift in Sources */,
 				AC00000000000000000000C1 /* ActivityCatalog.swift in Sources */,
+				AD00000000000000000000D1 /* VetReportPDFExporter.swift in Sources */,
 				2A1A1A1A1A1A1A1A1A1A1A23 /* Models.swift in Sources */,
 				2A1A1A1A1A1A1A1A1A1A1A2B /* DogDetailView.swift in Sources */,
 				2A1A1A1A1A1A1A1A1A1A1A1A /* DogLogApp.swift in Sources */,
