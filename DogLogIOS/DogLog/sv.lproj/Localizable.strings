@@ -1,0 +1,799 @@
+/* Exercise Library */
+"exercise.library.title" = "Övningsbibliotek";
+"exercise.library.subtitle" = "Bläddra, lägg till och favoritmarkera övningar";
+"exercise.library.search" = "Sök övningar";
+"exercise.library.empty" = "Inga övningar hittades";
+"exercise.library.favorites" = "Favoriter";
+"exercise.library.all" = "Alla övningar";
+"exercise.library.add" = "Lägg till övning";
+"exercise.library.fetch" = "Skapa AI-genererat övningsbibliotek";
+"exercise.library.importing" = "Importerar övningar...";
+"exercise.library.choose" = "Välj övning";
+
+/* Exercise Fields */
+"exercise.field.basic" = "Grunduppgifter";
+"exercise.field.name" = "Namn";
+"exercise.field.category" = "Kategori";
+"exercise.field.difficulty" = "Svårighetsgrad";
+"exercise.field.equipment" = "Utrustning";
+"exercise.field.instructions" = "Instruktioner";
+"exercise.field.tags" = "Taggar";
+"exercise.field.tags_placeholder" = "Skriv taggar, separerade med kommatecken";
+"exercise.field.favorite" = "Favorit";
+/* Common */
+"common.done" = "Klar";
+"common.cancel" = "Avbryt";
+"common.save" = "Spara";
+"common.delete" = "Ta bort";
+"common.edit" = "Redigera";
+"common.add" = "Lägg till";
+"common.ok" = "OK";
+"common.yes" = "Ja";
+"common.no" = "Nej";
+"common.loading" = "Laddar...";
+"common.error" = "Fel";
+"common.error.unknown" = "Okänt fel";
+"common.time" = "Tid";
+"common.date" = "Datum";
+
+/* Language Settings */
+"language.title" = "Språk";
+"language.choose" = "Välj språk";
+"language.system" = "Systemspråk";
+"language.system.description" = "Följer telefonens språkinställning";
+"language.footer" = "Appen kommer att använda det valda språket för all text, inklusive AI-analys.";
+"settings.language" = "Språk";
+
+/* Main Navigation */
+"main.title" = "DogLog";
+"main.dogs" = "Hundar";
+"main.add_dog" = "Lägg till hund";
+
+/* Dog Profile */
+"dog.name" = "Namn";
+"dog.breed" = "Ras";
+"dog.gender" = "Kön";
+"dog.birth_date" = "Födelsedatum";
+"dog.age_years" = "%d år gammal";
+"dog.unknown" = "Okänd";
+
+/* Activities */
+"activity.walk" = "Promenad";
+"activity.training" = "Träning";
+"activity.playtime" = "Lektid";
+"activity.feeding" = "Matning";
+"activity.grooming" = "Pälsvård";
+"activity.vet_visit" = "Veterinärbesök";
+"activity.socialization" = "Socialisering";
+"activity.rest" = "Vila";
+"activity.exercise" = "Motion";
+"activity.bath" = "Bad";
+
+/* Activity Outcomes */
+"outcome.good" = "Bra";
+"outcome.okay" = "Okej";
+"outcome.bad" = "Dåligt";
+
+/* Daily Ratings */
+"rating.good_day" = "Bra dag";
+"rating.okay_day" = "Okej dag";
+"rating.bad_day" = "Dålig dag";
+"rating.rate_day" = "Betygsätt dagen";
+"rating.how_was_day" = "Hur var dagen sammantaget?";
+
+/* AI Insights */
+"ai.title" = "🧠 AI-insikter";
+"ai.analyzing" = "Analyserar beteendemönster...";
+"ai.confidence" = "AI-säkerhet";
+"ai.mood_trend" = "Allmänt humör";
+"ai.activity_patterns" = "Aktivitetsmönster";
+"ai.weekly_patterns" = "Veckomönster";
+"ai.key_insights" = "Viktiga insikter";
+"ai.recommendations" = "Rekommendationer";
+"ai.current" = "Nuvarande";
+"ai.trend" = "Trend";
+"ai.improving" = "Förbättras";
+"ai.declining" = "Försämras";
+"ai.stable" = "Stabilt";
+"ai.change" = "förändring";
+"ai.best_days" = "Bästa dagar";
+"ai.avg_activities" = "Snitt aktiviteter";
+"ai.per_day" = "/dag";
+"ai.success_rate" = "framgångsgrad";
+"ai.frequency" = "frekvens";
+"ai.per_week" = "/vecka";
+"ai.high_confidence" = "Hög säkerhet - baserat på omfattande data";
+"ai.moderate_confidence" = "Måttlig säkerhet - mer data förbättrar noggrannheten";
+"ai.low_confidence" = "Låg säkerhet - fortsätt logga för bättre insikter";
+
+/* AI Source Selection */
+"ai.source.title" = "AI-analyskälla";
+"ai.source.local" = "Lokal AI";
+"ai.source.chatgpt" = "ChatGPT AI";
+"ai.source.local.description" = "Gratis • Omedelbart";
+"ai.source.chatgpt.description" = "Använder tokens • Expert";
+"ai.source.local.full" = "Lokal AI-analys";
+"ai.source.local.always_available" = "Gratis • Alltid tillgänglig";
+"ai.source.local.explanation" = "Lokal analys ger omedelbar mönsterigenkänning från din loggade data. För detaljerade träningsplaner och rasspecifika råd, prova ChatGPT AI.";
+
+/* ChatGPT Integration */
+"chatgpt.title" = "AI Expert-analys (Barkley)";
+"chatgpt.setup" = "Konfigurera";
+"chatgpt.professional_insights" = "Professionella AI-insikter tillgängliga";
+"chatgpt.description" = "Få expertanalys av hundbeteende med ChatGPT. Lägg till din OpenAI API-nyckel för att låsa upp professionella insikter och rekommendationer.";
+"chatgpt.add_api_key" = "Lägg till API-nyckel";
+"chatgpt.analysis_failed" = "Analys misslyckades";
+"chatgpt.try_again" = "Försök igen";
+"chatgpt.previous_analysis" = "Tidigare analys tillgänglig";
+"chatgpt.generate_analysis" = "Generera analys";
+"chatgpt.getting_analysis" = "Hämtar professionell analys...";
+"chatgpt.analysis_complete" = "Analys klar • Cachad för att spara tokens";
+"chatgpt.professional_summary" = "Professionell sammanfattning";
+"chatgpt.breed_analysis" = "Rasspecifik analys";
+"chatgpt.breed_traits" = "Rasegenskaper:";
+"chatgpt.common_issues" = "Vanliga rasproblem:";
+"chatgpt.age_development" = "Ålder & utveckling";
+"chatgpt.stage" = "Stadium";
+"chatgpt.behavior_assessment" = "Beteendebedömning";
+"chatgpt.trend" = "Trend";
+"chatgpt.strengths" = "Styrkor:";
+"chatgpt.areas_for_improvement" = "Förbättringsområden:";
+"chatgpt.training_recommendations" = "Träningsrekommendationer";
+"chatgpt.issue" = "Problem";
+"chatgpt.duration" = "Längd";
+"chatgpt.frequency" = "Frekvens";
+"chatgpt.steps" = "Steg:";
+"chatgpt.key_insights" = "Viktiga professionella insikter";
+"chatgpt.generated" = "Genererad";
+"chatgpt.api_test_result" = "API-testresultat";
+"chatgpt.api_test_success" = "API-anslutningstest lyckades! Din nyckel fungerar korrekt.";
+"chatgpt.api_test_failed" = "API-anslutningstest misslyckades. Kontrollera din nyckel och försök igen.";
+"chatgpt.api_test_error" = "API-testfel: %@";
+"chatgpt.settings_saved" = "Inställningar sparade";
+"chatgpt.api_key_section" = "ChatGPT API-nyckel";
+"chatgpt.enter_api_key" = "Ange din OpenAI API-nyckel för att aktivera AI-drivna insikter";
+"chatgpt.api_key_configured" = "API-nyckel konfigurerad";
+"chatgpt.api_configuration" = "API-konfiguration";
+"chatgpt.how_to_get_key" = "Så får du din API-nyckel:";
+"chatgpt.step_1" = "1. Besök platform.openai.com";
+"chatgpt.step_2" = "2. Logga in eller skapa ett konto";
+"chatgpt.step_3" = "3. Gå till API Keys-sektionen";
+"chatgpt.step_4" = "4. Skapa en ny hemlig nyckel";
+"chatgpt.step_5" = "5. Kopiera och klistra in den ovan";
+"chatgpt.security_note" = "⚠️ Din API-nyckel lagras säkert på din enhet och delas aldrig.";
+"chatgpt.getting_started" = "Kom igång";
+"chatgpt.test_api_key" = "Testa API-nyckel";
+"chatgpt.test_connection" = "Testa anslutning";
+"chatgpt.token_usage" = "Token-användning";
+"chatgpt.token_description" = "ChatGPT-analys använder cirka 1,000-1,500 tokens per förfrågan. Förfrågningar cachas för att minimera användning - du debiteras endast när ny data analyseras.";
+"chatgpt.cache_note" = "Cache ogiltigförklaras automatiskt när du lägger till nya aktiviteter eller betyg.";
+"chatgpt.cost_information" = "Kostnadsinformation";
+"chatgpt.settings_title" = "ChatGPT-inställningar";
+"chatgpt.api_key_saved" = "Din ChatGPT API-nyckel har sparats framgångsrikt.";
+
+/* Training Week */
+"training.week.title" = "Föreslagen träningsvecka";
+"training.week.create" = "Skapa träningsplan";
+"training.week.view" = "Visa träningsvecka";
+"training.week.ready" = "📅 Träningsvecka redo";
+"training.week.description" = "Visa din personliga 7-dagars träningsplan";
+"training.week.prompt.title" = "Skapa träningsplan";
+"training.week.prompt.description" = "Barkley kan skapa en personlig 7-dagars träningsvecka för %@";
+"training.week.maybe_later" = "Kanske senare";
+"training.week.create_week" = "Skapa träningsvecka";
+"training.week.regenerate" = "Regenerera träningsvecka";
+"training.week.daily_schedule" = "📅 Dagsschema";
+"training.week.add_activity" = "Lägg till aktivitet";
+"training.week.export_calendar" = "Exportera till kalender";
+"training.week.export_success" = "Kalenderexport lyckades";
+"training.week.export_message" = "'%@' har lagts till i din kalender för %@ kl %@";
+"training.week.already_exists" = "Finns redan i kalender";
+"training.week.already_exists_message" = "Denna aktivitet är redan schemalagd i din kalender för %@ kl %@";
+"training.week.calendar_access_required" = "Kalendertillgång krävs";
+"training.week.calendar_access_message" = "Tillåt kalendertillgång i Inställningar för att exportera träningsaktiviteter";
+"training.week.export_failed" = "Export misslyckades";
+"training.week.export_failed_message" = "Misslyckades att lägga till aktivitet i kalender: %@";
+"training.week.export_entire_week" = "Exportera hela veckan till kalender";
+"training.week.week_export_complete" = "Exporterade %d aktiviteter till kalender framgångsrikt!";
+"training.week.export_partial" = "Delvis export";
+"training.week.week_export_partial_message" = "Exporterade %d aktiviteter framgångsrikt, %d misslyckades.";
+"training.week.export_pdf" = "Exportera PDF";
+"training.week.rest_day" = "Vilodag";
+"training.week.rest_day_detail" = "Planerad vilodag för återhämtning. Fokusera på lugn miljö, trygghet och korta mysstunder.";
+"training.week.progress_label" = "%d%% klart";
+"training.week.status.fetching_exercises" = "Letar efter passande övningar...";
+"training.week.status.planning_monday" = "Fyller i måndag...";
+"training.week.status.planning_tuesday" = "Fyller i tisdag...";
+"training.week.status.planning_wednesday" = "Fyller i onsdag...";
+"training.week.status.planning_thursday" = "Fyller i torsdag...";
+"training.week.status.planning_friday" = "Fyller i fredag...";
+"training.week.status.planning_weekend" = "Fyller i helgen...";
+
+/* Morning Forecast */
+"forecast.title" = "Morgonprognos";
+"forecast.description" = "Förutsäg morgondagens beteendemönster";
+"forecast.for_tomorrow" = "Prognos för imorgon";
+"forecast.mood_prediction" = "Humörprognos";
+"forecast.recommended_activities" = "Rekommenderade aktiviteter";
+"forecast.activity_time" = "Tid";
+"forecast.activity_duration" = "Längd";
+"forecast.activity_focus" = "Fokus";
+"forecast.activity_goal" = "Mål";
+"forecast.weather_note" = "Vädernotering";
+"forecast.tips" = "Tips för dagen";
+
+/* Calendar Integration */
+"calendar.title" = "Kalender";
+"calendar.today" = "Idag";
+"calendar.daily_log" = "Daglig logg";
+"calendar.activities_for" = "Aktiviteter för %@";
+"calendar.daily_notes" = "Anteckningar för dagen";
+"calendar.additional_notes" = "Ytterligare anteckningar om dagen...";
+
+/* Settings */
+"settings.title" = "Inställningar";
+"settings.chatgpt" = "ChatGPT";
+"settings.api_key" = "API-nyckel";
+"settings.api_key_placeholder" = "sk-...";
+"settings.api_key_description" = "Din OpenAI API-nyckel för ChatGPT-analys";
+"settings.test_connection" = "Testa anslutning";
+"settings.connection_success" = "Anslutning lyckades";
+"settings.connection_failed" = "Anslutning misslyckades";
+
+/* Tutorial */
+"tutorial.welcome" = "Välkommen till DogLog";
+"tutorial.track_activities" = "Spåra aktiviteter";
+"tutorial.track_description" = "Logga dagliga aktiviteter som promenader, träning och lek för att bygga en komplett bild av din hunds beteende.";
+"tutorial.ai_insights" = "AI-insikter";
+"tutorial.ai_description" = "Upptäck mönster i din hunds beteende med avancerad AI-analys som ger personliga rekommendationer.";
+"tutorial.training_week" = "Träningsvecka";
+"tutorial.training_description" = "Få en personlig 7-dagars träningsplan skapad av Barkley baserat på din hunds specifika behov och beteende.";
+"tutorial.calendar" = "Kalenderintegration";
+"tutorial.calendar_description" = "Exportera träningsaktiviteter till din kalender och håll koll på din hunds schema.";
+"tutorial.get_started" = "Kom igång";
+"tutorial.skip" = "Hoppa över";
+
+/* Error Messages */
+"error.no_data" = "Ingen data tillgänglig";
+"error.loading_failed" = "Laddning misslyckades";
+"error.save_failed" = "Sparning misslyckades";
+"error.delete_failed" = "Borttagning misslyckades";
+"error.network_error" = "Nätverksfel";
+"error.invalid_api_key" = "Ogiltig API-nyckel";
+"error.api_limit_exceeded" = "API-gräns överskriden";
+
+/* Test Data */
+"test.generate_data" = "🎲 Generera testdata";
+"test.data_generated" = "Testdata genererat";
+"test.daycare" = "Hunddagis";
+"test.activity_note" = "Testanteckning för %@";
+"test.daily_note" = "Testdag %d - Slumpmässiga dagliga anteckningar för %@";
+
+/* Time Ranges */
+"time.all_time" = "Hela tiden";
+"time.this_month" = "Denna månad";
+
+/* Priorities */
+"priority.high" = "HÖG";
+"priority.medium" = "MEDEL";
+"priority.low" = "LÅG";
+
+/* Dr. Elias */
+"dr.dr_elias" = "Dr. Barkley";
+"dr.analyzing" = "Analyserar...";
+"dr.ai_expert" = "AI-expert";
+"dr.ai_dog_behaviorist" = "AI-hundbeteendist";
+"dr.expert_analysis_complete" = "Expertanalys klar";
+
+/* Morning Forecast */
+"forecast.building_profile" = "Bygger din profil";
+"forecast.need_more_data" = "Jag behöver mer data om %@ för att generera noggranna prognoser.";
+"forecast.keep_logging" = "Fortsätt logga dagliga aktiviteter och betyg i minst 3-5 dagar för att låsa upp morgonprognoser!";
+"forecast.morning_forecast" = "🌅 Morgonprognos";
+"forecast.confidence" = "säkerhet";
+"forecast.risk_level" = "Risknivå: %@";
+"forecast.key_factors" = "Nyckelfaktorer";
+/* Forecast Factors Localization */
+"forecast.factor.historical" = "Historiskt mönster";
+"forecast.factor.historical_desc" = "Baserat på %d liknande dagar tidigare";
+"forecast.factor.recent_trend" = "Senaste trend";
+"forecast.factor.recent_trend_up" = "Det har gått bättre på sistone";
+"forecast.factor.recent_trend_down" = "Nyligen uppmärksammade utmaningar";
+"forecast.factor.yesterday" = "Gårdagens effekt";
+"forecast.factor.yesterday_neutral" = "Ingen större påverkan från igår";
+"forecast.factor.yesterday_positive" = "Gårdagen var stark – positivt momentum!";
+"forecast.factor.yesterday_negative" = "Gårdagen var utmanande – kan påverka dagens humör";
+"forecast.factor.yesterday_many_bad" = "Flera utmanande aktiviteter igår – ta det lugnt idag";
+"forecast.factor.yesterday_many_good" = "Mycket bra aktivitetsdag igår – rid på den positiva vågen!";
+"forecast.factor.weekday_pattern" = "Din hund har vanligtvis %@ %@";
+"forecast.dr_elias_recommendationer" = "Dr. Barkleys rekommendationer";
+"forecast.dr_elias_recommendations" = "Dr. Barkleys rekommendationer";
+/* Forecast info popups */
+"forecast.info.historical" = "📊 Historiskt mönster\n\nBarkley har analyserat tidigare dagar som liknar idag (samma veckodag, liknande förutsättningar). \n\nDetta mönster är %d%% tillförlitligt. Det bygger på: %@";
+"forecast.info.recent" = "📈 Senaste trend\n\nBarkley tittar på de senaste 1–2 veckorna för att hitta trender i din hunds beteende. \n\nDenna trend är %d%% tydlig och påverkar dagens prognos. Det bygger på: %@";
+"forecast.info.weekday" = "📅 Veckodagsmönster\n\nBarkley har upptäckt återkommande mönster för denna veckodag. \n\nDetta mönster är %d%% konsekvent och relaterar ofta till rutiner, aktivitetsnivåer eller sociala faktorer. \n\nDetalj: %@";
+"forecast.info.generic" = "🔍 %@\n\nDetta har %d%% tillförlitlighet baserat på din hunds historiska data och beteendemönster. \n\nDetalj: %@";
+"forecast.analysis_confidence" = "Analyssäkerhet";
+"forecast.todays_plan" = "Dagens personliga plan";
+/* Daily plan localized items */
+"forecast.for_name" = "för %@";
+"forecast.daily_goal" = "Dagens mål";
+"forecast.time.midday" = "mitt på dagen";
+"forecast.tag.data_insight" = "data";
+"forecast.plan.energy_challenge.title" = "Energikick";
+"forecast.plan.energy_challenge.desc" = "Perfekt dag för nya övningar eller längre äventyr";
+"forecast.plan.social_time.title" = "Social tid";
+"forecast.plan.social_time.desc" = "Bra tillfälle för hundpark eller att träffa vänner";
+"forecast.plan.regular_exercise.title" = "Regelbunden motion";
+"forecast.plan.regular_exercise.desc" = "Håll dig till favoritstråk och bekanta aktiviteter";
+"forecast.plan.bonding_time.title" = "Knyt band";
+"forecast.plan.bonding_time.desc" = "Passar för mjuk träning och kvalitetstid";
+"forecast.plan.gentle_start.title" = "Mjuk start";
+"forecast.plan.gentle_start.desc" = "Behåll bekanta aktiviteter med låg press";
+"forecast.plan.comfort_zone.title" = "Komfortzon";
+"forecast.plan.comfort_zone.desc" = "Håll rutinen – favoritgodis och trygga platser";
+"forecast.plan.extra_support.title" = "Extra stöd";
+"forecast.plan.extra_support.desc" = "Var nära och undvik stressande situationer";
+"forecast.plan.patience_love.title" = "Tålamod & värme";
+"forecast.plan.patience_love.desc" = "Fokus på trygghet, korta aktiviteter, mycket beröm";
+"forecast.plan.gentle_care.title" = "Varsam omsorg";
+"forecast.plan.gentle_care.desc" = "Minimera stress och maximera trygghet";
+"forecast.plan.quiet_time.title" = "Lugnt kvällstest";
+"forecast.plan.quiet_time.desc" = "Lugn miljö, favoritfilt och mjuk musik";
+"forecast.plan.combat_sunday_blues.title" = "Söndagspepp";
+"forecast.plan.combat_sunday_blues.desc" = "Extra engagerande aktiviteter för typiska söndagsutmaningar";
+"forecast.plan.trust_pattern.title" = "Lita på mönstret";
+"forecast.plan.trust_pattern.desc" = "Hög säkerhet – följ planen med tillförsikt";
+"forecast.plan.stay_flexible.title" = "Var flexibel";
+"forecast.plan.stay_flexible.desc" = "Lägre säkerhet – anpassa planen efter dagsformen";
+/* Forecast messages and labels */
+"forecast.greeting.morning" = "God morgon!";
+"forecast.greeting.weekend" = "Trevlig helg!";
+"forecast.key_insight" = "Nyckelinsikt:";
+"forecast.msg.excellent" = "%@ har en fantastisk dag framför sig! %@ Perfekt för nya utmaningar och äventyr.";
+"forecast.msg.good" = "%@ har en bra dag framför sig! %@ Bra tillfälle för träningspass och positiva aktiviteter.";
+"forecast.msg.okay" = "%@ får troligen en genomsnittlig dag. %@ Håll rutinerna bekanta och aktiviteterna måttliga.";
+"forecast.msg.challenging" = "%@ kan stöta på utmaningar idag. %@ Ha extra tålamod och kortare aktiviteter.";
+"forecast.msg.difficult" = "%@ kan behöva extra stöd idag. %@ Satsa på lugna, positiva aktiviteter.";
+"forecast.time.morning" = "morgon";
+"forecast.time.afternoon" = "eftermiddag";
+"forecast.time.all_day" = "hela dagen";
+"forecast.reco.try_new.title" = "Prova något nytt";
+"forecast.reco.try_new.desc" = "Perfekt dag för nya kommandon eller längre äventyr!";
+"forecast.reco.stick_routine.title" = "Håll dig till rutinen";
+"forecast.reco.stick_routine.desc" = "Behåll bekanta och positiva aktiviteter för stabilitet.";
+"forecast.reco.extra_patience.title" = "Extra tålamod";
+"forecast.reco.extra_patience.desc" = "Ta det lugnt och ge extra beröm och godis idag.";
+"forecast.reco.minimal_stress.title" = "Minimera stress";
+"forecast.reco.minimal_stress.desc" = "Fokusera på lugna aktiviteter som mjuka promenader och stilla stunder.";
+"forecast.reco.recovery_mode.title" = "Återhämtningsläge";
+"forecast.reco.recovery_mode.desc" = "Ge extra trygghet och undvik utmanande aktiviteter.";
+"forecast.reco.break_pattern.title" = "Bryt mönstret";
+"forecast.reco.break_pattern.desc" = "Testa annan rutin eller miljö för att nollställa läget.";
+"forecast.start_logging" = "Börja logga idag";
+
+/* Risk Levels */
+"risk.excellent_day" = "Utmärkt dag";
+"risk.good_day" = "Bra dag";
+"risk.okay_day" = "Okej dag";
+"risk.challenging_day" = "Utmanande dag";
+"risk.difficult_day" = "Svår dag";
+"risk.low" = "Låg risk";
+"risk.moderate" = "Måttlig risk";
+"risk.high" = "Hög risk";
+"risk.critical" = "Kritisk risk";
+
+/* Training Week Additional */
+"training.analyzing_creating" = "Analyserar beteendemönster och skapar träningsplan...";
+"training.creating_week" = "Skapar din perfekta träningsvecka...";
+"training.create_plan" = "Skapa träningsplan";
+"training.generate_week" = "Generera träningsvecka";
+"training.export_calendar" = "Exportera till kalender";
+"training.add_calendar" = "Lägg till i kalender";
+"training.add_activity" = "Lägg till aktivitet";
+"training.time" = "Tid";
+"training.activity" = "Aktivitet";
+"training.duration" = "Längd";
+"training.focus" = "Fokus";
+"training.goal" = "Mål";
+"training.instructions" = "Instruktioner";
+"training.week.ai_analysis_plan" = "🧠 AI-analys + träningsplan";
+"training.week.dr_elias_description" = "Barkley analyserar %@:s beteendemönster och skapar en personlig 7-dagars träningsplan";
+"training.week.generate_week" = "Generera träningsvecka";
+"training.week.activities_count" = "%d aktiviteter";
+"training.week.export_confirm" = "Exportera '%@' till din kalender?";
+"training.week.default_time" = "09:00";
+"training.week.new_activity" = "Ny aktivitet";
+"training.week.default_duration" = "15 minuter";
+"training.week.default_focus" = "Träningsfokus";
+"training.week.default_instructions" = "Lägg till dina träningsinstruktioner här";
+"training.week.default_goal" = "Träningsmål";
+"training.week.duration_label" = "Längd: %@";
+"training.week.focus_label" = "Fokus: %@";
+"training.week.goal_label" = "Mål: %@";
+"training.week.instructions_label" = "Instruktioner: %@";
+"training.week.calendar_access_denied" = "Kalenderåtkomst nekad";
+"training.week.event_already_exists" = "Händelse finns redan i kalendern";
+"training.week.created_by" = "Skapad av DogLog träningsvecka";
+
+/* AI Insights Additional */
+"ai.time_range" = "Tidsintervall";
+"ai.overall_mood" = "Allmänt humör";
+"ai.improving_trend" = "Förbättras ↗";
+"ai.declining_trend" = "Försämras ↘";
+"ai.stable_trend" = "Stabilt →";
+"ai.professional_insights_available" = "Professionella AI-insikter tillgängliga";
+"ai.getting_professional_analysis" = "Hämtar professionell analys...";
+
+/* General UI */
+"ui.unknown_name" = "Okänt namn";
+"ui.learn_doglog" = "Tryck för att lära dig använda DogLog";
+
+/* Add/Edit Dog */
+"dog.basic_information" = "Grundläggande information";
+"dog.dog_name" = "Hundnamn";
+"dog.breed" = "Ras";
+"dog.date_of_birth" = "Födelsedatum";
+"dog.gender" = "Kön";
+"dog.male" = "Hane";
+"dog.female" = "Tik";
+"dog.photo" = "Foto";
+"dog.add_photo" = "Lägg till foto";
+"dog.change_photo" = "Ändra foto";
+"dog.profile_photo" = "Profilfoto";
+"dog.remove_photo" = "Ta bort foto";
+"dog.notes" = "Anteckningar";
+"dog.additional_notes" = "Ytterligare anteckningar...";
+"dog.edit_dog" = "Redigera hund";
+"dog.add_dog" = "Lägg till hund";
+"dog.delete_dog" = "Ta bort hund";
+"dog.delete_confirmation" = "Är du säker på att du vill ta bort %@? Denna åtgärd kan inte ångras.";
+
+/* Activities */
+"activity.activities" = "Aktiviteter";
+"activity.add_activity" = "Lägg till aktivitet";
+"activity.quick_add" = "Snabbtillägg";
+"activity.custom_activities" = "Anpassade aktiviteter";
+"activity.custom_activity" = "Anpassad aktivitet";
+"activity.enter_activity_name" = "Ange aktivitetsnamn";
+"activity.activity_name" = "Aktivitetsnamn";
+"activity.notes_about_activity" = "Anteckningar om denna aktivitet...";
+"activity.edit_activity" = "Redigera aktivitet";
+"activity.delete_activity" = "Ta bort aktivitet";
+"activity.enter_new_name" = "Ange nytt namn för aktiviteten";
+"activity.delete_activity_confirmation" = "Ta bort '%@'?";
+"activity.activities_for" = "Aktiviteter för %@";
+
+/* Daily Activity */
+"daily.daily_log" = "Daglig logg";
+"daily.daily_notes" = "Dagliga anteckningar";
+"daily.additional_notes" = "Ytterligare anteckningar om dagen...";
+"daily.activities_for_dog" = "Aktiviteter för %@";
+
+/* Navigation */
+"nav.previous" = "Föregående";
+"nav.next" = "Nästa";
+"nav.get_started" = "Kom igång!";
+"nav.skip" = "Hoppa över";
+"nav.how_to_use" = "Hur man använder DogLog";
+
+/* Tutorial */
+"tutorial.welcome_title" = "Välkommen till DogLog! 🐕";
+"tutorial.welcome_description" = "Spåra din hunds dagliga aktiviteter och beteendemönster med lätthet.";
+"tutorial.add_dog_title" = "Lägg till din hund 📝";
+"tutorial.add_dog_description" = "Börja med att lägga till din hunds information med + knappen. Inkludera namn, ras, ålder och ett foto!";
+"tutorial.daily_activities_title" = "Dagliga aktiviteter 📅";
+"tutorial.daily_activities_description" = "Tryck på vilken dag som helst i kalendern för att logga promenader, träning, lek med mera. Varje aktivitet har en ikon — betygsätt hur den gick!";
+"tutorial.rate_days_title" = "Betygsätt dina dagar 😊";
+"tutorial.rate_days_description" = "Betygsätt varje dag som Bra, Okej eller Dålig för att spåra övergripande mönster. Lägg till dagliga anteckningar för att komma ihåg speciella stunder!";
+"tutorial.test_data_title" = "Testdata 🎲";
+"tutorial.test_data_description" = "Använd funktionen Generera testdata för att se hur appen fungerar med exempelaktiviteter och betyg.";
+"tutorial.ready_title" = "Redo att börja! 🚀";
+"tutorial.ready_description" = "Du är redo! Lägg till din första hund och börja spåra deras dagliga äventyr. Din data hjälper till att bygga bättre rutiner!";
+"tutorial.demo_dog_name" = "🐕 Prova DogLog!";
+"tutorial.demo_dog_description" = "Tryck för att lära dig hur man använder DogLog";
+"tutorial.ai_sources_title" = "AI‑källor";
+"tutorial.ai_sources_description" = "Välj mellan Lokal AI (gratis, direkt) och ChatGPT AI (expert). Appen minns ditt val. ChatGPT används också för att skapa din träningsvecka.";
+"tutorial.training_week_title" = "Perfekt träningsvecka";
+"tutorial.training_week_description" = "Barkley skapar en 7‑dagars plan med 0–5 övningar/dag och vilodagar. Du kan redigera tider/instruktioner och exportera till kalender/PDF.";
+"tutorial.morning_forecast_title" = "Morgonprognos";
+"tutorial.morning_forecast_description" = "Få en daglig bedömning av läget och personliga rekommendationer. Välj tid i Notiser och få förhandsvisning i inställningarna.";
+"tutorial.exercise_library_title" = "Övningsbibliotek";
+"tutorial.exercise_library_description" = "Bläddra och favoritmarkera övningar, lägg till AI-genererade övningar och använd dem när du redigerar träningsveckan via ‘Välj övning’.";
+"tutorial.regeneration_title" = "Ny data → förnya";
+"tutorial.regeneration_description" = "När du loggar nya aktiviteter/betyg i kalendern frågar appen om du vill förnya träningsveckan – dina egna justeringar i veckan ligger kvar.";
+"tutorial.tutorial_label" = "TUTORIAL";
+
+/* Insights */
+"insights.ai_insights" = "🧠 AI-insikter";
+"insights.discover_patterns" = "Upptäck mönster i din hunds beteende";
+"insights.overall_mood" = "Allmänt humör";
+"insights.current" = "Nuvarande: %@";
+"insights.trend" = "Trend: %@";
+"insights.activity_patterns" = "Aktivitetsmönster";
+"insights.weekly_patterns" = "Veckomönster";
+"insights.best_days" = "Bästa dagar";
+"insights.avg_activities" = "Snitt aktiviteter";
+"insights.per_day" = "/dag";
+"insights.key_insights" = "Viktiga insikter";
+"insights.favorite_activity" = "Favoritaktivitet";
+"insights.favorite_activity_desc" = "%@ är din hunds vanligaste aktivitet med en framgångsgrad på %d%%.";
+"insights.great_week" = "Bra vecka!";
+"insights.great_week_desc" = "Din hund hade %d bra dagar denna vecka. Fortsätt med den fina rutinen!";
+"insights.high_success_activity" = "Aktivitet med hög framgång";
+"insights.high_success_activity_desc" = "%@ går oftast bra – överväg att göra det oftare.";
+"insights.boost_mood_activities" = "Stärk humöret";
+"insights.boost_mood_activities_desc" = "Öka aktiviteter som brukar gå bra för att förbättra helhetsläget.";
+"insights.improve_activity" = "Förbättra %@";
+"insights.improve_activity_desc" = "Dela upp %@ i mindre steg eller testa andra tillvägagångssätt.";
+"insights.increase_exercise" = "Öka motion";
+"insights.increase_exercise_desc" = "Regelbunden motion förbättrar humör och beteende. Sikta på dagliga promenader eller lek.";
+"insights.recommendations" = "Rekommendationer";
+"insights.ai_confidence" = "AI-säkerhet";
+"insights.success_rate_frequency" = "%dx/vecka • %d%% framgång";
+"insights.bulleted_item" = "• %@";
+"insights.professional_summary" = "Professionell sammanfattning";
+"insights.breed_analysis" = "Rasspecifik analys";
+"insights.breed_traits" = "Rasegenskaper:";
+"insights.common_issues" = "Vanliga rasproblem:";
+"insights.age_development" = "Ålder & utveckling";
+"insights.stage" = "Stadium: %@";
+"insights.behavior_assessment" = "Beteendebedömning";
+"insights.score_trend" = "Trend: %@";
+"insights.strengths" = "Styrkor:";
+"insights.areas_improvement" = "Förbättringsområden:";
+"insights.training_recommendations" = "Träningsrekommendationer";
+"insights.issue" = "Problem: %@";
+"insights.duration_frequency" = "Längd: %@ | Frekvens: %@";
+"insights.steps" = "Steg:";
+"insights.numbered_step" = "%d. %@";
+"insights.view_training_week" = "Visa föreslagen träningsvecka";
+"insights.key_professional" = "Viktiga professionella insikter";
+"insights.generated_relative" = "Genererad:";
+"insights.analysis_types" = "Två typer av AI-analys";
+"insights.local_analysis" = "Lokal mönsteranalys";
+"insights.local_description" = "Analyserar din data lokalt för att hitta mönster, trender och statistiska insikter. Alltid tillgänglig och bearbetar omedelbart.";
+"insights.expert_analysis" = "AI Expert-analys (ChatGPT)";
+"insights.expert_description" = "Professionell hundbeteendeanalys med rasspecifika råd och detaljerade 7-dagars träningsplaner. Kräver API-nyckel.";
+
+/* Forecast */
+"forecast.morning_forecast" = "Morgonprognos";
+"forecast.predict_patterns" = "Förutsäg morgondagens beteendemönster";
+
+/* Splash Screen */
+"splash.doglog" = "DogLog";
+"splash.subtitle" = "The Barkley method";
+"splash.tap_continue" = "Tryck för att fortsätta";
+
+/* Dr. Elias */
+"dr.dr_elias" = "Dr. Barkley";
+"dr.ai_expert" = "AI-expert";
+"dr.ai_dog_behaviorist" = "AI-hundbeteendespecialist";
+"dr.analyzing" = "Analyserar...";
+"dr.expert_analysis_complete" = "Expertanalys klar";
+
+/* Settings - App Info */
+"settings.version" = "Version";
+"settings.about" = "Om";
+"settings.disclaimer.title" = "Viktigt";
+"settings.disclaimer.message" = "DogLog är ett hjälpmedel och ersätter inte professionell rådgivning. Vid allvarliga problem eller riskbeteenden, kontakta en certifierad hundtränare, beteendeexpert eller veterinär.";
+"settings.notifications" = "Notiser";
+"common.enabled" = "Aktiverad";
+"common.disabled" = "Av";
+"common.enable" = "Aktivera";
+"common.free" = "Gratis";
+"common.paid" = "Betalt";
+"common.preview" = "Förhandsvisning";
+"common.your_dog" = "din hund";
+"settings.open_ios_settings" = "Öppna iOS‑inställningar";
+
+/* ChatGPT Settings */
+"chatgpt.settings_title" = "ChatGPT-inställningar";
+"chatgpt.api_key_section" = "ChatGPT API-nyckel";
+"chatgpt.enter_api_key" = "Ange din OpenAI API-nyckel för att aktivera AI-drivna insikter";
+"chatgpt.api_key_configured" = "API-nyckel konfigurerad";
+"chatgpt.api_configuration" = "API-konfiguration";
+"chatgpt.how_to_get_key" = "Hur du får din API-nyckel:";
+"chatgpt.step_1" = "1. Besök platform.openai.com";
+"chatgpt.step_2" = "2. Logga in eller skapa ett konto";
+"chatgpt.step_3" = "3. Gå till API Keys-sektionen";
+"chatgpt.step_4" = "4. Skapa en ny hemlig nyckel";
+"chatgpt.step_5" = "5. Kopiera och klistra in den ovan";
+"chatgpt.security_note" = "⚠️ Din API-nyckel lagras säkert på din enhet och delas aldrig.";
+"chatgpt.getting_started" = "Komma igång";
+"chatgpt.test_api_key" = "Testa API-nyckel";
+"chatgpt.test_connection" = "Testa anslutning";
+"chatgpt.token_usage" = "Token-användning";
+"chatgpt.token_description" = "Analys: ~2 000-2 500 tokens, Träningsplan: ~4 000-5 000 tokens. Cachade resultat sparar tokens - du debiteras endast när ny data analyseras.";
+"chatgpt.cache_note" = "Cache ogiltigförklaras automatiskt när du lägger till nya aktiviteter eller betyg.";
+"chatgpt.cost_information" = "Kostnadsinformation";
+"chatgpt.api_key_saved" = "Din ChatGPT API-nyckel har sparats framgångsrikt.";
+
+/* Years Old */
+"age.years_old" = "%d år gammal";
+
+/* Outcomes */
+"outcome.good" = "Bra";
+"outcome.okay" = "Okej";
+"outcome.bad" = "Dåligt";
+
+/* Day Ratings */
+"rating.good_day_emoji" = "😊 Bra dag";
+"rating.okay_day_emoji" = "😐 Okej dag";
+"rating.bad_day_emoji" = "😞 Dålig dag";
+
+/* Default Activities */
+"activity.walk" = "Promenad";
+"activity.training" = "Träning";
+"activity.playtime" = "Lektid";
+"activity.feeding" = "Matning";
+"activity.grooming" = "Pälsvård";
+"activity.vet_visit" = "Veterinärbesök";
+"activity.socialization" = "Socialisering";
+"activity.rest" = "Vila";
+"activity.exercise" = "Motion";
+"activity.bath" = "Bad";
+
+/* Notifications */
+"notifications.improve_title" = "Förbättra notifikationer";
+"notifications.open_settings" = "Öppna inställningar";
+"notifications.later" = "Senare";
+"notifications.improve_message" = "Barkley vill skicka dig morgonprognoser! För att se dem behöver du aktivera 'Banderoller' i iOS-inställningar. Tryck 'Öppna inställningar' → tryck på mittens telefon-ikon under 'Notiser'.";
+"notifications.error_no_dogs" = "Fel: Inga hundar tillgängliga";
+"notifications.morning_forecast" = "Få dagliga beteendeprediktioner från Barkley baserat på din hunds mönster";
+"notifications.activity_reminders" = "Milda påminnelser att logga din hunds aktiviteter och dagliga humör";
+"notifications.weekly_summaries" = "Veckovisa sammanfattningar av din hunds beteendetrender och förbättringar";
+"notifications.test_note" = "Testnotifikationer kommer att visas om 2 sekunder. Se till att notifikationer är aktiverade i Systeminställningar.";
+"notifications.chatgpt_note" = "Konfigurera ChatGPT API för avancerad AI-analys i notifikationer och insikter.";
+"notifications.permission" = "Tillstånd";
+"notifications.best_experience" = "Bästa upplevelse";
+"notifications.banners" = "Banderoller";
+"notifications.banners_description" = "Visa banderoller överst på skärmen";
+"notifications.notification_center" = "Notifieringscenter";
+"notifications.notification_center_description" = "Visa notiser i notifieringscentret";
+"notifications.lock_screen" = "Låsskärm";
+"notifications.lock_screen_description" = "Visa notiser på låsskärmen";
+"notifications.morning_forecasts" = "Morgonprognoser";
+"notifications.notification_time" = "Tid för notis";
+"notifications.cost_warning" = "Obs! Detta kan kosta";
+"notifications.configure_api_key" = "Lägg till din API‑nyckel i ChatGPT‑inställningar för att använda detta läge";
+"notifications.reminder_types" = "Påminnelsetyper";
+"notifications.no_logging_6_hours" = "Inget loggat på 6 timmar";
+"notifications.end_of_day_checkin" = "Kvällskoll: fyll i dagens logg";
+"notifications.weekly_pattern_breaks" = "Bryter vanliga veckomönster";
+"notifications.progress_reports" = "Veckorapporter";
+"notifications.delivery_schedule" = "Leveransschema";
+"notifications.sundays_7pm" = "Söndagar kl 19:00";
+"notifications.reports_description" = "Sammanfattning av veckan med trender och framsteg";
+"notifications.disabled" = "Notiser avstängda";
+"notifications.action.open_full_analysis" = "Öppna full analys";
+"notifications.action.quick_log_today" = "Snabblogga idag";
+"notifications.action.read_full_message" = "Läs hela meddelandet";
+"notifications.enable_message" = "För att få morgonprognoser och påminnelser, aktivera notifikationer i Systeminställningar.";
+"notifications.optimize_title" = "Optimera notifikationer";
+"notifications.ai_analysis_title" = "AI-analys för notifikationer";
+"notifications.local_ai_free" = "Lokal AI (Gratis)";
+"notifications.local_ai_description" = "Grundläggande mönsteranalys med enhetsbehandling";
+"notifications.chatgpt_ai" = "ChatGPT AI";
+"notifications.chatgpt_ai_description" = "Avancerad beteendeanalys med naturliga språkinsikter";
+"notifications.daily_cost_note" = "Varje morgonprognos kommer att använda ChatGPT API (~$0.01-0.05 per notifikation). Dagliga kostnader beror på antal hundar och API-användning.";
+"notifications.daily_forecasts" = "Dagliga prognoser";
+"notifications.dr_elias_prediction" = "Barkley kommer att förutsäga hur din hunds dag kommer att gå";
+"notifications.morning_forecast_sample" = "🌅 Morgonprognos för %@";
+"notifications.good_morning_sample" = "God morgon! %@ är inställd på en bra dag! 😊 Senaste trender visar förbättring - Barkley";
+"notifications.activity_reminders_title" = "Aktivitetspåminnelser";
+"notifications.gentle_nudges" = "Milda knuffar för att logga din hunds aktiviteter";
+"notifications.weekly_reports" = "Veckorapporter";
+"notifications.dr_elias_analyzes" = "Barkley analyserar mönster och framsteg";
+"notifications.morning_forecast" = "Få dagliga beteendeprognoser från Barkley baserat på din hunds mönster";
+"notifications.activity_reminders" = "Mjuka påminnelser att logga din hunds aktiviteter och dagliga humör";
+"notifications.weekly_summaries" = "Veckosammanfattningar av din hunds beteendetrender och förbättringar";
+"notifications.test_note" = "Testnotifikationer kommer att visas om 2 sekunder. Se till att notifikationer är aktiverade i Systeminställningar.";
+"notifications.chatgpt_note" = "Konfigurera ChatGPT API för avancerad AI-analys i notifikationer och insikter.";
+
+/* Unknown fallbacks */
+"dog.unknown_name" = "Okänd";
+"dog.unknown_dog" = "Hund";
+"dog.unknown" = "Okänd";
+"dog.unknown_breed" = "Okänd ras";
+"dog.age_unknown" = "Ålder okänd";
+
+/* Training */
+"training.general_enrichment" = "Allmän träning och berikande";
+
+/* AI Messages */
+"ai.no_recent_notes" = "Inga senaste anteckningar registrerade";
+"ai.no_activities_logged" = "Inga aktiviteter loggade";
+
+/* ChatGPT Errors */
+"chatgpt.error.missing_api_key" = "ChatGPT API-nyckel saknas. Lägg till din API-nyckel i inställningarna.";
+"chatgpt.error.invalid_api_key" = "Ogiltig ChatGPT API-nyckel. Kontrollera din API-nyckel i inställningarna.";
+"chatgpt.error.rate_limit_exceeded" = "ChatGPT hastighetsgräns överskriden. Försök igen senare.";
+"chatgpt.error.insufficient_quota" = "Ditt OpenAI-konto har slut på kredit. Fyll på via platform.openai.com under Billing och försök igen.";
+"chatgpt.error.api_error" = "ChatGPT API-fel: %@";
+"chatgpt.error.invalid_response" = "Ogiltigt svar från ChatGPT.";
+"chatgpt.error.parsing_error" = "Fel vid tolkning av ChatGPT-svar.";
+"chatgpt.error.token_limit" = "Svaret var ofullständigt på grund av token-gräns. Försök igen - appen har ökat gränsen automatiskt.";
+
+/* Info Popup (AI Insights details) */
+"insights.activity_pattern" = "Aktivitetsmönster";
+"insights.activity_pattern_explanation" = "Det här kortet visar hur en specifik aktivitet brukar gå för din hund över tid.";
+"insights.success_rate" = "framgång";
+"insights.times_per_week" = "gånger/vecka";
+"insights.success_rate_explanation" = "Framgångsgraden visar hur ofta den här aktiviteten gått bra jämfört med alla tillfällen.";
+"insights.frequency_explanation" = "Frekvensen visar ungefär hur många gånger per vecka aktiviteten görs.";
+"insights.trend_explanation" = "Trenden visar om aktiviteten blir bättre, sämre eller är stabil över tid.";
+"insights.activity_recommendation" = "Tips: Planera fler tillfällen som brukar gå bra och justera de som ofta blir utmanande.";
+
+"insights.confidence_explanation" = "AI-säkerhet är ett mått på hur tillförlitliga insikterna är baserat på mängden och kvaliteten på din loggade data.";
+"insights.high_confidence_desc" = "Hög: Mycket data och tydliga mönster.";
+"insights.medium_confidence_desc" = "Medel: Viss data finns, fortsätt logga för ökad säkerhet.";
+"insights.low_confidence_desc" = "Låg: För lite data – logga fler dagar och aktiviteter.";
+"insights.more_data_explanation" = "Ju fler dagar och aktiviteter du loggar, desto bättre blir AI:ns säkerhet och rekommendationer.";
+
+"insights.mood_trend_explanation" = "Humöranalysen bygger på dina dagliga betyg och visar nuläge, trend och förändring över tid.";
+"insights.improvement" = "Förändring";
+"insights.good_days_desc" = "Många bra dagar tyder på stabila rutiner och lagom nivå av aktivitet.";
+"insights.okay_days_desc" = "Okej-dagar är vanliga – små justeringar kan förbättra upplevelsen.";
+"insights.bad_days_desc" = "Flera dåliga dagar kan signalera att rutiner, miljö eller svårighetsgrad behöver ändras.";
+"insights.ai_analysis_explanation" = "Lokal AI väger samman mönster i aktiviteter och dagliga betyg för att beräkna humörtrend.";
+
+"insights.weekly_pattern_explanation" = "Veckomönster visar vilka dagar som brukar fungera bäst och hur aktiviteter fördelar sig över veckan.";
+"insights.best_days_explanation" = "Bästa dagar: Planera mer utmanande moment här.";
+"insights.worst_days_explanation" = "Tuffare dagar: Håll rutinerna enkla och positiva.";
+"insights.activity_distribution" = "Aktivitetsfördelning per dag hjälper dig att balansera veckan.";
+"insights.scheduling_recommendation" = "Lägg nyckelaktiviteter på dagar som brukar fungera bäst för att öka framgång.";
+
+"insights.category" = "Kategori";
+"insights.insight_generation_explanation" = "Denna insikt genereras utifrån dina historiska aktiviteter och dagliga betyg.";
+
+"insights.ai_recommendation" = "AI‑rekommendation";
+"insights.note_recommendations" = "Rekommendationer från anteckningar";
+"insights.note_tip_reduce_stress" = "Tecken på stress: sänk svårighetsgrad, korta passen och ge lugna pauser mellan aktiviteter.";
+"insights.note_tip_barking" = "Skällande: träna förutsägbarhet och ge alternativt beteende (t.ex. kontakt, nosarbete) innan triggers.";
+"insights.note_tip_leash" = "Koppeldrag: öva korta pass med belöning för slakt koppel, byt riktning och belöna fokus nära benet.";
+"insights.note_tip_focus" = "Fokus: träna i lättare miljö först, öka svårighet gradvis, använd högvärdiga belöningar.";
+"insights.note_tip_build_on_success" = "Bygg på det som går bra: planera in fler tillfällen av aktiviteter som ofta lyckas.";
+"insights.note_tip_consistency" = "Håll rutinen konsekvent – samma tid, plats och upplägg under en period för trygghet.";
+"insights.note_tip_short_sessions" = "Korta, frekventa pass (3–5 min) ger bättre resultat än långa pass när det är svårt.";
+"insights.priority" = "Prioritet";
+"insights.recommendation_explanation" = "Prioritet anger hur viktigt det är att testa rekommendationen för att förbättra beteendet.";
+"insights.high_priority_desc" = "Hög: Bör testas först för störst effekt.";
+"insights.medium_priority_desc" = "Medel: Testa när högre prioriterade steg är på plats.";
+"insights.low_priority_desc" = "Låg: Bra som komplement när tid finns.";
+
+/* Lagged Patterns (day-after analysis) */
+"lagged.section_title" = "Dagen-efter-mönster";
+"lagged.sample_caption" = "baserat på %d tillfällen";
+"lagged.empty_state" = "Inte tillräckligt med data ännu. Logga aktiviteter och betygsätt varje dag i cirka 3 veckor, så börjar DogLog upptäcka dagen-efter-mönster — till exempel om hunddagisdagar ofta följs av dåliga dagar.";
+"lagged.rest_day" = "en vilodag";
+"lagged.bad_day" = "en dålig dag";
+"lagged.pattern_negative_lag1" = "Efter %@: %d av %d följande dagar var dåliga (baslinje %d%%)";
+"lagged.pattern_positive_lag1" = "Efter %@: %d av %d följande dagar var bra (baslinje %d%%)";
+"lagged.pattern_negative_lag2" = "Två dagar efter %@: %d av %d dagar var dåliga (baslinje %d%%)";
+"lagged.pattern_positive_lag2" = "Två dagar efter %@: %d av %d dagar var bra (baslinje %d%%)";
+
+/* Context Tags (day confounds) */
+"context.section_title" = "Vad hände mer idag?";
+"context.heat_cycle" = "Löptid";
+"context.thunder" = "Åska/fyrverkerier";
+"context.guests" = "Gäster";
+"context.poor_sleep" = "Dålig sömn";
+"context.sick_injured" = "Sjuk/skadad";
+"context.travel" = "Resa";
+"context.home_alone_long" = "Ensam hemma länge";
+"context.new_environment" = "Ny miljö";
+
+/* Exercise Library Settings (web search + refresh) */
+"settings.exercise.web_search" = "Använd webbsökning för övningar";
+"settings.exercise.web_search_footer" = "Av: övningarna AI-genereras från modellens träningskunskap. På: AI:n söker på webben efter aktuella övningar (använder mer API-kredit).";
+"settings.exercise.refresh_interval" = "Uppdatera övningar automatiskt";
+"settings.exercise.refresh.manual" = "Manuellt";
+"settings.exercise.refresh.weekly" = "Varje vecka";
+"settings.exercise.refresh.biweekly" = "Varannan vecka";
+"settings.exercise.refresh.monthly" = "Varje månad";
+"training.week.language_mismatch" = "Den här träningsveckan skapades på ett annat språk. Generera om den för att få en plan på ditt nuvarande språk.";
+"tutorial.lagged_patterns_title" = "Mönster dagen efter";
+"tutorial.lagged_patterns_description" = "DogLog upptäcker när gårdagens aktiviteter förutsäger morgondagens humör — till exempel hunddagis följt av en tuff dag. Se mönstren lokalt och under AI-insikter.";
+"tutorial.context_tags_title" = "Kontexttaggar";
+"tutorial.context_tags_description" = "Tagga saker som inte är aktiviteter men ändå spelar roll — åska, gäster, dålig sömn, löptid. Det hjälper appen att inte skylla på fel aktivitet när det blir en dålig dag.";

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DogLog - Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease-in 2s forwards;
+        }
+
+        .splash-content {
+            text-align: center;
+            color: white;
+            animation: slideUp 1s ease-out;
+        }
+
+        .paw-icon {
+            font-size: 4rem;
+            animation: bounce 2s infinite;
+            margin-bottom: 1rem;
+        }
+
+        .app-name {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 2px;
+        }
+
+        .app-tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Main App */
+        .app {
+            display: none;
+            animation: fadeIn 0.5s ease-in 2.5s forwards;
+        }
+
+        .dog-gallery {
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .dogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dog-card, .add-dog-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 280px;
+        }
+
+        .dog-card:hover, .add-dog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .dog-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 3rem;
+            color: #999;
+        }
+
+        .dog-info {
+            text-align: center;
+        }
+
+        .dog-info h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .dog-info p {
+            color: #666;
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .add-dog-card {
+            border: 2px dashed #ddd;
+            background: transparent;
+            color: #999;
+            justify-content: center;
+        }
+
+        .add-dog-card:hover {
+            border-color: #667eea;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .add-icon {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+            margin: 0 0 1.5rem 0;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-btn {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .save-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #5a67d8;
+        }
+
+        .demo-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; display: block; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splash">
+        <div class="splash-content">
+            <div class="paw-icon">🐾</div>
+            <h1 class="app-name">DogLog</h1>
+            <p class="app-tagline">Track • Analyze • Improve</p>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app" id="app">
+        <div class="dog-gallery">
+            <div class="demo-note">
+                <strong>🎉 DogLog Demo</strong><br>
+                This is a functional preview of the DogLog app concept. Click "Add Dog" to test the interface!
+            </div>
+            
+            <header class="gallery-header">
+                <h1>DogLog</h1>
+                <p>Your furry friends' daily tracker</p>
+            </header>
+            
+            <div class="dogs-grid" id="dogsGrid">
+                <div class="empty-state">
+                    <div class="empty-icon">🐾</div>
+                    <h2>No dogs yet!</h2>
+                    <p>Add your first furry friend to get started tracking their activities.</p>
+                </div>
+                
+                <div class="add-dog-card" onclick="openModal()">
+                    <div class="add-icon">+</div>
+                    <p>Add Dog</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Dog Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Add New Dog</h2>
+            <form id="dogForm">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" required placeholder="Enter dog's name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="breed">Breed</label>
+                    <input type="text" id="breed" placeholder="e.g., Golden Retriever">
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" min="0" placeholder="Age in years">
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" rows="3" placeholder="Any additional information..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="save-btn">Add Dog</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let dogs = [];
+
+        // Show app after splash
+        setTimeout(() => {
+            document.getElementById('app').style.display = 'block';
+        }, 2500);
+
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('dogForm').reset();
+        }
+
+        function addDog(dogData) {
+            const dog = {
+                id: Date.now(),
+                ...dogData
+            };
+            dogs.push(dog);
+            renderDogs();
+            closeModal();
+        }
+
+        function renderDogs() {
+            const grid = document.getElementById('dogsGrid');
+            
+            if (dogs.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🐾</div>
+                        <h2>No dogs yet!</h2>
+                        <p>Add your first furry friend to get started tracking their activities.</p>
+                    </div>
+                    <div class="add-dog-card" onclick="openModal()">
+                        <div class="add-icon">+</div>
+                        <p>Add Dog</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = dogs.map(dog => `
+                <div class="dog-card" onclick="alert('In the full app, this would open ${dog.name}\\'s calendar and activity tracker!')">
+                    <div class="dog-photo">🐕</div>
+                    <div class="dog-info">
+                        <h3>${dog.name}</h3>
+                        <p>${dog.breed || 'Mixed breed'}</p>
+                        <p>${dog.age ? dog.age + ' years old' : 'Age not set'}</p>
+                    </div>
+                </div>
+            `).join('') + `
+                <div class="add-dog-card" onclick="openModal()">
+                    <div class="add-icon">+</div>
+                    <p>Add Dog</p>
+                </div>
+            `;
+        }
+
+        // Form submission
+        document.getElementById('dogForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const dogData = {
+                name: formData.get('name') || document.getElementById('name').value,
+                breed: document.getElementById('breed').value,
+                age: document.getElementById('age').value,
+                gender: document.getElementById('gender').value,
+                notes: document.getElementById('notes').value
+            };
+            
+            if (dogData.name.trim()) {
+                addDog(dogData);
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,772 @@
+/* Exercise Library */
+"exercise.library.title" = "Exercise Library";
+"exercise.library.subtitle" = "Browse, add, and favorite exercises";
+"exercise.library.search" = "Search exercises";
+"exercise.library.empty" = "No exercises found";
+"exercise.library.favorites" = "Favorites";
+"exercise.library.all" = "All exercises";
+"exercise.library.add" = "Add Exercise";
+"exercise.library.fetch" = "Generate AI exercise library";
+"exercise.library.importing" = "Importing exercises...";
+"exercise.library.choose" = "Choose Exercise";
+
+/* Exercise Fields */
+"exercise.field.basic" = "Basics";
+"exercise.field.name" = "Name";
+"exercise.field.category" = "Category";
+"exercise.field.difficulty" = "Difficulty";
+"exercise.field.equipment" = "Equipment";
+"exercise.field.instructions" = "Instructions";
+"exercise.field.tags" = "Tags";
+"exercise.field.tags_placeholder" = "Enter tags, separated by commas";
+"exercise.field.favorite" = "Favorite";
+/* Common */
+"common.done" = "Done";
+"common.cancel" = "Cancel";
+"common.save" = "Save";
+"common.delete" = "Delete";
+"common.edit" = "Edit";
+"common.add" = "Add";
+"common.ok" = "OK";
+"common.yes" = "Yes";
+"common.no" = "No";
+"common.loading" = "Loading...";
+"common.error" = "Error";
+"common.error.unknown" = "Unknown error";
+"common.time" = "Time";
+"common.date" = "Date";
+
+/* Language Settings */
+"language.title" = "Language";
+"language.choose" = "Choose Language";
+"language.system" = "System Language";
+"language.system.description" = "Follows your phone's language setting";
+"language.footer" = "The app will use the selected language for all text, including AI analysis.";
+"settings.language" = "Language";
+
+/* Main Navigation */
+"main.title" = "DogLog";
+"main.dogs" = "Dogs";
+"main.add_dog" = "Add Dog";
+
+/* Dog Profile */
+"dog.name" = "Name";
+"dog.breed" = "Breed";
+"dog.gender" = "Gender";
+"dog.birth_date" = "Birth Date";
+"dog.age_years" = "%d years old";
+"dog.unknown" = "Unknown";
+
+/* Activities */
+"activity.walk" = "Walk";
+"activity.training" = "Training";
+"activity.playtime" = "Playtime";
+"activity.feeding" = "Feeding";
+"activity.grooming" = "Grooming";
+"activity.vet_visit" = "Vet Visit";
+"activity.socialization" = "Socialization";
+"activity.rest" = "Rest";
+"activity.exercise" = "Exercise";
+"activity.bath" = "Bath";
+
+/* Activity Outcomes */
+"outcome.good" = "Good";
+"outcome.okay" = "Okay";
+"outcome.bad" = "Bad";
+
+/* Daily Ratings */
+"rating.good_day" = "Good Day";
+"rating.okay_day" = "Okay Day";
+"rating.bad_day" = "Bad Day";
+"rating.rate_day" = "Rate Day";
+"rating.how_was_day" = "How was the day overall?";
+
+/* AI Insights */
+"ai.title" = "🧠 AI Insights";
+"ai.analyzing" = "Analyzing behavior patterns...";
+"ai.confidence" = "AI Confidence";
+"ai.mood_trend" = "Overall Mood";
+"ai.activity_patterns" = "Activity Patterns";
+"ai.weekly_patterns" = "Weekly Patterns";
+"ai.key_insights" = "Key Insights";
+"ai.recommendations" = "Recommendations";
+"ai.current" = "Current";
+"ai.trend" = "Trend";
+"ai.improving" = "Improving";
+"ai.declining" = "Declining";
+"ai.stable" = "Stable";
+"ai.change" = "change";
+"ai.best_days" = "Best Days";
+"ai.avg_activities" = "Avg Activities";
+"ai.per_day" = "/day";
+"ai.success_rate" = "success rate";
+"ai.frequency" = "frequency";
+"ai.per_week" = "/week";
+"ai.high_confidence" = "High confidence - based on substantial data";
+"ai.moderate_confidence" = "Moderate confidence - more data will improve accuracy";
+"ai.low_confidence" = "Low confidence - keep logging for better insights";
+
+/* AI Source Selection */
+"ai.source.title" = "AI Analysis Source";
+"ai.source.local" = "Local AI";
+"ai.source.chatgpt" = "ChatGPT AI";
+"ai.source.local.description" = "Free • Instant";
+"ai.source.chatgpt.description" = "Uses tokens • Expert";
+"ai.source.local.full" = "Local AI Analysis";
+"ai.source.local.always_available" = "Free • Always Available";
+"ai.source.local.explanation" = "Local analysis provides instant pattern recognition from your logged data. For detailed training plans and breed-specific advice, try ChatGPT AI.";
+
+/* ChatGPT Integration */
+"chatgpt.title" = "AI Expert Analysis (Barkley)";
+"chatgpt.setup" = "Setup";
+"chatgpt.professional_insights" = "Professional AI Insights Available";
+"chatgpt.description" = "Get expert dog behaviorist analysis powered by ChatGPT. Add your OpenAI API key to unlock professional insights and recommendations.";
+"chatgpt.add_api_key" = "Add API Key";
+"chatgpt.analysis_failed" = "Analysis Failed";
+"chatgpt.try_again" = "Try Again";
+"chatgpt.previous_analysis" = "Previous analysis available";
+"chatgpt.generate_analysis" = "Generate Analysis";
+"chatgpt.getting_analysis" = "Getting professional analysis...";
+"chatgpt.analysis_complete" = "Analysis complete • Cached to save tokens";
+"chatgpt.professional_summary" = "Professional Summary";
+"chatgpt.breed_analysis" = "Breed-Specific Analysis";
+"chatgpt.breed_traits" = "Breed Traits:";
+"chatgpt.common_issues" = "Common Breed Issues:";
+"chatgpt.age_development" = "Age & Development";
+"chatgpt.stage" = "Stage";
+"chatgpt.behavior_assessment" = "Behavior Assessment";
+"chatgpt.trend" = "Trend";
+"chatgpt.strengths" = "Strengths:";
+"chatgpt.areas_for_improvement" = "Areas for Improvement:";
+"chatgpt.training_recommendations" = "Training Recommendations";
+"chatgpt.issue" = "Issue";
+"chatgpt.duration" = "Duration";
+"chatgpt.frequency" = "Frequency";
+"chatgpt.steps" = "Steps:";
+"chatgpt.key_insights" = "Key Professional Insights";
+"chatgpt.generated" = "Generated";
+"chatgpt.api_test_result" = "API Test Result";
+"chatgpt.api_test_success" = "API connection test successful! Your key is working correctly.";
+"chatgpt.api_test_failed" = "API connection test failed. Please check your key and try again.";
+"chatgpt.api_test_error" = "API test error: %@";
+"chatgpt.settings_saved" = "Settings Saved";
+
+/* Training Week */
+"training.week.title" = "Suggested Training Week";
+"training.week.create" = "Create Training Plan";
+"training.week.view" = "View Training Week";
+"training.week.ready" = "📅 Training Week Ready";
+"training.week.description" = "View your personalized 7-day training plan";
+"training.week.prompt.title" = "Create Training Plan";
+"training.week.prompt.description" = "Barkley can create a personalized 7-day training week for %@";
+"training.week.maybe_later" = "Maybe Later";
+"training.week.create_week" = "Create Training Week";
+"training.week.regenerate" = "Regenerate Training Week";
+"training.week.daily_schedule" = "📅 Daily Schedule";
+"training.week.add_activity" = "Add Activity";
+"training.week.export_calendar" = "Export to Calendar";
+"training.week.export_success" = "Calendar Export Successful";
+"training.week.export_message" = "'%@' has been added to your calendar for %@ at %@";
+"training.week.already_exists" = "Already in Calendar";
+"training.week.already_exists_message" = "This activity is already scheduled in your calendar for %@ at %@";
+"training.week.calendar_access_required" = "Calendar Access Required";
+"training.week.calendar_access_message" = "Please allow calendar access in Settings to export training activities";
+"training.week.export_failed" = "Export Failed";
+"training.week.export_failed_message" = "Failed to add activity to calendar: %@";
+"training.week.export_entire_week" = "Export entire week to calendar";
+"training.week.week_export_complete" = "Successfully exported %d activities to calendar!";
+"training.week.export_partial" = "Partial export";
+"training.week.week_export_partial_message" = "Successfully exported %d activities, %d failed.";
+"training.week.export_pdf" = "Export PDF";
+"training.week.rest_day" = "Rest Day";
+"training.week.rest_day_detail" = "Planned rest day for recovery. Focus on calm environment, comfort, and short bonding moments.";
+"training.week.progress_label" = "%d%% complete";
+"training.week.status.fetching_exercises" = "Finding suitable exercises...";
+"training.week.status.planning_monday" = "Filling Monday...";
+"training.week.status.planning_tuesday" = "Filling Tuesday...";
+"training.week.status.planning_wednesday" = "Filling Wednesday...";
+"training.week.status.planning_thursday" = "Filling Thursday...";
+"training.week.status.planning_friday" = "Filling Friday...";
+"training.week.status.planning_weekend" = "Filling the weekend...";
+
+/* Morning Forecast */
+"forecast.title" = "Morning Forecast";
+"forecast.description" = "Predict tomorrow's behavior patterns";
+"forecast.for_tomorrow" = "Forecast for Tomorrow";
+"forecast.mood_prediction" = "Mood Prediction";
+"forecast.recommended_activities" = "Recommended Activities";
+"forecast.activity_time" = "Time";
+"forecast.activity_duration" = "Duration";
+"forecast.activity_focus" = "Focus";
+"forecast.activity_goal" = "Goal";
+"forecast.weather_note" = "Weather Note";
+"forecast.tips" = "Tips for the Day";
+
+/* Calendar Integration */
+"calendar.title" = "Calendar";
+"calendar.today" = "Today";
+"calendar.daily_log" = "Daily Log";
+"calendar.activities_for" = "Activities for %@";
+"calendar.daily_notes" = "Daily Notes";
+"calendar.additional_notes" = "Additional notes about the day...";
+
+/* Settings */
+"settings.title" = "Settings";
+"settings.chatgpt" = "ChatGPT";
+"settings.api_key" = "API Key";
+"settings.api_key_placeholder" = "sk-...";
+"settings.api_key_description" = "Your OpenAI API key for ChatGPT analysis";
+"settings.test_connection" = "Test Connection";
+"settings.connection_success" = "Connection Successful";
+"settings.connection_failed" = "Connection Failed";
+
+/* Tutorial */
+"tutorial.welcome" = "Welcome to DogLog";
+"tutorial.track_activities" = "Track Activities";
+"tutorial.track_description" = "Log daily activities like walks, training, and play to build a complete picture of your dog's behavior.";
+"tutorial.ai_insights" = "AI Insights";
+"tutorial.ai_description" = "Discover patterns in your dog's behavior with advanced AI analysis that provides personalized recommendations.";
+"tutorial.training_week" = "Training Week";
+"tutorial.training_description" = "Get a personalized 7-day training plan created by Barkley based on your dog's specific needs and behavior.";
+"tutorial.calendar" = "Calendar Integration";
+"tutorial.calendar_description" = "Export training activities to your calendar and keep track of your dog's schedule.";
+"tutorial.get_started" = "Get Started";
+"tutorial.skip" = "Skip";
+
+/* Error Messages */
+"error.no_data" = "No data available";
+"error.loading_failed" = "Loading failed";
+"error.save_failed" = "Save failed";
+"error.delete_failed" = "Delete failed";
+"error.network_error" = "Network error";
+"error.invalid_api_key" = "Invalid API key";
+"error.api_limit_exceeded" = "API limit exceeded";
+
+/* Test Data */
+"test.generate_data" = "🎲 Generate Test Data";
+"test.data_generated" = "Test data generated";
+"test.daycare" = "Doggy daycare";
+"test.activity_note" = "Test note for %@";
+"test.daily_note" = "Test day %d - Random daily notes for %@";
+
+/* Time Ranges */
+"time.all_time" = "All Time";
+"time.this_month" = "This Month";
+
+/* Priorities */
+"priority.high" = "HIGH";
+"priority.medium" = "MED";
+"priority.low" = "LOW";
+
+/* Add/Edit Dog */
+"dog.basic_information" = "Basic Information";
+"dog.dog_name" = "Dog Name";
+"dog.breed" = "Breed";
+"dog.date_of_birth" = "Date of Birth";
+"dog.gender" = "Gender";
+"dog.male" = "Male";
+"dog.female" = "Female";
+"dog.photo" = "Photo";
+"dog.add_photo" = "Add Photo";
+"dog.change_photo" = "Change Photo";
+"dog.profile_photo" = "Profile Photo";
+"dog.remove_photo" = "Remove Photo";
+"dog.notes" = "Notes";
+"dog.additional_notes" = "Additional notes...";
+"dog.edit_dog" = "Edit Dog";
+"dog.add_dog" = "Add Dog";
+"dog.delete_dog" = "Delete Dog";
+"dog.delete_confirmation" = "Are you sure you want to delete %@? This action cannot be undone.";
+
+/* Activities */
+"activity.activities" = "Activities";
+"activity.add_activity" = "Add Activity";
+"activity.quick_add" = "Quick Add";
+"activity.custom_activities" = "Custom Activities";
+"activity.custom_activity" = "Custom Activity";
+"activity.enter_activity_name" = "Enter activity name";
+"activity.activity_name" = "Activity name";
+"activity.notes_about_activity" = "Notes about this activity...";
+"activity.edit_activity" = "Edit Activity";
+"activity.delete_activity" = "Delete Activity";
+"activity.enter_new_name" = "Enter new name for the activity";
+"activity.delete_activity_confirmation" = "Delete '%@'?";
+"activity.activities_for" = "Activities for %@";
+
+/* Daily Activity */
+"daily.daily_log" = "Daily Log";
+"daily.daily_notes" = "Daily Notes";
+"daily.additional_notes" = "Additional notes about the day...";
+"daily.activities_for_dog" = "Activities for %@";
+
+/* Navigation */
+"nav.previous" = "Previous";
+"nav.next" = "Next";
+"nav.get_started" = "Get Started!";
+"nav.skip" = "Skip";
+"nav.how_to_use" = "How to Use DogLog";
+
+/* Tutorial */
+"tutorial.welcome_title" = "Welcome to DogLog! 🐕";
+"tutorial.welcome_description" = "Track your dog's daily activities and behavior patterns with ease.";
+"tutorial.add_dog_title" = "Add Your Dog 📝";
+"tutorial.add_dog_description" = "Start by adding your dog's information using the + button. Include their name, breed, age, and a photo!";
+"tutorial.daily_activities_title" = "Daily Activities 📅";
+"tutorial.daily_activities_description" = "Tap any day on the calendar to log walks, training, playtime, and more. Each activity has an icon — rate how it went!";
+"tutorial.rate_days_title" = "Rate Your Days 😊";
+"tutorial.rate_days_description" = "Rate each day as Good, Okay, or Bad to track overall patterns. Add daily notes to remember special moments!";
+"tutorial.test_data_title" = "Test Data 🎲";
+"tutorial.test_data_description" = "Use the Generate Test Data feature to see how the app works with sample activities and ratings.";
+"tutorial.ready_title" = "Ready to Start! 🚀";
+"tutorial.ready_description" = "You're all set! Add your first dog and start tracking their daily adventures. Your data will help build better routines!";
+"tutorial.demo_dog_name" = "🐕 Try DogLog!";
+"tutorial.demo_dog_description" = "Tap to learn how to use DogLog";
+"tutorial.ai_sources_title" = "AI Sources";
+"tutorial.ai_sources_description" = "Choose between Local AI (free, instant) and ChatGPT AI (expert). The app remembers your choice. ChatGPT also creates your training week.";
+"tutorial.training_week_title" = "Perfect Training Week";
+"tutorial.training_week_description" = "Barkley creates a 7‑day plan with 0–5 exercises/day and rest days. You can edit times/instructions and export to Calendar/PDF.";
+"tutorial.morning_forecast_title" = "Morning Forecast";
+"tutorial.morning_forecast_description" = "Get a daily assessment and personal recommendations. Pick a time in Notifications and preview the message in settings.";
+"tutorial.exercise_library_title" = "Exercise Library";
+"tutorial.exercise_library_description" = "Browse and favorite exercises, add AI-generated ones, and use them when editing the training week via ‘Choose Exercise’.";
+"tutorial.regeneration_title" = "New data → renew";
+"tutorial.regeneration_description" = "When you log new activities/ratings in the calendar, the app will ask if you want to refresh the training week – your manual edits stay.";
+"tutorial.tutorial_label" = "TUTORIAL";
+
+/* Insights */
+"insights.ai_insights" = "🧠 AI Insights";
+"insights.discover_patterns" = "Discover patterns in your dog's behavior";
+"insights.overall_mood" = "Overall Mood";
+"insights.current" = "Current: %@";
+"insights.trend" = "Trend: %@";
+"insights.activity_patterns" = "Activity Patterns";
+"insights.weekly_patterns" = "Weekly Patterns";
+"insights.best_days" = "Best Days";
+"insights.avg_activities" = "Avg Activities";
+"insights.per_day" = "/day";
+"insights.key_insights" = "Key Insights";
+"insights.favorite_activity" = "Favorite Activity";
+"insights.favorite_activity_desc" = "%@ is your dog's most frequent activity with a %d%% success rate.";
+"insights.great_week" = "Great Week!";
+"insights.great_week_desc" = "Your dog had %d good days this week. Keep up the great routine!";
+"insights.high_success_activity" = "High Success Activity";
+"insights.high_success_activity_desc" = "%@ consistently goes well – consider doing it more often!";
+"insights.boost_mood_activities" = "Boost Mood Activities";
+"insights.boost_mood_activities_desc" = "Increase activities that usually go well to improve overall mood.";
+"insights.improve_activity" = "Improve %@";
+"insights.improve_activity_desc" = "Consider breaking down %@ into smaller steps or trying different approaches.";
+"insights.increase_exercise" = "Increase Exercise";
+"insights.increase_exercise_desc" = "Regular exercise can improve mood and behavior. Aim for daily walks or play sessions.";
+"insights.recommendations" = "Recommendations";
+"insights.ai_confidence" = "AI Confidence";
+"insights.success_rate_frequency" = "%dx/week • %d%% success";
+"insights.bulleted_item" = "• %@";
+"insights.professional_summary" = "Professional Summary";
+"insights.breed_analysis" = "Breed-Specific Analysis";
+"insights.breed_traits" = "Breed Traits:";
+"insights.common_issues" = "Common Breed Issues:";
+"insights.age_development" = "Age & Development";
+"insights.stage" = "Stage: %@";
+"insights.behavior_assessment" = "Behavior Assessment";
+"insights.score_trend" = "Trend: %@";
+"insights.strengths" = "Strengths:";
+"insights.areas_improvement" = "Areas for Improvement:";
+"insights.training_recommendations" = "Training Recommendations";
+"insights.issue" = "Issue: %@";
+"insights.duration_frequency" = "Duration: %@ | Frequency: %@";
+"insights.steps" = "Steps:";
+"insights.numbered_step" = "%d. %@";
+"insights.view_training_week" = "View Suggested Training Week";
+"insights.key_professional" = "Key Professional Insights";
+"insights.generated_relative" = "Generated:";
+"insights.analysis_types" = "Two Types of AI Analysis";
+"insights.local_analysis" = "Local Pattern Analysis";
+"insights.local_description" = "Analyzes your data locally to find patterns, trends, and statistical insights. Always available and processes instantly.";
+"insights.expert_analysis" = "AI Expert Analysis (ChatGPT)";
+"insights.expert_description" = "Professional dog behaviorist analysis with breed-specific advice and detailed 7-day training plans. Requires API key.";
+
+/* Forecast */
+"forecast.morning_forecast" = "Morning Forecast";
+"forecast.predict_patterns" = "Predict tomorrow's behavior patterns";
+
+/* Splash Screen */
+"splash.doglog" = "DogLog";
+"splash.subtitle" = "The Barkley method";
+"splash.tap_continue" = "Tap to continue";
+
+/* Dr. Elias */
+"dr.dr_elias" = "Dr. Barkley";
+"dr.ai_expert" = "AI Expert";
+"dr.ai_dog_behaviorist" = "AI Dog Behaviorist";
+"dr.analyzing" = "Analyzing...";
+"dr.expert_analysis_complete" = "Expert Analysis Complete";
+
+/* Settings - App Info */
+"settings.version" = "Version";
+"settings.about" = "About";
+"settings.disclaimer.title" = "Important";
+"settings.disclaimer.message" = "DogLog is an assistive tool and does not replace professional advice. For serious issues or risk behaviors, contact a certified dog trainer, behaviorist, or veterinarian.";
+"settings.notifications" = "Notifications";
+"common.enabled" = "Enabled";
+"common.disabled" = "Off";
+"common.enable" = "Enable";
+"common.free" = "Free";
+"common.paid" = "Paid";
+"common.preview" = "Preview";
+"common.your_dog" = "your dog";
+"settings.open_ios_settings" = "Open iOS Settings";
+
+/* ChatGPT Settings */
+"chatgpt.settings_title" = "ChatGPT Settings";
+"chatgpt.api_key_section" = "ChatGPT API Key";
+"chatgpt.enter_api_key" = "Enter your OpenAI API key to enable AI-powered insights";
+"chatgpt.api_key_configured" = "API key configured";
+"chatgpt.api_configuration" = "API Configuration";
+"chatgpt.how_to_get_key" = "How to get your API key:";
+"chatgpt.step_1" = "1. Visit platform.openai.com";
+"chatgpt.step_2" = "2. Sign in or create an account";
+"chatgpt.step_3" = "3. Go to API Keys section";
+"chatgpt.step_4" = "4. Create a new secret key";
+"chatgpt.step_5" = "5. Copy and paste it above";
+"chatgpt.security_note" = "⚠️ Your API key is stored securely on your device and never shared.";
+"chatgpt.getting_started" = "Getting Started";
+"chatgpt.test_api_key" = "Test API Key";
+"chatgpt.test_connection" = "Test Connection";
+"chatgpt.token_usage" = "Token Usage";
+"chatgpt.token_description" = "Analysis: ~2,000-2,500 tokens, Training Plan: ~4,000-5,000 tokens. Cached results save tokens - you'll only be charged when new data is analyzed.";
+"chatgpt.cache_note" = "Cache is automatically invalidated when you add new activities or ratings.";
+"chatgpt.cost_information" = "Cost Information";
+"chatgpt.api_key_saved" = "Your ChatGPT API key has been saved successfully.";
+
+/* Years Old */
+"age.years_old" = "%d years old";
+
+/* Outcomes */
+"outcome.good" = "Good";
+"outcome.okay" = "Okay";
+"outcome.bad" = "Bad";
+
+/* Day Ratings */
+"rating.good_day_emoji" = "😊 Good Day";
+"rating.okay_day_emoji" = "😐 Okay Day";
+"rating.bad_day_emoji" = "😞 Bad Day";
+
+/* Default Activities */
+"activity.walk" = "Walk";
+"activity.training" = "Training";
+"activity.playtime" = "Playtime";
+"activity.feeding" = "Feeding";
+"activity.grooming" = "Grooming";
+"activity.vet_visit" = "Vet Visit";
+"activity.socialization" = "Socialization";
+"activity.rest" = "Rest";
+"activity.exercise" = "Exercise";
+"activity.bath" = "Bath";
+
+/* Notifications */
+"notifications.improve_title" = "Improve Notifications";
+"notifications.open_settings" = "Open Settings";
+"notifications.later" = "Later";
+"notifications.improve_message" = "Barkley wants to send you morning forecasts! To see them, you need to enable 'Banners' in iOS settings. Tap 'Open Settings' → tap the center phone icon under 'Notifications'.";
+"notifications.error_no_dogs" = "Error: No dogs available";
+"notifications.morning_forecast" = "Get daily behavior predictions from Barkley based on your dog's patterns";
+"notifications.activity_reminders" = "Gentle reminders to log your dog's activities and daily mood";
+"notifications.weekly_summaries" = "Weekly summaries of your dog's behavior trends and improvements";
+"notifications.test_note" = "Test notifications will appear in 2 seconds. Make sure notifications are enabled in System Settings.";
+"notifications.chatgpt_note" = "Configure ChatGPT API for advanced AI analysis in notifications and insights.";
+"notifications.permission" = "Permission";
+"notifications.best_experience" = "Best experience";
+"notifications.banners" = "Banners";
+"notifications.banners_description" = "Show banners at the top of the screen";
+"notifications.notification_center" = "Notification Center";
+"notifications.notification_center_description" = "Show notifications in the notification center";
+"notifications.lock_screen" = "Lock Screen";
+"notifications.lock_screen_description" = "Show notifications on the lock screen";
+"notifications.morning_forecasts" = "Morning Forecasts";
+"notifications.notification_time" = "Notification time";
+"notifications.cost_warning" = "Note: This may incur costs";
+"notifications.configure_api_key" = "Add your API key in ChatGPT settings to enable this mode";
+"notifications.reminder_types" = "Reminder types";
+"notifications.no_logging_6_hours" = "No logging for 6 hours";
+"notifications.end_of_day_checkin" = "End‑of‑day check‑in";
+"notifications.weekly_pattern_breaks" = "Breaks usual weekly patterns";
+"notifications.progress_reports" = "Progress Reports";
+"notifications.delivery_schedule" = "Delivery schedule";
+"notifications.sundays_7pm" = "Sundays at 7:00 PM";
+"notifications.reports_description" = "Weekly summary with trends and progress";
+"notifications.disabled" = "Notifications disabled";
+"notifications.action.open_full_analysis" = "Open Full Analysis";
+"notifications.action.quick_log_today" = "Quick Log Today";
+"notifications.action.read_full_message" = "Read Full Message";
+
+/* Unknown fallbacks */
+"dog.unknown_name" = "Unknown";
+"dog.unknown_dog" = "Dog";
+
+/* Notifications Extended */
+"notifications.enable_message" = "To receive morning forecasts and reminders, please enable notifications in System Settings.";
+"notifications.optimize_title" = "Optimize Notifications";
+"notifications.ai_analysis_title" = "AI Analysis for Notifications";
+"notifications.local_ai_free" = "Local AI (Free)";
+"notifications.local_ai_description" = "Basic pattern analysis using device processing";
+"notifications.chatgpt_ai" = "ChatGPT AI";
+"notifications.chatgpt_ai_description" = "Advanced behavioral analysis with natural language insights";
+"notifications.daily_cost_note" = "Each morning forecast will use ChatGPT API (~$0.01-0.05 per notification). Daily costs depend on number of dogs and API usage.";
+"notifications.daily_forecasts" = "Daily Forecasts";
+"notifications.dr_elias_prediction" = "Barkley will predict how your dog's day will go";
+"notifications.morning_forecast_sample" = "🌅 Morning Forecast for %@";
+"notifications.good_morning_sample" = "Good morning! %@ is set for a good day! 😊 Recent trends show improvement - Barkley";
+"notifications.activity_reminders_title" = "Activity Reminders";
+"notifications.gentle_nudges" = "Gentle nudges to log your dog's activities";
+"notifications.weekly_reports" = "Weekly Reports";
+"notifications.dr_elias_analyzes" = "Barkley analyzes patterns and progress";
+
+/* Morning Forecast Extended */
+"forecast.building_profile" = "Building Your Profile";
+"forecast.need_more_data" = "I need more data about %@ to generate accurate forecasts.";
+"forecast.keep_logging" = "Keep logging daily activities and ratings for at least 3-5 days to unlock morning forecasts!";
+"forecast.confidence" = "confidence";
+"forecast.risk_level" = "Risk Level: %@";
+"forecast.key_factors" = "Key Factors";
+/* Forecast Factors Localization */
+"forecast.factor.historical" = "Historical Pattern";
+"forecast.factor.historical_desc" = "Based on %d similar days in the past";
+"forecast.factor.recent_trend" = "Recent Trend";
+"forecast.factor.recent_trend_up" = "Things have been improving lately";
+"forecast.factor.recent_trend_down" = "Recent challenges detected";
+"forecast.factor.yesterday" = "Yesterday's Impact";
+"forecast.factor.yesterday_neutral" = "No significant impact from yesterday";
+"forecast.factor.yesterday_positive" = "Yesterday was a great day - positive momentum!";
+"forecast.factor.yesterday_negative" = "Yesterday was challenging - may affect today's mood";
+"forecast.factor.yesterday_many_bad" = "Multiple challenging activities yesterday - take it easy today";
+"forecast.factor.yesterday_many_good" = "Great activity day yesterday - riding the positive wave!";
+"forecast.factor.weekday_pattern" = "Your dog typically has %@ %@";
+"forecast.dr_elias_recommendations" = "Dr. Barkley Recommendations";
+/* Forecast info popups */
+"forecast.info.historical" = "📊 Historical Pattern\n\nBarkley analyzed previous days similar to today (same weekday, similar conditions).\n\nThis pattern is %d%% reliable. Details: %@";
+"forecast.info.recent" = "📈 Recent Trend\n\nBarkley looks at the last 1–2 weeks to identify trends in your dog's behavior.\n\nThis trend is %d%% clear and affects today's forecast. Details: %@";
+"forecast.info.weekday" = "📅 Weekday Pattern\n\nBarkley has discovered recurring patterns for this weekday.\n\nThis pattern is %d%% consistent and often relates to routines, activity levels, or social factors.\n\nDetail: %@";
+"forecast.info.generic" = "🔍 %@\n\nThis factor has %d%% reliability based on your dog's historical data and behavioral patterns.\n\nDetail: %@";
+"forecast.analysis_confidence" = "Analysis Confidence";
+"forecast.todays_plan" = "Today's Personal Plan";
+/* Daily plan localized items */
+"forecast.for_name" = "for %@";
+"forecast.daily_goal" = "Daily Goal";
+"forecast.time.midday" = "midday";
+"forecast.tag.data_insight" = "Data Insight";
+"forecast.plan.energy_challenge.title" = "Energy Challenge";
+"forecast.plan.energy_challenge.desc" = "Perfect day for new training or longer adventures";
+"forecast.plan.social_time.title" = "Social Time";
+"forecast.plan.social_time.desc" = "Great opportunity for dog park or meeting friends";
+"forecast.plan.regular_exercise.title" = "Regular Exercise";
+"forecast.plan.regular_exercise.desc" = "Stick to favorite routes and familiar activities";
+"forecast.plan.bonding_time.title" = "Bonding Time";
+"forecast.plan.bonding_time.desc" = "Perfect for gentle training and quality time together";
+"forecast.plan.gentle_start.title" = "Gentle Start";
+"forecast.plan.gentle_start.desc" = "Keep activities familiar and low‑pressure";
+"forecast.plan.comfort_zone.title" = "Comfort Zone";
+"forecast.plan.comfort_zone.desc" = "Stick to routine – favorite treats and spaces";
+"forecast.plan.extra_support.title" = "Extra Support";
+"forecast.plan.extra_support.desc" = "Stay close and avoid stressful situations";
+"forecast.plan.patience_love.title" = "Patience & Love";
+"forecast.plan.patience_love.desc" = "Focus on comfort, short activities, lots of praise";
+"forecast.plan.gentle_care.title" = "Gentle Care";
+"forecast.plan.gentle_care.desc" = "Minimum stress, maximum comfort and support";
+"forecast.plan.quiet_time.title" = "Quiet Time";
+"forecast.plan.quiet_time.desc" = "Calm environment, favorite blanket, soft music";
+"forecast.plan.combat_sunday_blues.title" = "Sunday Boost";
+"forecast.plan.combat_sunday_blues.desc" = "Extra engagement to counter typical Sunday challenges";
+"forecast.plan.trust_pattern.title" = "Trust the Pattern";
+"forecast.plan.trust_pattern.desc" = "High confidence – follow the plan with confidence";
+"forecast.plan.stay_flexible.title" = "Stay Flexible";
+"forecast.plan.stay_flexible.desc" = "Lower confidence – adapt based on your dog's mood";
+/* Forecast messages and labels */
+"forecast.greeting.morning" = "Good morning!";
+"forecast.greeting.weekend" = "Happy weekend!";
+"forecast.key_insight" = "Key insight:";
+"forecast.msg.excellent" = "%@ is set for an amazing day! %@ Perfect for new challenges and adventures.";
+"forecast.msg.good" = "%@ should have a good day ahead! %@ Great opportunity for training sessions and positive activities.";
+"forecast.msg.okay" = "%@ will likely have an average day. %@ Stick to familiar routines and moderate activities.";
+"forecast.msg.challenging" = "%@ might face some challenges today. %@ Extra patience and shorter activities recommended.";
+"forecast.msg.difficult" = "%@ may need extra support today. %@ Keep activities calm, positive, and stress‑free.";
+"forecast.time.morning" = "morning";
+"forecast.time.afternoon" = "afternoon";
+"forecast.time.all_day" = "all day";
+"forecast.reco.try_new.title" = "Try Something New";
+"forecast.reco.try_new.desc" = "Perfect day for new training or longer adventures!";
+"forecast.reco.stick_routine.title" = "Stick to Routine";
+"forecast.reco.stick_routine.desc" = "Keep activities familiar and positive to maintain stability.";
+"forecast.reco.extra_patience.title" = "Extra Patience";
+"forecast.reco.extra_patience.desc" = "Take things slow and offer extra treats and praise today.";
+"forecast.reco.minimal_stress.title" = "Minimal Stress Activities";
+"forecast.reco.minimal_stress.desc" = "Focus on calming activities like gentle walks and quiet time.";
+"forecast.reco.recovery_mode.title" = "Recovery Mode";
+"forecast.reco.recovery_mode.desc" = "Give extra comfort and avoid challenging activities.";
+"forecast.reco.break_pattern.title" = "Break the Pattern";
+"forecast.reco.break_pattern.desc" = "Try a different routine or environment to reset the mood.";
+"forecast.start_logging" = "Start Logging Today";
+
+/* Risk Levels */
+"risk.excellent_day" = "Excellent Day";
+"risk.good_day" = "Good Day";
+"risk.okay_day" = "Okay Day";
+"risk.challenging_day" = "Challenging Day";
+"risk.difficult_day" = "Difficult Day";
+"risk.low" = "Low Risk";
+"risk.moderate" = "Moderate Risk";
+"risk.high" = "High Risk";
+"risk.critical" = "Critical Risk";
+
+/* Training Week Extended */
+"training.analyzing_creating" = "Analyzing behavior patterns and creating training plan...";
+"training.creating_week" = "Creating your perfect training week...";
+"training.create_plan" = "Create Training Plan";
+"training.generate_week" = "Generate Training Week";
+"training.export_calendar" = "Export to Calendar";
+"training.add_calendar" = "Add to Calendar";
+"training.add_activity" = "Add Activity";
+"training.time" = "Time";
+"training.activity" = "Activity";
+"training.duration" = "Duration";
+"training.focus" = "Focus";
+"training.goal" = "Goal";
+"training.instructions" = "Instructions";
+
+/* Training Week Additional */
+"training.week.ai_analysis_plan" = "🧠 AI Analysis + Training Plan";
+"training.week.dr_elias_description" = "Barkley will analyze %@'s behavior patterns and create a personalized 7-day training plan";
+"training.week.generate_week" = "Generate Training Week";
+"training.week.activities_count" = "%d activities";
+"training.week.export_confirm" = "Export '%@' to your calendar?";
+"training.week.default_time" = "9:00 AM";
+"training.week.new_activity" = "New Activity";
+"training.week.default_duration" = "15 minutes";
+"training.week.default_focus" = "Training Focus";
+"training.week.default_instructions" = "Add your training instructions here";
+"training.week.default_goal" = "Training goal";
+"training.week.duration_label" = "Duration: %@";
+"training.week.focus_label" = "Focus: %@";
+"training.week.goal_label" = "Goal: %@";
+"training.week.instructions_label" = "Instructions: %@";
+"training.week.calendar_access_denied" = "Calendar access denied";
+"training.week.event_already_exists" = "Event already exists in calendar";
+"training.week.created_by" = "Created by DogLog Training Week";
+
+/* AI Insights Extended */
+"ai.time_range" = "Time Range";
+"ai.overall_mood" = "Overall Mood";
+"ai.improving_trend" = "Improving ↗";
+"ai.declining_trend" = "Declining ↘";
+"ai.stable_trend" = "Stable →";
+"ai.professional_insights_available" = "Professional AI Insights Available";
+"ai.getting_professional_analysis" = "Getting professional analysis...";
+
+/* Additional AI Insights Localizations */
+"insights.mood_trend_analysis" = "Mood Trend Analysis";
+"insights.activity_pattern" = "Activity Pattern";
+"insights.behavior_insight" = "Behavior Insight";
+"insights.ai_recommendation" = "AI Recommendation";
+"insights.note_recommendations" = "Recommendations from notes";
+"insights.note_tip_reduce_stress" = "Signs of stress: lower difficulty, shorten sessions, add calm breaks between activities.";
+"insights.note_tip_barking" = "Barking: train predictability and offer an alternative behavior (e.g., check‑in, scent work) before triggers.";
+"insights.note_tip_leash" = "Leash pulling: practice short sessions rewarding loose leash, change direction, and reward focus near your leg.";
+"insights.note_tip_focus" = "Focus: start in easier environments, increase difficulty gradually, use high‑value rewards.";
+"insights.note_tip_build_on_success" = "Build on what works: schedule more of the activities that frequently succeed.";
+"insights.note_tip_consistency" = "Keep routines consistent – same time, place, and structure for a period to build confidence.";
+"insights.note_tip_short_sessions" = "Short, frequent sessions (3–5 min) work better than long ones when things are challenging.";
+"insights.confidence_explanation" = "The AI confidence level indicates how reliable these insights are based on the amount of data available.";
+"insights.high_confidence_desc" = "High (80%+): Based on substantial data, insights are very reliable";
+"insights.medium_confidence_desc" = "Medium (50-79%): Moderate reliability, more data will improve accuracy";
+"insights.low_confidence_desc" = "Low (<50%): Limited data available, keep logging for better insights";
+"insights.more_data_explanation" = "The more activities and daily ratings you log, the more accurate and personalized the AI insights become.";
+"insights.mood_trend_explanation" = "Mood trend analysis tracks your dog's overall emotional state over time.";
+"insights.improvement" = "Improvement";
+"insights.good_days_desc" = "Good days: Positive activities and high energy";
+"insights.okay_days_desc" = "Okay days: Normal behavior, some mixed outcomes";
+"insights.bad_days_desc" = "Bad days: Challenging behaviors or low energy";
+"insights.ai_analysis_explanation" = "The AI looks at daily ratings and activity outcomes to identify patterns and predict trends.";
+"insights.activity_pattern_explanation" = "Activity pattern analysis shows how well specific activities work for your dog.";
+"insights.success_rate" = "Success rate";
+"insights.times_per_week" = "times per week";
+"insights.success_rate_explanation" = "Success rate: Percentage of \"good\" outcomes for this activity";
+"insights.frequency_explanation" = "Frequency: How often you do this activity";
+"insights.trend_explanation" = "Trend: Whether outcomes are improving, declining, or stable";
+"insights.activity_recommendation" = "Activities with high success rates should be done more often, while low-success activities might need adjustment.";
+"insights.weekly_pattern_explanation" = "Weekly pattern analysis identifies which days work best for your dog.";
+"insights.best_days_explanation" = "Best days: Days when your dog typically has good outcomes";
+"insights.worst_days_explanation" = "Worst days: Days that tend to be more challenging";
+"insights.activity_distribution" = "Activity distribution: How activities are spread across the week";
+"insights.scheduling_recommendation" = "Use this information to schedule important activities on your dog's best days.";
+"insights.category" = "Category";
+"insights.insight_generation_explanation" = "This insight was generated by analyzing patterns in your dog's activity data and daily ratings. The AI looks for correlations, trends, and anomalies to provide personalized observations about your dog's behavior.";
+"insights.priority" = "Priority";
+"insights.recommendation_explanation" = "This recommendation is based on patterns the AI identified in your dog's data. Recommendations are prioritized by potential impact on your dog's wellbeing and behavior.";
+"insights.high_priority_desc" = "High priority: Important for health or behavior improvement";
+"insights.medium_priority_desc" = "Medium priority: Beneficial for optimization";
+"insights.low_priority_desc" = "Low priority: Nice-to-have improvements";
+"chatgpt.professional_description" = "Get professional dog behaviorist insights based on your data";
+
+/* General UI */
+"ui.unknown_name" = "Unknown Name";
+"ui.learn_doglog" = "Tap to learn how to use DogLog";
+"ui.sample_dog_name" = "Buddy";
+
+/* Unknown fallbacks */
+"dog.unknown_name" = "Unknown";
+"dog.unknown_dog" = "Dog";
+"dog.unknown" = "Unknown";
+"dog.unknown_breed" = "Unknown breed";
+"dog.age_unknown" = "Age unknown";
+
+/* Training */
+"training.general_enrichment" = "General training and enrichment";
+
+/* AI Messages */
+"ai.no_recent_notes" = "No recent notes recorded";
+"ai.no_activities_logged" = "No activities logged";
+
+/* ChatGPT Errors */
+"chatgpt.error.missing_api_key" = "ChatGPT API key is missing. Please add your API key in settings.";
+"chatgpt.error.invalid_api_key" = "Invalid ChatGPT API key. Please check your API key in settings.";
+"chatgpt.error.rate_limit_exceeded" = "ChatGPT rate limit exceeded. Please try again later.";
+"chatgpt.error.insufficient_quota" = "Your OpenAI account is out of credit. Add credit at platform.openai.com under Billing, then try again.";
+"chatgpt.error.api_error" = "ChatGPT API error: %@";
+"chatgpt.error.invalid_response" = "Invalid response from ChatGPT.";
+"chatgpt.error.parsing_error" = "Error parsing ChatGPT response.";
+"chatgpt.error.token_limit" = "Response was incomplete due to token limit. Try again - the app has automatically increased the limit.";
+
+/* Lagged Patterns (day-after analysis) */
+"lagged.section_title" = "Day-after patterns";
+"lagged.sample_caption" = "based on %d occurrences";
+"lagged.empty_state" = "Not enough data yet. Log activities and rate each day for about 3 weeks, and DogLog will start detecting day-after patterns — like whether daycare days are usually followed by bad days.";
+"lagged.rest_day" = "a rest day";
+"lagged.bad_day" = "a bad day";
+"lagged.pattern_negative_lag1" = "After %@: %d of %d following days were bad (baseline %d%%)";
+"lagged.pattern_positive_lag1" = "After %@: %d of %d following days were good (baseline %d%%)";
+"lagged.pattern_negative_lag2" = "Two days after %@: %d of %d days were bad (baseline %d%%)";
+"lagged.pattern_positive_lag2" = "Two days after %@: %d of %d days were good (baseline %d%%)";
+
+/* Context Tags (day confounds) */
+"context.section_title" = "What else happened today?";
+"context.heat_cycle" = "Heat cycle";
+"context.thunder" = "Thunder/fireworks";
+"context.guests" = "Guests";
+"context.poor_sleep" = "Poor sleep";
+"context.sick_injured" = "Sick/injured";
+"context.travel" = "Travel";
+"context.home_alone_long" = "Home alone long";
+"context.new_environment" = "New environment";
+
+/* Exercise Library Settings (web search + refresh) */
+"settings.exercise.web_search" = "Use web search for exercises";
+"settings.exercise.web_search_footer" = "Off: exercises are AI-generated from the model's training knowledge. On: the AI searches the web for current exercises (uses more API credit).";
+"settings.exercise.refresh_interval" = "Auto-refresh exercises";
+"settings.exercise.refresh.manual" = "Manually";
+"settings.exercise.refresh.weekly" = "Weekly";
+"settings.exercise.refresh.biweekly" = "Every two weeks";
+"settings.exercise.refresh.monthly" = "Monthly";
+"training.week.language_mismatch" = "This training week was created in another language. Regenerate it to get a plan in your current language.";
+"tutorial.lagged_patterns_title" = "Day-after patterns";
+"tutorial.lagged_patterns_description" = "DogLog spots when yesterday's activities predict tomorrow's mood — like daycare followed by a rough day. See these patterns locally and in AI Insights.";
+"tutorial.context_tags_title" = "Context tags";
+"tutorial.context_tags_description" = "Tag things that aren't activities but still matter — thunder, guests, poor sleep, heat cycle. They help the app avoid blaming the wrong activity for a bad day.";
